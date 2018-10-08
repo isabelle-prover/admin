@@ -17,7 +17,7 @@ Hosts and inventories
 *Hosts* are machines which are to be configured by Ansible.
 They are specified by a host name or an IP address.
 *Inventories* are lists of hosts.
-Hosts can be grouped together.
+Hosts can be grouped together; groups may form a hierarchy.
 In an inventory file, hosts or groups of hosts may have additional variables.
 Inventory files use a simple, INI-like syntax.
 
@@ -73,7 +73,7 @@ To run Ansible, you need to give it an inventory file and a playbook:
 
 ::
 
-  $ ansible-playbook -i inventories/production site.yml
+  $ ansible-playbook -i inventories/production [-l GROUP|HOST] site.yml
 
 In this repository, there are two inventory files: one for production, one for testing.
 Always check the contents of the inventory files before deploying.

@@ -8,5 +8,6 @@ Welcome to Isabelle admin documentation!
    preliminaries
    architecture
    ansible
+   mta
    opennebula
    process

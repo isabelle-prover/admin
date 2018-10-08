@@ -14,4 +14,4 @@ Recommended reading for this documentation:
   * `Cloud Manual <https://www.lrz.de/services/compute/cloud_en/cloud-manual_en/>`_
   * `Glossary <https://www.lrz.de/services/compute/cloud_en/glossary-cloud/>`_
 
-- `Lehstuhl-VM (de) <https://wiki.in.tum.de/Informatik/Benutzerwiki/LehrstuhlVM>`_
+- `Lehrstuhl-VM (de) <https://wiki.in.tum.de/Informatik/Benutzerwiki/LehrstuhlVM>`_
