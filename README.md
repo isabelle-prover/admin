@@ -1,1 +1,3 @@
-## Administrative documentation & tracker for Isabelle CI infrastructure
+## Isabelle CI infrastructure
+
+[![Documentation](https://readthedocs.org/projects/isabelle-admin/badge/?version=latest)](https://admin.isabelle.systems/)
