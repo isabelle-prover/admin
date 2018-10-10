@@ -1,0 +1,7 @@
+---
+
+- include: install.yml
+- include: firewall.yml
+- include: apache.yml
+- include: app.yml
+- include: lxc.yml

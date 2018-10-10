@@ -1,0 +1,13 @@
+---
+
+- name: Flush firewall
+  shell: iptables -F
+
+- name: Prepare firewall
+  file: path=/etc/iptables state=directory owner=root group=root mode=0755
+
+- name: Copy firewall rules
+  copy: src=rules.v4 dest=/etc/iptables/rules.v4 owner=root group=root mode=0644
+
+- name: Load firewall rules
+  shell: iptables-restore < /etc/iptables/rules.v4

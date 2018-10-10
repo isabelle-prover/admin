@@ -1,0 +1,44 @@
+---
+
+- name: Enable Apache modules
+  apache2_module: name={{ item }}
+  with_items:
+    - cgid
+    - proxy
+    - proxy_http
+    - ssl
+    - rewrite
+    - include
+    - headers
+
+- name: Disable default Apache site
+  shell: a2dissite 000-default.conf
+
+- name: Prepare Apache web roots
+  file: path=/var/www/{{ item }} state=directory owner=root group=root mode=0755
+  with_items: "{{ config.apache.webroots }}"
+
+- name: Obtain AFP submission host
+  set_fact: afp_submission_host={{ groups['afp'][0] }}
+
+- name: Configure Apache
+  template: src={{ item }} dest=/etc/apache2/sites-enabled/{{ item }} owner=root group=root mode=0644
+  with_items: "{{ config.apache.configs }}"
+
+- name: Start Apache
+  service: name=apache2 state=started
+
+- name: Copy web assets
+  copy: src=assets dest=/var/www/ci/ owner=root group=root mode=0644 directory_mode=0755
+  tags:
+    - apache-status
+
+- name: Prepare status page
+  file: path=/var/www/ci/status state=directory owner=root group=root mode=0755
+  tags:
+    - apache-status
+
+- name: Copy status page
+  copy: src=status.html dest=/var/www/ci/status/index.html owner=root group=root mode=0644
+  tags:
+    - apache-status

@@ -1,0 +1,37 @@
+---
+
+- name: Install packages
+  apt:
+    state: present
+    name:
+      - openjdk-8-jre
+      - mercurial
+      - curl
+      - libgomp1
+      - unzip
+      - ghc
+      - mlton
+      - swi-prolog
+      - smlnj
+      - lib32stdc++6
+      - texlive-full
+      - python-tz
+      - python-jinja2
+      - python-termcolor
+      - python-six
+      - gnuplot5-nox
+
+- name: Prepare Jenkins home directory
+  file: path=/media/data state=directory owner=root group=root mode=0755
+
+- name: Create Jenkins user
+  user: name=jenkins uid=902 shell=/bin/sh home={{ config.worker.jenkins_home }}
+
+- name: Prepare .ssh directory
+  file: path={{ config.worker.jenkins_home }}/.ssh state=directory owner=jenkins group=root mode=0700
+
+- name: Copy authorized_keys file
+  copy: src=authorized_keys dest={{ config.worker.jenkins_home }}/.ssh/authorized_keys owner=jenkins group=root mode=0644
+
+- name: Link Java
+  file: src=/usr/bin/java path={{ config.worker.jenkins_home }}/java state=link

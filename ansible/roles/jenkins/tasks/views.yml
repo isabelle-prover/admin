@@ -1,0 +1,23 @@
+---
+
+- name: Prepare Jenkins view definitions
+  file: path=/home/admin/views state=directory owner=root group=root mode=0644
+
+- name: Copy Jenkins view definitions
+  copy: src=views/{{ item }}.xml dest=/home/admin/views/{{ item }}.xml owner=root group=root mode=0644
+  loop: "{{ config.jenkins.views }}"
+
+- name: List Jenkins views
+  shell: "xmlstarlet select -t -v '/hudson/views/*/name' /var/lib/jenkins/config.xml 2>/dev/null"
+  register: jenkins_views
+  failed_when: "jenkins_views.stderr != ''"
+
+- name: Create missing Jenkins views
+  shell: /home/admin/cli.sh create-view {{ item }} < /home/admin/views/{{ item }}.xml
+  when: "item not in jenkins_views.stdout_lines"
+  loop: "{{ config.jenkins.views }}"
+
+- name: Update existing Jenkins views
+  shell: /home/admin/cli.sh update-view {{ item }} < /home/admin/views/{{ item }}.xml
+  when: "item in jenkins_views.stdout_lines"
+  loop: "{{ config.jenkins.views }}"

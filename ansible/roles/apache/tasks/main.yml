@@ -1,0 +1,9 @@
+---
+
+- include: install.yml
+- include: firewall.yml
+- include: security.yml
+- include: ssl.yml
+- include: apache.yml
+- include: afp.yml
+- include: mercurial.yml

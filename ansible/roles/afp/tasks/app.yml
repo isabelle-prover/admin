@@ -1,0 +1,25 @@
+---
+
+- name: Clone application repository
+  git: dest=/opt/afpbuild repo={{ config.afp.git }} force=yes
+
+- name: Move config to application repository
+  template: src=config.py dest=/opt/afpbuild/src/config.py owner=root group=root mode=0644
+
+- name: Prepare application storage
+  file: path=/var/afpbuild state=directory owner=root group=root mode=0755
+
+- name: Prepare application storage (upload)
+  file: path=/var/afpbuild/up state=directory owner=www-data group=root mode=0755
+
+- name: Prepare application storage (download)
+  file: path=/var/afpbuild/down state=directory owner=conrad group=root mode=0755
+
+- name: Deploy index
+  copy: src=/opt/afpbuild/bin/index dest=/var/www/afp/index remote_src=true owner=root group=root mode=0755
+
+- name: Copy AFP submission service file
+  copy: src=afp-submission.service dest=/etc/systemd/system/afp-submission.service owner=root group=root mode=0644
+
+- name: Reload and restart afp-submission.service
+  service: name=afp-submission.service enabled=yes state=restarted

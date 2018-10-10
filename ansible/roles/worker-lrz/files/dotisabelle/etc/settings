@@ -1,0 +1,24 @@
+init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/main"
+init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/ci-extras"
+init_component "$ISABELLE_HOME/Admin/jenkins/build"
+[ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
+
+
+if [[ "$ISABELLE_CI_PLATFORM" = "32" ]]; then
+  ML_OPTIONS="-H 1000"
+  ML_PLATFORM="$ISABELLE_PLATFORM"
+else
+  ML_OPTIONS="-H 4000 --maxheap 20G"
+  ML_PLATFORM="$ISABELLE_PLATFORM64"
+fi
+
+ML_HOME="$POLYML_HOME/$ML_PLATFORM"
+
+ISABELLE_GHC=ghc
+ISABELLE_POLYML="$ML_HOME/poly"
+ISABELLE_SCALA="$SCALA_HOME/bin"
+ISABELLE_OCAMLC=ocamlc
+ISABELLE_OCAML=ocaml
+ISABELLE_MLTON=mlton
+ISABELLE_SWIPL=swipl
+ISABELLE_SMLNJ=sml

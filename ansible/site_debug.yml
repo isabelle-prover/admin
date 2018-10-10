@@ -1,0 +1,15 @@
+---
+
+- name: Debug
+  hosts:
+    - all
+
+  roles:
+    - debug
+
+  vars_files:
+    - vars/secrets.yml
+
+  # for macOS to find Python 3
+  environment:
+    PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"

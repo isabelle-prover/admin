@@ -1,0 +1,16 @@
+---
+
+- name: Prepare hgweb
+  file: path=/var/www/hgweb/ state=directory owner=root group=root mode=0755
+
+- name: Configure hgweb
+  copy: src=hgweb.config dest=/var/www/hgweb/hgweb.config owner=root group=root mode=0644
+
+- name: Install hgweb
+  copy: src=hgweb.cgi dest=/var/www/hgweb/hgweb.cgi owner=root group=root mode=0755
+
+- name: Create Mercurial user
+  user: name=mercurial uid=900 shell=/bin/false
+
+- name: Create repository root
+  file: path=/home/mercurial/repos state=directory owner=mercurial group=users mode=0755

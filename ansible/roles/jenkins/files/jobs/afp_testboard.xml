@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.20">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.mercurial.MercurialSCM" plugin="mercurial@1.54">
+    <installation>cached-mercurial</installation>
+    <source>https://bitbucket.org/isa-afp/afp-testboard/</source>
+    <modules></modules>
+    <revisionType>BRANCH</revisionType>
+    <revision>default</revision>
+    <clean>true</clean>
+    <credentialsId></credentialsId>
+    <disableChangeLog>false</disableChangeLog>
+    <browser class="hudson.plugins.mercurial.browser.BitBucket">
+      <url>https://bitbucket.org/isa-afp/afp-testboard/</url>
+    </browser>
+  </scm>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>H/3 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo &quot;$MERCURIAL_REVISION&quot;</command>
+    </hudson.tasks.Shell>
+    <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
+      <phaseName>main</phaseName>
+      <phaseJobs>
+        <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+          <jobName>afp_testboard-afp</jobName>
+          <currParams>true</currParams>
+          <exposedSCM>false</exposedSCM>
+          <disableJob>false</disableJob>
+          <parsingRulesPath></parsingRulesPath>
+          <maxRetries>0</maxRetries>
+          <enableRetryStrategy>false</enableRetryStrategy>
+          <enableCondition>false</enableCondition>
+          <abortAllJob>false</abortAllJob>
+          <condition></condition>
+          <configs>
+            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters plugin="parameterized-trigger@2.32">
+              <properties>AFP_REVISION=${MERCURIAL_REVISION}</properties>
+            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+          </configs>
+          <killPhaseOnJobResultCondition>NEVER</killPhaseOnJobResultCondition>
+          <buildOnlyIfSCMChanges>false</buildOnlyIfSCMChanges>
+        </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+      </phaseJobs>
+      <continuationCondition>ALWAYS</continuationCondition>
+    </com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+  <pollSubjobs>false</pollSubjobs>
+</com.tikal.jenkins.plugins.multijob.MultiJobProject>

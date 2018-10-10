@@ -1,0 +1,11 @@
+---
+
+- name: Install packages
+  apt:
+    state: present
+    name:
+      - apache2
+      - mercurial
+      - curl
+      - iptables-persistent
+      - certbot

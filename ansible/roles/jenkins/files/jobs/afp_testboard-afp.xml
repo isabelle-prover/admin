@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>AFP_REVISION</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.5">
+    <scms>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+        <modules></modules>
+        <revisionType>BRANCH</revisionType>
+        <revision>default</revision>
+        <clean>false</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>true</disableChangeLog>
+      </hudson.plugins.mercurial.MercurialSCM>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>https://bitbucket.org/isa-afp/afp-testboard/</source>
+        <modules></modules>
+        <revisionType>CHANGESET</revisionType>
+        <revision>${AFP_REVISION}</revision>
+        <subdir>afp</subdir>
+        <clean>true</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>true</disableChangeLog>
+      </hudson.plugins.mercurial.MercurialSCM>
+    </scms>
+  </scm>
+  <assignedNode>mta_hpc</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers />
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>Admin/jenkins/run_build afp</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>heaps/**/log/**,status.json,dependencies.json</artifacts>
+      <allowEmptyArchive>true</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+      <caseSensitive>true</caseSensitive>
+    </hudson.tasks.ArtifactArchiver>
+  </publishers>
+  <buildWrappers>
+    <EnvInjectBuildWrapper plugin="envinject@1.92.1">
+      <info>
+        <propertiesContent>ISABELLE_CI_TESTBOARD=true</propertiesContent>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+    </EnvInjectBuildWrapper>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.5"/>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.16">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>120</timeoutMinutes>
+      </strategy>
+      <operationList/>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+  </buildWrappers>
+</project>

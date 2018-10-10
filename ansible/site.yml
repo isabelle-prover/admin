@@ -1,0 +1,51 @@
+---
+
+- name: Configure LRZ workers
+  hosts: worker-lrz
+
+  roles:
+    - { role: lrz-base, tags: [ 'lrz-base' ] }
+    - { role: worker-lrz, tags: [ 'worker', 'worker-lrz' ] }
+
+- name: Configure MTA workers
+  hosts: worker-mta
+  become: yes
+  become_method: sudo
+
+  vars_files:
+    - vars/secrets.yml
+
+  roles:
+    - { role: worker-mta, tags: [ 'worker', 'worker-mta' ] }
+
+- name: Configure Mac workers
+  hosts: worker-mac
+
+  roles:
+    - { role: worker-mac, tags: [ 'worker', 'worker-mac' ] }
+
+  # for macOS to find Python 3
+  environment:
+    PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+- name: Configure AFP submission checker
+  hosts: afp
+
+  vars_files:
+    - vars/secrets.yml
+
+  roles:
+    - { role: lrz-base, tags: [ 'lrz-base' ] }
+    - { role: afp, tags: [ 'afp' ] }
+
+- name: Configure and deploy Apache and Jenkins
+  hosts: leader
+  become: yes
+  become_method: sudo
+
+  vars_files:
+    - vars/secrets.yml
+
+  roles:
+    - { role: apache, tags: [ 'apache' ] }
+    - { role: jenkins, tags: [ 'jenkins' ] }

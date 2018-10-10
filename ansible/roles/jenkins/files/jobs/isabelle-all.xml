@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.5">
+    <scms>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+        <modules></modules>
+        <revisionType>BRANCH</revisionType>
+        <revision>default</revision>
+        <clean>false</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>false</disableChangeLog>
+        <browser class="hudson.plugins.mercurial.browser.HgWeb">
+          <url>https://isabelle.in.tum.de/repos/isabelle/</url>
+        </browser>
+      </hudson.plugins.mercurial.MercurialSCM>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>https://bitbucket.org/isa-afp/afp-devel/</source>
+        <modules></modules>
+        <revisionType>BRANCH</revisionType>
+        <revision>default</revision>
+        <subdir>afp</subdir>
+        <clean>true</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>false</disableChangeLog>
+        <browser class="hudson.plugins.mercurial.browser.BitBucket">
+          <url>https://bitbucket.org/isa-afp/afp-devel/</url>
+        </browser>
+      </hudson.plugins.mercurial.MercurialSCM>
+    </scms>
+  </scm>
+  <quietPeriod>120</quietPeriod>
+  <assignedNode>mta_big</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>H/3 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>Admin/jenkins/run_build all</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>heaps/**/log/**,status.json,dependencies.json,afp/web/**</artifacts>
+      <allowEmptyArchive>true</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+      <caseSensitive>true</caseSensitive>
+    </hudson.tasks.ArtifactArchiver>
+    <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@2.3.1">
+      <script plugin="script-security@1.20">
+        <script>
+def ws = manager.build.project.workspace
+
+def browser_info = ws.child(&quot;browser_info&quot;)
+def afp = ws.child(&quot;afp&quot;)
+def web = afp.child(&quot;web&quot;)
+def release = afp.child(&quot;release&quot;)
+
+def root_target = new hudson.FilePath(new java.io.File(&quot;/var/www/afp-devel&quot;))
+root_target.mkdirs()
+root_target.deleteContents()
+
+web.copyRecursiveTo(root_target)
+
+def browser_info_target = root_target.child(&quot;browser_info&quot;).child(&quot;current&quot;)
+
+browser_info.copyRecursiveTo(browser_info_target)
+
+def release_target = root_target.child(&quot;release&quot;)
+
+release.copyRecursiveTo(release_target)
+
+def result = ws.child(&quot;report.html&quot;).readToString()
+
+if (!result.trim().isEmpty()) {
+  def summary = manager.createSummary(&quot;error.png&quot;)
+  summary.appendText(result, false)
+}
+        </script>
+        <sandbox>false</sandbox>
+      </script>
+      <behavior>2</behavior>
+      <runForMatrixParent>false</runForMatrixParent>
+    </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.42">
+      <recipientList>isabelle-ci@mail46.informatik.tu-muenchen.de</recipientList>
+      <contentType>text/plain</contentType>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FirstFailureTrigger>
+          <email>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>true</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+          <failureCount>0</failureCount>
+        </hudson.plugins.emailext.plugins.trigger.FirstFailureTrigger>
+      </configuredTriggers>
+      <defaultSubject>Build failure in AFP</defaultSubject>
+      <defaultContent>The AFP build failed. See the log at: $BUILD_URL</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
+      <attachBuildLog>true</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_REPLYTO</replyTo>
+      <saveOutput>false</saveOutput>
+      <disabled>false</disabled>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.16">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>180</timeoutMinutes>
+      </strategy>
+      <operationList/>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.5"/>
+  </buildWrappers>
+</project>

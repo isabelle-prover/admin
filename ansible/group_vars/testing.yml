@@ -1,0 +1,8 @@
+---
+
+config:
+  domains:
+    jenkins: ci-staging.isabelle.systems
+    afp: www-afp-staging.isabelle.systems
+    afp_devel: afp-devel-staging.isabelle.systems
+    afp_short: afp-staging.isabelle.systems

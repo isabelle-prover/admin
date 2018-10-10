@@ -1,0 +1,133 @@
+---
+
+- name: Prepare LXC configuration directory
+  file: path={{ config.afp.container_home }}/.config/lxc state=directory owner=root group=root mode=0755
+
+- name: Copy LXC configuration
+  template: src=default.conf dest={{ config.afp.container_home }}/.config/lxc/default.conf owner=root group=root mode=0644
+
+- name: Edit /etc/lxc/lxc-usernet
+  lineinfile: name=/etc/lxc/lxc-usernet line='conrad veth lxcbr0 2'
+
+- name: Restart lxc-net.service
+  service: name=lxc-net.service state=restarted
+
+- name: List LXC containers
+  shell: unset XDG_RUNTIME_DIR && unset XDG_SESSION_ID && lxc-ls -1
+  register: afp_lxc
+  become: yes
+  become_user: conrad
+  become_method: su
+
+- name: Create LXC base container
+  shell: unset XDG_RUNTIME_DIR && unset XDG_SESSION_ID && lxc-create -n base -t download --bdev dir -- -d ubuntu -r xenial -a amd64
+  when: "afp_lxc.stdout.find('base') == -1"
+  become: yes
+  become_user: conrad
+  become_method: su
+
+- name: Copy resolv.conf
+  copy: src=/etc/resolv.conf dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/etc/resolv.conf remote_src=true owner=root group=root mode=0644
+
+- name: Download Isabelle
+  get_url: url=https://isabelle.in.tum.de/dist/Isabelle2018_linux.tar.gz dest=/media/data/isabelle2018.tar.gz checksum=sha1:8f2645f802f4c0d262085262efe8d9dc1ca7cc70
+
+- name: Unpack Isabelle into LXC base container
+  unarchive: src=/media/data/isabelle2018.tar.gz copy=false creates=Isabelle2018 dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt owner=root group=root
+
+- name: Clone AFP
+  hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://bitbucket.org/isa-afp/afp-2018 revision=default force=yes purge=yes
+
+- name: Create .isabelle/Isabelle2018/etc/ in home dir of unprivileged user in container
+  file:
+    path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2018/etc"
+    owner: 10001001
+    group: 10001001
+    state: directory
+    mode: 0755
+
+- name: Configure Isabelle to use 64-bit mode
+  blockinfile:
+    name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2018/etc/settings"
+    create: yes
+    block: |
+      ML_PLATFORM="$ISABELLE_PLATFORM64"
+      ML_OPTIONS="-H 4000 --maxheap 6G"
+      ML_HOME="$POLYML_HOME/$ML_PLATFORM"
+
+- name: Build Isabelle sessions
+  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2018/bin/isabelle build -o threads=2 -bv {{ item }}"
+  with_items:
+    - Pure
+    - HOL
+    - HOL-Library
+    - HOL-Analysis
+    - HOL-Probability
+  environment:
+    HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
+
+- name: Build AFP sessions
+  command: >
+           {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2018/bin/isabelle build
+           -d {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp/thys -bv
+           -o timeout_scale=5
+           {{ item }}
+  with_items:
+    - Refine_Imperative_HOL
+    - Formal_SSA
+  environment:
+    HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
+
+- name: Set correct file rights of .isabelle in home dir of unprivileged user in container
+  file:
+    path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle"
+    owner: 10001001
+    group: 10001001
+    recurse: yes
+    state: directory
+    mode: 0755
+
+- name: Edit LXC base container config for network access
+  blockinfile:
+    name: "{{ config.afp.container_home }}/.local/share/lxc/base/config"
+    block: |
+      lxc.network.type = veth
+      lxc.network.link = lxcbr0
+      lxc.network.flags = up
+      lxc.network.hwaddr = 00:16:3e:xx:xx:xx
+
+- name: Start LXC base container
+  shell: "unset XDG_RUNTIME_DIR && unset XDG_SESSION_ID && {{ item }}"
+  with_items:
+    - lxc-start -n base
+    - lxc-wait -n base -s RUNNING
+  become: true
+  become_user: conrad
+
+- name: Wait for network in LXC container
+  action: shell unset XDG_RUNTIME_DIR && unset XDG_SESSION_ID && ping -c 1 129.187.5.1
+  register: result
+  until: result.rc == 0
+  retries: 10
+  delay: 2
+  become: true
+  become_user: conrad
+
+- name: Install packages in LXC container
+  shell: "unset XDG_RUNTIME_DIR && unset XDG_SESSION_ID && {{ item }}"
+  with_items:
+    - lxc-attach -n base -- apt-get -y update
+    - lxc-attach -n base -- apt-get -y install lib32stdc++6 unzip texlive-full texlive-math-extra
+  become: true
+  become_user: conrad
+
+- name: Stop container
+  shell: "unset XDG_RUNTIME_DIR && unset XDG_SESSION_ID && {{ item }}"
+  with_items:
+    - lxc-stop -n base
+  become: true
+  become_user: conrad
+
+- name: Remove network config from LXC base container config
+  blockinfile:
+    name: "{{ config.afp.container_home }}/.local/share/lxc/base/config"

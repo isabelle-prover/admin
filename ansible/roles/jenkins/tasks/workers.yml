@@ -1,0 +1,22 @@
+---
+
+- name: Prepare Jenkins worker configurations
+  file: path=/home/admin/workers state=directory owner=root group=root mode=0644
+
+- name: Copy Jenkins worker configurations
+  template: src=node.xml dest=/home/admin/workers/{{ hostvars[item]['worker_name'] }}.xml owner=root group=root mode=0644
+  loop: "{{ groups['worker'] }}"
+
+- name: List Jenkins workers
+  shell: ls -1 /var/lib/jenkins/nodes
+  register: jenkins_nodes
+
+- name: Create missing Jenkins workers
+  shell: /home/admin/cli.sh create-node {{ hostvars[item]['worker_name'] }} < /home/admin/workers/{{ hostvars[item]['worker_name'] }}.xml
+  when: "jenkins_nodes.stdout.find(hostvars[item]['worker_name']) == -1"
+  loop: "{{ groups['worker'] }}"
+
+- name: Update existing Jenkins workers
+  shell: /home/admin/cli.sh update-node {{ hostvars[item]['worker_name'] }} < /home/admin/workers/{{ hostvars[item]['worker_name'] }}.xml
+  when: "jenkins_nodes.stdout.find(hostvars[item]['worker_name']) >= 0"
+  loop: "{{ groups['worker'] }}"

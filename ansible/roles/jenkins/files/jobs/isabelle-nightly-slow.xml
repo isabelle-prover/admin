@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.5">
+    <scms>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+        <modules></modules>
+        <revisionType>BRANCH</revisionType>
+        <revision>default</revision>
+        <clean>true</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>false</disableChangeLog>
+      </hudson.plugins.mercurial.MercurialSCM>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>https://bitbucket.org/isa-afp/afp-devel/</source>
+        <modules></modules>
+        <revisionType>BRANCH</revisionType>
+        <revision>default</revision>
+        <subdir>afp</subdir>
+        <clean>true</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>false</disableChangeLog>
+      </hudson.plugins.mercurial.MercurialSCM>
+    </scms>
+  </scm>
+  <assignedNode>lrz-cloud</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>@midnight</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>Admin/jenkins/run_build slow</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>heaps/**/log/**</artifacts>
+      <allowEmptyArchive>true</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+      <caseSensitive>true</caseSensitive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.42">
+      <recipientList>isabelle-ci@mail46.informatik.tu-muenchen.de</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FirstFailureTrigger>
+          <email>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>true</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+          <failureCount>0</failureCount>
+        </hudson.plugins.emailext.plugins.trigger.FirstFailureTrigger>
+      </configuredTriggers>
+      <contentType>text/plain</contentType>
+      <defaultSubject>Build failure in Isabelle+AFP (slow)</defaultSubject>
+      <defaultContent>The Isabelle build failed. See the log at: $BUILD_URL</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
+      <attachBuildLog>true</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_REPLYTO</replyTo>
+      <saveOutput>false</saveOutput>
+      <disabled>false</disabled>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.16">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>1400</timeoutMinutes>
+      </strategy>
+      <operationList/>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.5"/>
+  </buildWrappers>
+</project>

@@ -1,0 +1,64 @@
+---
+ansible_python_interpreter: python3
+
+config:
+  worker:
+    jenkins_home: "/media/data/jenkins"
+
+  mail:
+    host: postout.lrz.de
+    port: 465
+    user: ge73ruk
+    sender: ge73ruk@mytum.de
+
+  github:
+    user: isabelle-bot
+
+  afp:
+    container_home: "/media/data/conrad"
+    git: "https://github.com/isabelle-prover/afp-submission.git"
+    sub_id_min: 10000001
+    sub_id_max: 10100000
+    sub_id_count: 100000
+
+    site_home: "/var/www/afp"
+
+  apache:
+    cert_name: isabelle-tls-certs
+
+    webroots:
+      - ci
+      - afp
+      - afp-devel
+
+    configs:
+      - ci.conf
+      - ci-ssl.conf
+      - isa-afp.conf
+      - isa-afp-ssl.conf
+
+  jenkins:
+    port: 8009
+
+    scripts:
+      - users.groovy
+      - security.groovy
+      - credentials.groovy
+      - executors.groovy
+      - mail.groovy
+      - hg.groovy
+      - optout.groovy
+
+    jobs:
+      - isabelle-all
+      - isabelle-nightly-benchmark
+      - isabelle-nightly-mac
+      - isabelle-nightly-slow
+      - testboard
+      - afp_testboard
+      - afp_testboard-afp
+
+    views:
+      - default
+      - nightly
+      - testboard

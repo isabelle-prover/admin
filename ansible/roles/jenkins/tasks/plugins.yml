@@ -1,0 +1,30 @@
+---
+
+- name: List Jenkins plugins
+  shell: /home/admin/cli.sh list-plugins | cut -f 1 -d ' '
+  register: jenkins_plugins
+  failed_when: "jenkins_plugins.stderr != ''"
+
+- name: Install Jenkins plugins
+  shell: /home/admin/cli.sh install-plugin -deploy {{ item }}
+  when: "jenkins_plugins.stdout.find(item) == -1"
+  with_items:
+    - envinject
+    - mercurial
+    - greenballs
+    - embeddable-build-status
+    - build-monitor-plugin
+    - multiple-scms
+    - jenkins-multijob-plugin
+    - email-ext
+    - build-timeout
+    - groovy-postbuild
+    - ansicolor
+    - timestamper
+    - monitoring
+    - parameterized-trigger
+    - ssh-slaves
+    - metrics
+    - cvs
+    - disk-usage
+    - linenumbers

@@ -1,0 +1,10 @@
+[Unit]
+Description=AFP Submission Service
+
+[Service]
+# python -u flag so that stdout is immediately written and not buffered
+ExecStart=/usr/bin/sudo -u conrad /usr/bin/python3 -u /opt/afpbuild/bin/server
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,27 @@
+---
+
+- name: Install packages
+  apt:
+    state: present
+    update_cache: yes
+    name:
+      - mercurial
+      - python3
+      - python3-jinja2
+      - python3-lxc
+      - apache2
+      - uidmap
+      - lxc
+      - cgroup-bin
+      - libpam-systemd
+      - cgmanager-utils
+      - libgomp1
+
+- name: Create container user
+  user: name=conrad uid=903 shell=/bin/sh home={{ config.afp.container_home }}
+
+- name: Set subordinate UIDs
+  shell: usermod -v {{ config.afp.sub_id_min }}-{{ config.afp.sub_id_max }} conrad
+
+- name: Set subordinate GIDs
+  shell: usermod -w {{ config.afp.sub_id_min }}-{{ config.afp.sub_id_max }} conrad

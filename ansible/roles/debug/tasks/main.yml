@@ -1,0 +1,14 @@
+---
+
+- name: Print site-specific configuration
+  debug: var=config
+
+- name: Print inventory groups
+  debug: var=groups
+
+- name: Print worker configuration
+  debug: msg="{{ hostvars[item]['worker_name'] }}"
+  with_items: "{{ groups['worker'] }}"
+
+- name: Print domains
+  debug: msg="{{ config.domains.values() | join(";") }}"
