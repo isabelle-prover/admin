@@ -37,10 +37,10 @@ Hosted by
   Rechnerbetriebsgruppe der Fakultäten für Mathematik und Informatik
 
 Specification
-  dual-core VM running Ubuntu 16.04 LTS, virtualized by vSphere
+  dual-core VM running Ubuntu 18.04 LTS, virtualized by vSphere
 
 Hostnames
-  - ``vmnipkow8.informatik.tu-muenchen.de``
+  - ``vmnipkow13.informatik.tu-muenchen.de``
   - ``ci.isabelle.systems``
   - ``isa-afp.org``
   - ``www.isa-afp.org``
