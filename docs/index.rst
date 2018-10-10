@@ -11,3 +11,4 @@ Welcome to Isabelle admin documentation!
    mta
    opennebula
    process
+   jenkins
