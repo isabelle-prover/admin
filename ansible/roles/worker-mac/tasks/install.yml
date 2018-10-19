@@ -5,7 +5,6 @@
     state: present
     name:
       - mercurial
-      - ghc
       - mlton
       - swi-prolog
       - smlnj

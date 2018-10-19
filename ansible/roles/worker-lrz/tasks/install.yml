@@ -10,7 +10,6 @@
       - curl
       - libgomp1
       - unzip
-      - ghc
       - mlton
       - swi-prolog
       - smlnj
