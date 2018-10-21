@@ -8,6 +8,7 @@
       - mlton
       - swi-prolog
       - smlnj
+      - haskell-stack
 
 - name: Install packages with Cask
   homebrew_cask: name={{ item }} state=present
