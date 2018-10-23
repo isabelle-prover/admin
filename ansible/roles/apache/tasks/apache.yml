@@ -15,7 +15,7 @@
   shell: a2dissite 000-default.conf
 
 - name: Prepare Apache web roots
-  file: path=/var/www/{{ item }} state=directory owner=root group=root mode=0755
+  file: path=/var/www/{{ item }} state=directory
   with_items: "{{ config.apache.webroots }}"
 
 - name: Obtain AFP submission host
