@@ -11,7 +11,7 @@
     <string>afp_testboard-afp</string>
     <string>isabelle-all</string>
     <string>isabelle-nightly-benchmark</string>
-    <string>isabelle-nightly-mac</string>
+    <string>isabelle-nightly-mac-afp</string>
     <string>isabelle-nightly-slow</string>
     <string>testboard</string>
   </jobNames>

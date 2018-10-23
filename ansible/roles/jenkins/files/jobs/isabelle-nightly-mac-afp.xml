@@ -4,16 +4,30 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
-  <scm class="hudson.plugins.mercurial.MercurialSCM" plugin="mercurial@1.54">
-    <source>http://isabelle.in.tum.de/repos/isabelle/</source>
-    <modules></modules>
-    <revisionType>BRANCH</revisionType>
-    <revision>default</revision>
-    <clean>true</clean>
-    <credentialsId></credentialsId>
-    <disableChangeLog>false</disableChangeLog>
+  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.5">
+    <scms>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+        <modules></modules>
+        <revisionType>BRANCH</revisionType>
+        <revision>default</revision>
+        <clean>true</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>false</disableChangeLog>
+      </hudson.plugins.mercurial.MercurialSCM>
+      <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+        <source>https://bitbucket.org/isa-afp/afp-devel/</source>
+        <modules></modules>
+        <revisionType>BRANCH</revisionType>
+        <revision>default</revision>
+        <subdir>afp</subdir>
+        <clean>true</clean>
+        <credentialsId></credentialsId>
+        <disableChangeLog>false</disableChangeLog>
+      </hudson.plugins.mercurial.MercurialSCM>
+    </scms>
   </scm>
-  <assignedNode>mac_elcapitan</assignedNode>
+  <assignedNode>mac_highsierra</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -50,7 +64,7 @@
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.5"/>
     <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.16">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
-        <timeoutMinutes>600</timeoutMinutes>
+        <timeoutMinutes>500</timeoutMinutes>
       </strategy>
       <operationList/>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>

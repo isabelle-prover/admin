@@ -3,9 +3,8 @@ init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/ci-ex
 init_component "$ISABELLE_HOME/Admin/jenkins/build"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
 
-ML_OPTIONS="-H 1000"
+ML_OPTIONS="-H 1000 --maxheap 3G"
 ML_PLATFORM="$ISABELLE_PLATFORM"
-
 ML_HOME="$POLYML_HOME/$ML_PLATFORM"
 
 ISABELLE_POLYML="$ML_HOME/poly"
@@ -13,5 +12,3 @@ ISABELLE_SCALA="$SCALA_HOME/bin"
 ISABELLE_MLTON=mlton
 ISABELLE_SWIPL=swipl
 ISABELLE_SMLNJ=sml
-
-ISABELLE_STACK="/usr/local/bin/stack"

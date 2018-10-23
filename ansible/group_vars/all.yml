@@ -52,7 +52,7 @@ config:
     jobs:
       - isabelle-all
       - isabelle-nightly-benchmark
-      - isabelle-nightly-mac
+      - isabelle-nightly-mac-afp
       - isabelle-nightly-slow
       - testboard
       - afp_testboard

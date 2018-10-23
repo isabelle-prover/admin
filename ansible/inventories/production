@@ -9,7 +9,7 @@ lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 
 [worker-mac]
-macisa1.informatik.tu-muenchen.de worker_name=workermac1 worker_tag=mac_elcapitan
+macisa2.isabelle.systems worker_name=workermac2 worker_tag=mac_highsierra
 
 [afp]
 10.155.208.87

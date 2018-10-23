@@ -8,7 +8,7 @@
   <jobNames>
     <comparator class="hudson.util.CaseInsensitiveComparator"/>
     <string>isabelle-nightly-benchmark</string>
-    <string>isabelle-nightly-mac</string>
+    <string>isabelle-nightly-mac-afp</string>
     <string>isabelle-nightly-slow</string>
   </jobNames>
   <jobFilters/>
