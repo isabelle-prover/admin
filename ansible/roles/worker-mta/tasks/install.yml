@@ -5,6 +5,7 @@
     state: present
     name:
       - openjdk-8-jre
+      - m4
       - mercurial
       - curl
       - libgomp1
