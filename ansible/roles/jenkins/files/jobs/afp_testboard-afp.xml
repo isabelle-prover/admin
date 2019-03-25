@@ -49,16 +49,6 @@
       <command>Admin/jenkins/run_build afp</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers>
-    <hudson.tasks.ArtifactArchiver>
-      <artifacts>heaps/**/log/**,status.json,dependencies.json</artifacts>
-      <allowEmptyArchive>true</allowEmptyArchive>
-      <onlyIfSuccessful>false</onlyIfSuccessful>
-      <fingerprint>false</fingerprint>
-      <defaultExcludes>true</defaultExcludes>
-      <caseSensitive>true</caseSensitive>
-    </hudson.tasks.ArtifactArchiver>
-  </publishers>
   <buildWrappers>
     <EnvInjectBuildWrapper plugin="envinject@1.92.1">
       <info>
