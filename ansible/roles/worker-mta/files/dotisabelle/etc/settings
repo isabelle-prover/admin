@@ -7,10 +7,7 @@ init_component "$ISABELLE_HOME/Admin/jenkins/build"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
 
-
 ML_OPTIONS="-H 4000 --maxheap 8G"
-ML_PLATFORM="$ISABELLE_PLATFORM64"
-ML_HOME="$POLYML_HOME/$ML_PLATFORM"
 
 ISABELLE_POLYML="$ML_HOME/poly"
 ISABELLE_SCALA="$SCALA_HOME/bin"
