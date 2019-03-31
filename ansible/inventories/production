@@ -12,7 +12,7 @@ hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 macisa2.isabelle.systems worker_name=workermac2 worker_tag=mac_highsierra
 
 [afp]
-10.155.208.87
+10.155.208.88
 
 [worker:children]
 worker-lrz
