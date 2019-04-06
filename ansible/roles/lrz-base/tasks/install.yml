@@ -14,3 +14,9 @@
 
 - name: Disable root password
   shell: passwd -l root
+
+- name: Prepare .ssh directory
+  file: path=/root/.ssh state=directory owner=root group=root mode=0700
+
+- name: Copy authorized_keys file
+  copy: src=authorized_keys dest=/root/.ssh/authorized_keys owner=root group=root mode=0644
