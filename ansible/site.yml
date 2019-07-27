@@ -2,6 +2,8 @@
 
 - name: Configure LRZ workers
   hosts: worker-lrz
+  become: yes
+  become_method: sudo
 
   roles:
     - { role: lrz-base, tags: [ 'lrz-base' ] }
@@ -30,6 +32,8 @@
 
 - name: Configure AFP submission checker
   hosts: afp
+  become: yes
+  become_method: sudo
 
   vars_files:
     - vars/secrets.yml

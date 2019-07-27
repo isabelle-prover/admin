@@ -2,7 +2,7 @@
 vmnipkow13.in.tum.de
 
 [worker-lrz]
-10.155.208.82 worker_name=workerlrz5 worker_tag=lrz-cloud
+10.195.0.242 worker_name=workerlrz5 worker_tag=lrz-cloud
 
 [worker-mta]
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
@@ -12,7 +12,7 @@ hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 macisa2.isabelle.systems worker_name=workermac2 worker_tag=mac_highsierra
 
 [afp]
-10.155.208.88
+10.195.2.20
 
 [worker:children]
 worker-lrz

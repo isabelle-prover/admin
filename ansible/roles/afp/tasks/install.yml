@@ -14,8 +14,8 @@
       - lxc
       - cgroup-bin
       - libpam-systemd
-      - cgmanager-utils
       - libgomp1
+      - fontconfig
 
 - name: Create container user
   user: name=conrad uid=903 shell=/bin/sh home={{ config.afp.container_home }}

@@ -5,7 +5,7 @@
     state: present
     update_cache: yes
     name:
-      - openjdk-8-jre
+      - openjdk-11-jre
       - m4
       - mercurial
       - curl
@@ -16,7 +16,6 @@
       - smlnj
       - lib32stdc++6
       - texlive-full
-      - texlive-math-extra
       - python-six
 
 - name: Create Jenkins user
