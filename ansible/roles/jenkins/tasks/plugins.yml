@@ -28,3 +28,6 @@
     - cvs
     - disk-usage
     - linenumbers
+    - http_request
+    - pipeline-utility-steps
+    - workflow-aggregator
