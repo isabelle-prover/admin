@@ -9,6 +9,16 @@
     - { role: lrz-base, tags: [ 'lrz-base' ] }
     - { role: worker-lrz, tags: [ 'worker', 'worker-lrz' ] }
 
+- name: Configure LRZ-large workers
+  hosts: worker-lrz-large
+  become: yes
+  become_method: sudo
+
+  roles:
+    - { role: lrz-base, tags: [ 'lrz-base' ] }
+    - { role: worker-lrz, tags: [ 'worker', 'worker-lrz' ] }
+    - { role: worker-lrz-large, tags: [ 'worker-lrz-large' ] }
+
 - name: Configure MTA workers
   hosts: worker-mta
   become: yes
