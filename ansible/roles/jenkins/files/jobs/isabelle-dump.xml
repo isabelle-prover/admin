@@ -31,7 +31,7 @@
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.80">
     <script>pipeline {
-   agent { node &apos;lrz&apos; }
+   agent { node &apos;lrz-large&apos; }
 
    stages {
       stage(&apos;Checkout&apos;) {
