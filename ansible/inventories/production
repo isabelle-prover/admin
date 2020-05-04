@@ -4,6 +4,9 @@ vmnipkow13.in.tum.de
 [worker-lrz]
 10.195.0.242 worker_name=workerlrz5 worker_tag=lrz-cloud
 
+[worker-lrz-large]
+10.195.3.255 worker_name=workerlrz6 worker_tag=lrz-large
+
 [worker-mta]
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
@@ -16,12 +19,14 @@ macisa2.isabelle.systems worker_name=workermac2 worker_tag=mac_highsierra
 
 [worker:children]
 worker-lrz
+worker-lrz-large
 worker-mta
 worker-mac
 
 [lrz:children]
 afp
 worker-lrz
+worker-lrz-large
 
 [production:children]
 leader

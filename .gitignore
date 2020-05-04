@@ -1,3 +1,5 @@
 passphrase
 *.retry
 venv
+*.iml
+.idea/
