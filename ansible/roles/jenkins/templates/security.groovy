@@ -1,7 +1,3 @@
-import jenkins.security.s2m.AdminWhitelistRule
-
-jenkins.CLI.get().setEnabled(false)
-
 org.jenkinsci.main.modules.sshd.SSHD.get().setPort(-1)
 
 realm = new hudson.security.HudsonPrivateSecurityRealm(false, false, null)
