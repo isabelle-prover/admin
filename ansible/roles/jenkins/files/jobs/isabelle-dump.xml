@@ -58,7 +58,7 @@
       }
       stage(&apos;Dump&apos;) {
          steps {
-            sh &apos;isabelle/bin/isabelle dump -o threads=4 -D afp/thys -b Pure -X slow -X very-slow -O dump -a&apos;
+            sh &apos;isabelle/bin/isabelle dump -o threads=4 -D afp/thys -b Pure -X slow -X large -X very_slow -O dump -a&apos;
          }
       }
       stage(&apos;Store&apos;) {
