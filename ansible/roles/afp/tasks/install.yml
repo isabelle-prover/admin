@@ -12,10 +12,11 @@
       - apache2
       - uidmap
       - lxc
-      - cgroup-bin
+      - cgroup-tools
       - libpam-systemd
       - libgomp1
       - fontconfig
+      - acl # <https://github.com/georchestra/ansible/issues/55#issuecomment-588313638>
 
 - name: Create container user
   user: name=conrad uid=903 shell=/bin/sh home={{ config.afp.container_home }}
