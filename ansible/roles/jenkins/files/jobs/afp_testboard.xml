@@ -22,9 +22,6 @@
     <clean>true</clean>
     <credentialsId></credentialsId>
     <disableChangeLog>false</disableChangeLog>
-    <browser class="hudson.plugins.mercurial.browser.BitBucket">
-      <url>https://bitbucket.org/isa-afp/afp-testboard/</url>
-    </browser>
   </scm>
   <assignedNode>master</assignedNode>
   <canRoam>false</canRoam>

@@ -27,9 +27,6 @@
         <clean>true</clean>
         <credentialsId></credentialsId>
         <disableChangeLog>false</disableChangeLog>
-        <browser class="hudson.plugins.mercurial.browser.BitBucket">
-          <url>https://bitbucket.org/isa-afp/afp-devel/</url>
-        </browser>
       </hudson.plugins.mercurial.MercurialSCM>
     </scms>
   </scm>
