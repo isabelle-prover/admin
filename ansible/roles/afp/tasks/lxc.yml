@@ -36,7 +36,7 @@
   unarchive: src=/media/data/isabelle2020-rc2.tar.gz copy=false creates=Isabelle2020-RC2 dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt owner=root group=root
 
 - name: Clone AFP
-  hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://bitbucket.org/isa-afp/afp-2020 revision=default force=yes purge=yes
+  hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-2020 revision=default force=yes purge=yes
 
 - name: Create .isabelle/Isabelle2020-RC2/etc/ in home dir of unprivileged user in container
   file:
