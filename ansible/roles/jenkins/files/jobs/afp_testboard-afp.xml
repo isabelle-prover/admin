@@ -34,7 +34,7 @@
         <disableChangeLog>true</disableChangeLog>
       </hudson.plugins.mercurial.MercurialSCM>
       <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
-        <source>https://bitbucket.org/isa-afp/afp-testboard/</source>
+        <source>https://foss.heptapod.net/isa-afp/afp-testboard/</source>
         <modules></modules>
         <revisionType>CHANGESET</revisionType>
         <revision>${AFP_REVISION}</revision>

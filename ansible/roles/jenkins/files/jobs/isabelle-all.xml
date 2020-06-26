@@ -19,7 +19,7 @@
         </browser>
       </hudson.plugins.mercurial.MercurialSCM>
       <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
-        <source>https://bitbucket.org/isa-afp/afp-devel/</source>
+        <source>https://foss.heptapod.net/isa-afp/afp-devel/</source>
         <modules></modules>
         <revisionType>BRANCH</revisionType>
         <revision>default</revision>

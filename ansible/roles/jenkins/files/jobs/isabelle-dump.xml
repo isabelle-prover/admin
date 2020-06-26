@@ -45,7 +45,7 @@
                env.AFP_VERSION = (response.content =~ /&lt;mercurialNodeName&gt;([a-z0-9]+)/)[1][1]
             }
             checkout([$class: &apos;MercurialSCM&apos;, credentialsId: &apos;&apos;, revision: &quot;${ISABELLE_VERSION}&quot;, revisionType: &apos;CHANGESET&apos;, source: &apos;https://isabelle.in.tum.de/repos/isabelle&apos;, subdir: &apos;isabelle&apos;])
-            checkout([$class: &apos;MercurialSCM&apos;, credentialsId: &apos;&apos;, revision: &quot;${AFP_VERSION}&quot;, revisionType: &apos;CHANGESET&apos;, source: &apos;https://bitbucket.org/isa-afp/afp-devel&apos;, subdir: &apos;afp&apos;])
+            checkout([$class: &apos;MercurialSCM&apos;, credentialsId: &apos;&apos;, revision: &quot;${AFP_VERSION}&quot;, revisionType: &apos;CHANGESET&apos;, source: &apos;https://foss.heptapod.net/isa-afp/afp-devel&apos;, subdir: &apos;afp&apos;])
          }
       }
       stage(&apos;Install&apos;) {

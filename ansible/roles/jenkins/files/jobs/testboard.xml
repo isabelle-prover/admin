@@ -42,7 +42,7 @@
 if [ -d afp ]; then
   ( cd afp &amp;&amp; hg pull &amp;&amp; hg up -C )
 else
-  hg clone &quot;https://bitbucket.org/isa-afp/afp-devel/&quot; afp
+  hg clone &quot;https://foss.heptapod.net/isa-afp/afp-devel/&quot; afp
 fi</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
