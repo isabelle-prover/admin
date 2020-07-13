@@ -20,7 +20,7 @@
   become_method: sudo
 
 - name: Create LXC base container
-  shell: lxc-create -n base -t download --bdev dir -- -d ubuntu -r bionic -a amd64 --no-validate
+  shell: lxc-create -n base -t download --bdev dir -- -d ubuntu -r focal -a amd64 --no-validate
   when: "afp_lxc.stdout.find('base') == -1"
   become: yes
   become_user: conrad
