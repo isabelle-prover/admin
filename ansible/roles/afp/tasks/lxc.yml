@@ -30,17 +30,17 @@
   copy: src=/etc/resolv.conf dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/etc/resolv.conf remote_src=true owner=root group=root mode=0644
 
 - name: Download Isabelle
-  get_url: url=https://isabelle.in.tum.de/website-Isabelle2020-RC2/dist/Isabelle2020-RC2_linux.tar.gz dest=/media/data/isabelle2020-rc2.tar.gz checksum=sha256:2dfa331144c1780cde9d03a1bd2c826fd925916a2a7bd4c17dc583c292eca37f
+  get_url: url=https://isabelle.in.tum.de/website-Isabelle2020/dist/Isabelle2020_linux.tar.gz dest=/media/data/isabelle2020.tar.gz checksum=sha256:633aff864d6647bd175cf831e7513e3fd0cd06beacbf29a5c6c66d4de1522bae
 
 - name: Unpack Isabelle into LXC base container
-  unarchive: src=/media/data/isabelle2020-rc2.tar.gz copy=false creates=Isabelle2020-RC2 dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt owner=root group=root
+  unarchive: src=/media/data/isabelle2020.tar.gz copy=false creates=Isabelle2020 dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt owner=root group=root
 
 - name: Clone AFP
   hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-2020 revision=default force=yes purge=yes
 
-- name: Create .isabelle/Isabelle2020-RC2/etc/ in home dir of unprivileged user in container
+- name: Create .isabelle/Isabelle2020/etc/ in home dir of unprivileged user in container
   file:
-    path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2020-RC2/etc"
+    path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2020/etc"
     owner: 10001001
     group: 10001001
     state: directory
@@ -48,14 +48,14 @@
 
 - name: Configure Isabelle
   blockinfile:
-    name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2020-RC2/etc/settings"
+    name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2020/etc/settings"
     create: yes
     block: |
       ML_OPTIONS="-H 4000 --maxheap 6G"
       ML_HOME="$POLYML_HOME/$ML_PLATFORM"
 
 - name: Build Isabelle sessions
-  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2020-RC2/bin/isabelle build -o threads=2 -bv {{ item }}"
+  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2020/bin/isabelle build -o threads=2 -bv {{ item }}"
   with_items:
     - Pure
     - HOL
