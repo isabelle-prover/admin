@@ -35,7 +35,7 @@ AFP_PATH = "/opt/afp/thys"
 ISABELLE_BROWSER_INFO = CONTAINER_DIR + "/.isabelle/Isabelle2020/browser_info/"
 
 CONTAINERS_PATH = "/media/data/conrad/.local/share/lxc/"
-CONTAINER_ROOT = "delta/overlay"
+CONTAINER_ROOT = "overlay/delta"
 
 BROWSER_INFO_DIR = "/var/www/afp/browser_info"
 BROWSER_INFO_WWW = "browser_info"
