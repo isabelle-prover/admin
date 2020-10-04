@@ -7,14 +7,14 @@
       - mercurial
       - mlton
       - swi-prolog
-      - smlnj
       - haskell-stack
+      - java
 
 - name: Install packages with Cask
   homebrew_cask: name={{ item }} state=present
   with_items:
     - mactex
-    - java
+    - smlnj
 
 - name: Create Jenkins user
   user: name=jenkins uid=902 shell=/bin/sh home={{ config.worker.jenkins_home }}
