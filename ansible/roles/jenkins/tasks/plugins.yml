@@ -32,3 +32,4 @@
     - pipeline-utility-steps
     - workflow-aggregator
     - bootstrap4-api
+    - ws-cleanup

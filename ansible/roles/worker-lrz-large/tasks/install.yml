@@ -1,0 +1,4 @@
+---
+
+- name: Overwrite authorized_keys file
+  copy: src=authorized_keys dest={{ config.worker.jenkins_home }}/.ssh/authorized_keys owner=jenkins group=root mode=0644

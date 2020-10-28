@@ -9,7 +9,7 @@
       <options/>
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
-  <description></description>
+  <description>Dumps PIDE database.</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -34,13 +34,18 @@
    agent { node &apos;lrz-large&apos; }
 
    stages {
+      stage(&apos;Prepare&apos;) {
+          steps {
+              cleanWs()
+          }
+      }
       stage(&apos;Checkout&apos;) {
          steps {
             script {
                def response = httpRequest &apos;https://ci.isabelle.systems/jenkins/job/isabelle-all/lastSuccessfulBuild/api/xml?tree=actions[*[_class,mercurialNodeName]]&amp;xpath=freeStyleBuild/action[@_class=%22hudson.plugins.mercurial.MercurialTagAction%22]/mercurialNodeName&amp;wrapper=revs&apos;
-               
+
                if (response.status != 200) error(&quot;Could not determine Isabelle/AFP version of last successful build!&quot;)
-               
+
                env.ISABELLE_VERSION = (response.content =~ /&lt;mercurialNodeName&gt;([a-z0-9]+)/)[0][1]
                env.AFP_VERSION = (response.content =~ /&lt;mercurialNodeName&gt;([a-z0-9]+)/)[1][1]
             }
@@ -58,7 +63,7 @@
       }
       stage(&apos;Dump&apos;) {
          steps {
-            sh &apos;isabelle/bin/isabelle dump -o threads=4 -D afp/thys -b Pure -X slow -X large -X very_slow -O dump -a&apos;
+            sh &apos;isabelle/bin/isabelle dump -o threads=4 -D afp/thys -b Pure -X slow -X large -X very_slow -O dump -a || true&apos;
          }
       }
       stage(&apos;Store&apos;) {
