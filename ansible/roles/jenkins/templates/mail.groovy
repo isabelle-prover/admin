@@ -10,7 +10,7 @@ def inst = Jenkins.getInstance()
 
 def desc = inst.getDescriptor("hudson.tasks.Mailer")
 
-desc.setSmtpHost("mailin.informatik.tu-muenchen.de")
+desc.setSmtpHost("mailrelay.informatik.tu-muenchen.de")
 desc.setUseSsl(false)
 
 desc.save()
