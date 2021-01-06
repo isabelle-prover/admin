@@ -1,4 +1,4 @@
-ansible>=2.7
+ansible==2.8.18
 Sphinx>=1.8
 sphinx-autobuild
 sphinx_rtd_theme
