@@ -50,7 +50,7 @@
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>heaps/**/log/**,status.json,dependencies.json,afp/web/**</artifacts>
+      <artifacts>status.json,dependencies.json,afp/web/**</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
