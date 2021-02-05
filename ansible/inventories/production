@@ -11,9 +11,6 @@ vmnipkow13.in.tum.de
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 
-[worker-mac]
-macisa2.isabelle.systems worker_name=workermac2 worker_tag=mac_highsierra
-
 [afp]
 138.246.234.221
 
@@ -21,7 +18,6 @@ macisa2.isabelle.systems worker_name=workermac2 worker_tag=mac_highsierra
 worker-lrz
 worker-lrz-large
 worker-mta
-worker-mac
 
 [lrz:children]
 afp

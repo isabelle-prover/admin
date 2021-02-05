@@ -30,16 +30,6 @@
   roles:
     - { role: worker-mta, tags: [ 'worker', 'worker-mta' ] }
 
-- name: Configure Mac workers
-  hosts: worker-mac
-
-  roles:
-    - { role: worker-mac, tags: [ 'worker', 'worker-mac' ] }
-
-  # for macOS to find Python 3
-  environment:
-    PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
-
 - name: Configure AFP submission checker
   hosts: afp
   become: yes
