@@ -30,17 +30,17 @@
   copy: src=/etc/resolv.conf dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/etc/resolv.conf remote_src=true owner=root group=root mode=0644
 
 - name: Download Isabelle
-  get_url: url=https://isabelle.in.tum.de/website-Isabelle2020/dist/Isabelle2020_linux.tar.gz dest=/media/data/isabelle2020.tar.gz checksum=sha256:633aff864d6647bd175cf831e7513e3fd0cd06beacbf29a5c6c66d4de1522bae
+  get_url: url=https://isabelle.in.tum.de/website-Isabelle2021/dist/Isabelle2021_linux.tar.gz dest=/media/data/isabelle2021.tar.gz checksum=sha256:5d7811a658c43448456de1cb61e3bc27b93ac3ef2f3dc51a1aa6244c78624fc7
 
 - name: Unpack Isabelle into LXC base container
-  unarchive: src=/media/data/isabelle2020.tar.gz copy=false creates=Isabelle2020 dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt owner=root group=root
+  unarchive: src=/media/data/isabelle2021.tar.gz copy=false creates=Isabelle2021 dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt owner=root group=root
 
 - name: Clone AFP
-  hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-2020 revision=default force=yes purge=yes
+  hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-2021 revision=default force=yes purge=yes
 
-- name: Create .isabelle/Isabelle2020/etc/ in home dir of unprivileged user in container
+- name: Create .isabelle/Isabelle2021/etc/ in home dir of unprivileged user in container
   file:
-    path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2020/etc"
+    path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2021/etc"
     owner: 10001001
     group: 10001001
     state: directory
@@ -48,20 +48,35 @@
 
 - name: Configure Isabelle
   blockinfile:
-    name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2020/etc/settings"
+    name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2021/etc/settings"
     create: yes
     block: |
       ML_OPTIONS="-H 4000 --maxheap 6G"
       ML_HOME="$POLYML_HOME/$ML_PLATFORM"
 
 - name: Build Isabelle sessions
-  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2020/bin/isabelle build -o threads=2 -bv {{ item }}"
+  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2021/bin/isabelle build -o threads=2 -bv {{ item }}"
   with_items:
     - Pure
     - HOL
     - HOL-Library
     - HOL-Analysis
     - HOL-Probability
+  environment:
+    HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
+
+- name: Build AFP sessions
+  command: >
+           {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2021/bin/isabelle build
+           -d {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp/thys -bv
+           -o timeout_scale=5
+           {{ item }}
+  with_items:
+    - Automatic_Refinement
+    - Refine_Monadic
+    - Collections
+    - Sepref_Prereq
+    - Refine_Imperative_HOL
   environment:
     HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
 
