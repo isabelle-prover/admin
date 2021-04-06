@@ -63,7 +63,7 @@ Hosted by
   Leibniz-Rechenzentrum
 
 Specification
-  octa-core VMs running Ubuntu 16.04 LTS, virtualized by OpenNebula/KVM
+  octa-core VMs running Ubuntu  18.04 LTS, virtualized by OpenNebula/KVM
 
 Hostnames
   various, see :doc:`opennebula`
@@ -118,7 +118,7 @@ Hosted by
   Leibniz-Rechenzentrum
 
 Specification
-  dual-core VM running Ubuntu 16.04 LTS, virtualized by OpenNebula/KVM
+  dual-core VM running Ubuntu 20.04 LTS, virtualized by OpenNebula/KVM
 
 Hostnames
   various, see :doc:`opennebula`
