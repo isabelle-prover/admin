@@ -17,9 +17,10 @@
       - texlive-full
       - python-tz
       - python-jinja2
-      - python-termcolor
+      - python3-termcolor
       - python-six
-      - gnuplot5-nox
+      - gnuplot-nox
+      - libzarith-ocaml
 
 - name: Prepare Jenkins home directory
   file: path=/media/data state=directory owner=root group=root mode=0755
