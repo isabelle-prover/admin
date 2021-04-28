@@ -16,9 +16,12 @@
       - lib32stdc++6
       - texlive-full
       - python-tz
-      - python-jinja2
-      - python3-termcolor
       - python-six
+      - python-jinja2
+      - python3-tz
+      - python3-six
+      - python3-jinja2
+      - python3-termcolor
       - gnuplot-nox
       - libzarith-ocaml
 
