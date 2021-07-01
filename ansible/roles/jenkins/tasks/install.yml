@@ -1,7 +1,7 @@
 ---
 
 - name: Add Jenkins stable APT key
-  apt_key: url='http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key'
+  apt_key: url='http://pkg.jenkins-ci.org/debian-stable/jenkins.io.key'
 
 - name: Add Jenkins stable APT repository
   apt_repository: repo='deb http://pkg.jenkins-ci.org/debian-stable binary/'
@@ -16,6 +16,9 @@
       - jenkins
       - xmlstarlet
       - python-httplib2
+
+- name: Add Jenkins user to shadow group
+  user: name=jenkins groups=shadow append=yes
 
 - name: Set permissions for AFP devel site
   file: path=/var/www/afp-devel state=directory owner=jenkins group=root mode=0755

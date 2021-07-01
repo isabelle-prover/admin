@@ -8,3 +8,7 @@ user.save()
 
 jenkins = jenkins.model.Jenkins.getInstance()
 jenkins.getRootPath().child("secrets/initialAdminPassword").delete()
+
+if (!jenkins.installState.isSetupComplete()) {
+    jenkins.install.InstallState.INITIAL_SETUP_COMPLETED.initializeState()
+}
