@@ -19,7 +19,8 @@
     <modules></modules>
     <revisionType>BRANCH</revisionType>
     <revision>default</revision>
-    <clean>true</clean>
+    <subdir>afp</subdir>
+    <clean>false</clean>
     <credentialsId></credentialsId>
     <disableChangeLog>false</disableChangeLog>
   </scm>
@@ -38,11 +39,12 @@
   <builders>
     <hudson.tasks.Shell>
       <command>set -ex
-if [ -d isabelle ]; then
-( cd isabelle &amp;&amp; hg pull &amp;&amp; hg up -C &quot;http://isabelle.in.tum.de/repos/isabelle/&quot;)
-else
-hg clone &quot;http://isabelle.in.tum.de/repos/isabelle/&quot; isabelle
-fi</command>
+if ! [ -d .hg ]; then
+  hg init
+fi
+hg pull http://isabelle.in.tum.de/repos/isabelle/
+hg up
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
           <command>Admin/jenkins/run_build afp</command>

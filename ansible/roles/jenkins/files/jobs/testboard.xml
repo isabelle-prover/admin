@@ -47,16 +47,19 @@
   <builders>
     <hudson.tasks.Shell>
       <command>set -ex
-if [ -v AFP_REVISION ]; then
-  AFP_SOURCE=&quot;-r $AFP_REVISION https://foss.heptapod.net/isa-afp/afp-testboard/&quot;
-else
-  AFP_SOURCE=&quot;https://foss.heptapod.net/isa-afp/afp-devel/&quot;
+if ! [ -d afp ]; then
+  hg clone https://foss.heptapod.net/isa-afp/afp-devel/ afp
 fi
-if [ -d afp ]; then
-  ( cd afp &amp;&amp; hg pull &amp;&amp; hg up -C $AFP_SOURCE)
+
+if [ -z &quot;$AFP_REVISION&quot; ]; then
+  AFP_URL=&quot;https://foss.heptapod.net/isa-afp/afp-devel/&quot;
+  AFP_REVISION=$(hg id --id $AFP_URL)
 else
-  hg clone $AFP_SOURCE afp
-fi</command>
+  AFP_URL=&quot;https://foss.heptapod.net/isa-afp/afp-testboard/&quot;
+fi
+
+( cd afp &amp;&amp; hg pull $AFP_URL &amp;&amp; hg up -C -r &quot;$AFP_REVISION&quot; )
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>Admin/jenkins/run_build testboard</command>
