@@ -1,7 +1,7 @@
 ---
 
 - name: Create administrative user
-  user: name=admin uid=901 shell=/bin/false
+  user: name=admin uid=901 shell=/bin/false password={{ config.jenkins.password | password_hash('sha512') }}
 
 - name: Copy Jenkins CLI script
   template: src=cli.sh dest=/home/admin/cli.sh owner=root group=root mode=0700

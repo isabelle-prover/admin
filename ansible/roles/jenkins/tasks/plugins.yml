@@ -33,3 +33,5 @@
     - workflow-aggregator
     - bootstrap4-api
     - ws-cleanup
+    - role-strategy
+    - pam-auth
