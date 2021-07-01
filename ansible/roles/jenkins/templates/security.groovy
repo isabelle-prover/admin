@@ -18,8 +18,8 @@ strategy.addRole(RoleType.Global, readRole)
 
 // Assign roles to users/groups
 strategy.assignRole(RoleType.Global, adminRole, 'admin')
-strategy.assignRole(RoleType.Global, readRole, '@isabelle')
-strategy.assignRole(RoleType.Global, buildRole, '@isabelle')
+strategy.assignRole(RoleType.Global, readRole, 'isabelle')
+strategy.assignRole(RoleType.Global, buildRole, 'isabelle')
 strategy.assignRole(RoleType.Global, readRole, 'anonymous')
 
 
