@@ -8,7 +8,6 @@
   <jobNames>
     <comparator class="hudson.util.CaseInsensitiveComparator"/>
     <string>afp_testboard</string>
-    <string>afp_testboard-afp</string>
     <string>isabelle-all</string>
     <string>isabelle-dump</string>
     <string>isabelle-nightly-benchmark</string>

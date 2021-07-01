@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Isabelle testboard.</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -12,6 +12,15 @@
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+          <hudson.model.StringParameterDefinition>
+              <name>AFP_REVISION</name>
+              <description>Mercurial revision of the afp-testboard to test against. Leave empty for current afp-devel.</description>
+              <trim>true</trim>
+          </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.plugins.mercurial.MercurialSCM" plugin="mercurial@1.54">
     <installation>cached-mercurial</installation>
@@ -38,11 +47,15 @@
   <builders>
     <hudson.tasks.Shell>
       <command>set -ex
-
-if [ -d afp ]; then
-  ( cd afp &amp;&amp; hg pull &amp;&amp; hg up -C )
+if [ -v AFP_REVISION ]; then
+  AFP_SOURCE=&quot;-r $AFP_REVISION https://foss.heptapod.net/isa-afp/afp-testboard/&quot;
 else
-  hg clone &quot;https://foss.heptapod.net/isa-afp/afp-devel/&quot; afp
+  AFP_SOURCE=&quot;https://foss.heptapod.net/isa-afp/afp-devel/&quot;
+fi
+if [ -d afp ]; then
+  ( cd afp &amp;&amp; hg pull &amp;&amp; hg up -C $AFP_SOURCE)
+else
+  hg clone $AFP_SOURCE afp
 fi</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>

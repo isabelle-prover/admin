@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.20">
+<project>
   <actions/>
-  <description></description>
+  <description>AFP testboard job (current Isabelle).</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -23,7 +23,7 @@
     <credentialsId></credentialsId>
     <disableChangeLog>false</disableChangeLog>
   </scm>
-  <assignedNode>master</assignedNode>
+  <assignedNode>mta_hpc</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -37,35 +37,34 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>echo &quot;$MERCURIAL_REVISION&quot;</command>
+      <command>set -ex
+if [ -d isabelle ]; then
+( cd isabelle &amp;&amp; hg pull &amp;&amp; hg up -C &quot;http://isabelle.in.tum.de/repos/isabelle/&quot;)
+else
+hg clone &quot;http://isabelle.in.tum.de/repos/isabelle/&quot; isabelle
+fi</command>
     </hudson.tasks.Shell>
-    <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
-      <phaseName>main</phaseName>
-      <phaseJobs>
-        <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-          <jobName>afp_testboard-afp</jobName>
-          <currParams>true</currParams>
-          <exposedSCM>false</exposedSCM>
-          <disableJob>false</disableJob>
-          <parsingRulesPath></parsingRulesPath>
-          <maxRetries>0</maxRetries>
-          <enableRetryStrategy>false</enableRetryStrategy>
-          <enableCondition>false</enableCondition>
-          <abortAllJob>false</abortAllJob>
-          <condition></condition>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters plugin="parameterized-trigger@2.32">
-              <properties>AFP_REVISION=${MERCURIAL_REVISION}</properties>
-            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-          </configs>
-          <killPhaseOnJobResultCondition>NEVER</killPhaseOnJobResultCondition>
-          <buildOnlyIfSCMChanges>false</buildOnlyIfSCMChanges>
-        </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-      </phaseJobs>
-      <continuationCondition>ALWAYS</continuationCondition>
-    </com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
+    <hudson.tasks.Shell>
+          <command>Admin/jenkins/run_build afp</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers/>
-  <buildWrappers/>
-  <pollSubjobs>false</pollSubjobs>
-</com.tikal.jenkins.plugins.multijob.MultiJobProject>
+    <buildWrappers>
+        <EnvInjectBuildWrapper plugin="envinject@1.92.1">
+            <info>
+                <propertiesContent>ISABELLE_CI_TESTBOARD=true</propertiesContent>
+                <loadFilesFromMaster>false</loadFilesFromMaster>
+            </info>
+        </EnvInjectBuildWrapper>
+        <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
+            <colorMapName>xterm</colorMapName>
+        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+        <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.5"/>
+        <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.16">
+            <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+                <timeoutMinutes>240</timeoutMinutes>
+            </strategy>
+            <operationList/>
+        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    </buildWrappers>
+</project>
