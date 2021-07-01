@@ -56,7 +56,6 @@ config:
       - isabelle-nightly-slow
       - testboard
       - afp_testboard
-      - afp_testboard-afp
 
     views:
       - default
