@@ -3,7 +3,7 @@ init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/ci-ex
 init_component "$ISABELLE_HOME/Admin/jenkins/build"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
 
-ML_OPTIONS="-H 4000 --maxheap 20G"
+ML_OPTIONS="-H 4000 --maxheap 32G"
 ML_PLATFORM="$ISABELLE_PLATFORM64"
 ML_HOME="$POLYML_HOME/$ML_PLATFORM"
 
