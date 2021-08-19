@@ -13,7 +13,7 @@
     <credentialsId></credentialsId>
     <disableChangeLog>false</disableChangeLog>
   </scm>
-  <assignedNode>mta_big</assignedNode>
+  <assignedNode>mta_hpc</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>

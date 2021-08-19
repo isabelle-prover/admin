@@ -25,7 +25,7 @@
     <credentialsId></credentialsId>
     <disableChangeLog>false</disableChangeLog>
   </scm>
-  <assignedNode>mta_hpc</assignedNode>
+  <assignedNode>mta_big</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
