@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Isabelle testboard.</description>
+  <description>Isabelle testboard. Triggered by:
+&apos;hg push -f ssh://isabelle-server.in.tum.de//home/isabelle-repository/repos/testboard&apos;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
