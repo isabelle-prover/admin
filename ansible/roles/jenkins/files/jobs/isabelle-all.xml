@@ -31,7 +31,7 @@
     </scms>
   </scm>
   <quietPeriod>120</quietPeriod>
-  <assignedNode>mta_hpc</assignedNode>
+  <assignedNode>mta_big</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
