@@ -7,7 +7,7 @@
   apt_repository: repo='deb http://pkg.jenkins-ci.org/debian-stable binary/'
 
 - name: Install Java # needs to be configured before Jenkins
-  apt: name=openjdk-8-jre state=present
+  apt: name=openjdk-11-jdk state=present
 
 - name: Install packages
   apt:
