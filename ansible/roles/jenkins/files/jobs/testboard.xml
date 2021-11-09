@@ -54,7 +54,7 @@ fi
 
 if [ -z &quot;$AFP_REVISION&quot; ]; then
   AFP_URL=&quot;https://foss.heptapod.net/isa-afp/afp-devel/&quot;
-  AFP_REVISION=$(hg id --id $AFP_URL)
+  AFP_REVISION=$(hg id --id --rev default $AFP_URL)
 else
   AFP_URL=&quot;https://foss.heptapod.net/isa-afp/afp-testboard/&quot;
 fi
