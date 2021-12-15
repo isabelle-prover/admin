@@ -25,14 +25,14 @@ BASE_CONTAINER = "base"
 UNPRIV_USER = "ubuntu"
 CONTAINER_DIR = "/home/" + UNPRIV_USER
 THEORY_DIR = CONTAINER_DIR + "/thy"
-ISABELLE_PATH = "/opt/Isabelle2021/bin/isabelle"
+ISABELLE_PATH = "/opt/Isabelle2021-1/bin/isabelle"
 ISABELLE_SETTINGS = ["-o", "document=pdf",
                      "-o", "document_variants=document:outline=/proof,/ML",
                      "-o", "browser_info",
                      "-o", "timeout_scale=4",
                      "-v"]
 AFP_PATH = "/opt/afp/thys"
-ISABELLE_BROWSER_INFO = CONTAINER_DIR + "/.isabelle/Isabelle2021/browser_info/"
+ISABELLE_BROWSER_INFO = CONTAINER_DIR + "/.isabelle/Isabelle2021-1/browser_info/"
 AFP_STATUS_FILENAME = "AFP_STATUS"
 
 CONTAINERS_PATH = "/media/data/conrad/.local/share/lxc/"
