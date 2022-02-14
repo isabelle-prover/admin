@@ -129,12 +129,14 @@ if (!result.trim().isEmpty()) {
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.16">
+  <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.20">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>240</timeoutMinutes>
       </strategy>
-      <operationList/>
-    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+      <operationList>
+          <hudson.plugins.build__timeout.operations.FailOperation/>
+      </operationList>
+  </hudson.plugins.build__timeout.BuildTimeoutWrapper>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.5"/>
   </buildWrappers>
 </project>
