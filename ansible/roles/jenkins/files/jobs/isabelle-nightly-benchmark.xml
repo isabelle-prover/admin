@@ -32,7 +32,7 @@
   </builders>
   <publishers>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.42">
-      <recipientList>isabelle-ci@mail46.informatik.tu-muenchen.de</recipientList>
+      <recipientList>isabelle-ci@mailman46.in.tum.de</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FirstFailureTrigger>
           <email>

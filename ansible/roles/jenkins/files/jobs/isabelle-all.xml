@@ -86,7 +86,7 @@ if (!result.trim().isEmpty()) {
       <runForMatrixParent>false</runForMatrixParent>
     </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.42">
-      <recipientList>isabelle-ci@mail46.informatik.tu-muenchen.de</recipientList>
+      <recipientList>isabelle-ci@mailman46.in.tum.de</recipientList>
       <contentType>text/plain</contentType>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FirstFailureTrigger>
