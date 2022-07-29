@@ -23,24 +23,10 @@
 - name: Set permissions for AFP devel site
   file: path=/var/www/afp-devel state=directory owner=jenkins group=root mode=0755
 
-- name: Jenkins basic configuration
-  lineinfile: dest=/etc/default/jenkins regexp=^JENKINS_ARGS line='JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort={{ config.jenkins.port }} --ajp13Port=-1 --prefix=$PREFIX"'
-  register: jenkins_conf
-
 - name: Check initial setup
   shell: test -f /var/lib/jenkins/secrets/initialAdminPassword
   register: jenkins_initial
   failed_when: False
-
-- name: Warn for automatic stopping
-  pause:
-    prompt: "Jenkins will be automatically stopped; continuing in 10 seconds"
-    seconds: 10
-  when: "jenkins_initial.rc == 0 and jenkins_conf.changed"
-
-- name: Stop Jenkins in initial setup (if necessary)
-  service: name=jenkins state=stopped
-  when: "jenkins_initial.rc == 0 and jenkins_conf.changed"
 
 - name: Check Jenkins service status
   shell: service jenkins status
@@ -48,10 +34,6 @@
     warn: False
   register: jenkins_status
   failed_when: False
-
-- name: Stop Jenkins manually in non-initial setup (if necessary)
-  fail: msg="Jenkins needs to be stopped manually"
-  when: "jenkins_conf.changed and jenkins_status.rc == 0"
 
 - name: Start Jenkins
   service: name=jenkins state=started

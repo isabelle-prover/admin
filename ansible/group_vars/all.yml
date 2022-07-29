@@ -38,8 +38,6 @@ config:
       - isa-afp-ssl.conf
 
   jenkins:
-    port: 8009
-
     scripts:
       - users.groovy
       - security.groovy
