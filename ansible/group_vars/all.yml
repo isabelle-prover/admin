@@ -51,7 +51,6 @@ config:
 
     jobs:
       - isabelle-all
-      - isabelle-dump
       - isabelle-nightly-benchmark
       - isabelle-nightly-slow
       - testboard

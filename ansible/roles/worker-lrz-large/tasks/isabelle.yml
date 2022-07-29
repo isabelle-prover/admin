@@ -1,4 +1,0 @@
----
-
-- name: Copy Isabelle settings for 2xlarge machine
-  copy: src=dotisabelle/ dest={{ config.worker.jenkins_home }}/.isabelle owner=jenkins group=root mode=0644 follow=yes

@@ -9,7 +9,6 @@
     <comparator class="hudson.util.CaseInsensitiveComparator"/>
     <string>afp_testboard</string>
     <string>isabelle-all</string>
-    <string>isabelle-dump</string>
     <string>isabelle-nightly-benchmark</string>
     <string>isabelle-nightly-slow</string>
     <string>testboard</string>
