@@ -4,7 +4,7 @@
   apt:
     state: present
     name:
-      - openjdk-8-jre
+      - openjdk-11-jre
       - m4
       - mercurial
       - curl
