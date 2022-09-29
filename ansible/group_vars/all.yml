@@ -53,6 +53,7 @@ config:
       - isabelle-nightly-slow
       - testboard
       - afp_testboard
+      - isabelle-notify
 
     views:
       - default

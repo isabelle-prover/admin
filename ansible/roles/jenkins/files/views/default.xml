@@ -12,6 +12,7 @@
     <string>isabelle-nightly-benchmark</string>
     <string>isabelle-nightly-slow</string>
     <string>testboard</string>
+    <string>isabelle-notify</string>
   </jobNames>
   <jobFilters/>
   <columns>
