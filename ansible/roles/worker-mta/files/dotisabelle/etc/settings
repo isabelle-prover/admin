@@ -6,6 +6,7 @@ init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/ci-ex
 init_component "$ISABELLE_HOME/Admin/jenkins/build"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
+[ -d "$ISABELLE_HOME/itc" ] && init_component "$ISABELLE_HOME/itc"
 
 ML_OPTIONS="-H 4000 --maxheap 8G"
 

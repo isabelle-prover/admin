@@ -31,7 +31,11 @@
                 </branches>
                 <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
                 <submoduleCfg class="empty-list"/>
-                <extensions/>
+                <extensions>
+                    <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+                        <relativeTargetDir>itc</relativeTargetDir>
+                    </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+                </extensions>
             </hudson.plugins.git.GitSCM>
         </scms>
     </scm>
