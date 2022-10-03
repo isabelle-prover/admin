@@ -41,8 +41,8 @@
 - name: Create .isabelle/Isabelle2022-RC3/etc/ in home dir of unprivileged user in container
   file:
     path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle2022-RC3/etc"
-    owner: 10001001
-    group: 10001001
+    owner: "10001001"
+    group: "10001001"
     state: directory
     mode: 0755
 
@@ -87,8 +87,8 @@
 - name: Set correct file rights of .isabelle in home dir of unprivileged user in container
   file:
     path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle"
-    owner: 10001001
-    group: 10001001
+    owner: "10001001"
+    group: "10001001"
     recurse: yes
     state: directory
     mode: 0755
