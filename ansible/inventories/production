@@ -1,10 +1,10 @@
 [leader]
 vmnipkow13.in.tum.de
 
-[worker-lrz]
+[worker_lrz]
 10.195.0.242 worker_name=workerlrz5 worker_tag=lrz-cloud
 
-[worker-mta]
+[worker_mta]
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 
@@ -12,12 +12,12 @@ hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 138.246.234.221
 
 [worker:children]
-worker-lrz
-worker-mta
+worker_lrz
+worker_mta
 
 [lrz:children]
 afp
-worker-lrz
+worker_lrz
 
 [production:children]
 leader
