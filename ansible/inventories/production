@@ -2,7 +2,7 @@
 vmnipkow13.in.tum.de
 
 [worker_lrz]
-10.195.0.242 worker_name=workerlrz5 worker_tag=lrz-cloud
+10.195.3.255 worker_name=workerlrz5 worker_tag=lrz-cloud
 
 [worker_mta]
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
