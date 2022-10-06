@@ -5,6 +5,7 @@
     state: present
     name:
       - openjdk-17-jre
+      - git
       - m4
       - mercurial
       - curl
