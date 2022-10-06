@@ -4,13 +4,12 @@
   apt:
     state: present
     name:
-      - openjdk-11-jre
+      - openjdk-17-jre
       - m4
       - mercurial
       - curl
       - libgomp1
       - unzip
-      - mlton
       - swi-prolog
       - smlnj
       - lib32stdc++6
