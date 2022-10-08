@@ -10,6 +10,7 @@
       - mercurial
       - curl
       - libgomp1
+      - libgmp-dev
       - unzip
       - swi-prolog
       - smlnj
