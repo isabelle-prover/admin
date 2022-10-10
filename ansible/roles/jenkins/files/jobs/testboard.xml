@@ -91,7 +91,7 @@ if (!result.trim().isEmpty()) {
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
     <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.16">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
-        <timeoutMinutes>240</timeoutMinutes>
+        <timeoutMinutes>300</timeoutMinutes>
       </strategy>
       <operationList/>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>
