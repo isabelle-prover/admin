@@ -8,6 +8,7 @@
       - git
       - m4
       - mercurial
+      - git
       - curl
       - libgomp1
       - unzip

@@ -16,6 +16,7 @@
       - jenkins
       - xmlstarlet
       - python-httplib2
+      - git
 
 - name: Add Jenkins user to shadow group
   user: name=jenkins groups=shadow append=yes
