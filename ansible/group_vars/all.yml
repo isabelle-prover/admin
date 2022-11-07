@@ -14,7 +14,12 @@ config:
   github:
     user: isabelle-bot
 
+  isabelle:
+    version: 2022
+    checksum: sha256:e7fa6e9d9675d7a56751c00fa81ad0d081e1b6ffbdb0d7f02056853ba77f04c6
+
   afp:
+    version: 2022
     container_home: "/media/data/conrad"
     git: "https://github.com/isabelle-prover/afp-submission.git"
     sub_id_min: 10000001
