@@ -1,5 +1,5 @@
 [Unit]
-Description=AFP Submission Service
+Description=AFP Submission Service Backend
 
 [Service]
 # python -u flag so that stdout is immediately written and not buffered

@@ -1,0 +1,11 @@
+[Unit]
+Description=AFP Submission Service Frontend
+
+[Service]
+ExecStart={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2022/bin/isabelle afp_submit -p 8080 /var/afpbuild
+User=conrad
+Environment="HOME=/media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu"
+
+[Install]
+WantedBy=multi-user.target
+

@@ -54,6 +54,18 @@
       ML_OPTIONS="-H 4000 --maxheap 6G"
       ML_HOME="$POLYML_HOME/$ML_PLATFORM"
 
+- name: Add AFP component
+  blockinfile:
+    name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle{{ config.isabelle.version }}/etc/components"
+    create: yes
+    block: |
+      {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp
+
+- name: Download additional AFP components
+  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle components -a"
+  environment:
+    HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
+
 - name: Build Isabelle sessions
   command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle build -o threads=2 -bv {{ item }}"
   with_items:
@@ -70,7 +82,7 @@
 - name: Build AFP sessions
   command: >
            {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle build
-           -d {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp/thys -bv
+           -d '$AFP' -bv
            -o timeout_scale=5
            {{ item }}
   with_items:

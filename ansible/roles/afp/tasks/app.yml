@@ -15,11 +15,14 @@
 - name: Prepare application storage (download)
   file: path=/var/afpbuild/down state=directory owner=conrad group=root mode=0755
 
-- name: Deploy index
-  copy: src=/opt/afpbuild/bin/index dest=/var/www/afp/index remote_src=true owner=root group=root mode=0755
+- name: Copy AFP submission service backend file
+  copy: src=afp-submission-backend.service dest=/etc/systemd/system/afp-submission-backend.service owner=root group=root mode=0644
 
-- name: Copy AFP submission service file
-  copy: src=afp-submission.service dest=/etc/systemd/system/afp-submission.service owner=root group=root mode=0644
+- name: Reload and restart afp-submission-backend.service
+  service: name=afp-submission-backend.service enabled=yes daemon_reload=yes state=restarted
 
-- name: Reload and restart afp-submission.service
-  service: name=afp-submission.service enabled=yes state=restarted
+- name: Copy AFP submission service frontend file
+  template: src=afp-submission-frontend.service dest=/etc/systemd/system/afp-submission-frontend.service owner=root group=root mode=0644
+
+- name: Reload and restart afp-submission-frontend.service
+  service: name=afp-submission-frontend.service enabled=yes daemon_reload=yes state=restarted

@@ -4,6 +4,8 @@
   apache2_module: name={{ item }}
   with_items:
     - cgid
+    - proxy
+    - proxy_http
 
 - name: Disable default Apache site
   shell: a2dissite 000-default.conf
