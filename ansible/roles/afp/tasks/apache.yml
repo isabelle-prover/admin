@@ -6,6 +6,7 @@
     - cgid
     - proxy
     - proxy_http
+    - headers
 
 - name: Disable default Apache site
   shell: a2dissite 000-default.conf
