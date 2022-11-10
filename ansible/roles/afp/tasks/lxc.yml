@@ -38,6 +38,12 @@
 - name: Clone AFP
   hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-{{ config.afp.version }} revision=default force=yes purge=yes
 
+- name: Add APF symlink
+  file:
+    src: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp"
+    dest: "/opt/afp"
+    state: link
+
 - name: Create .isabelle/Isabelle{{ config.isabelle.version }}/etc/ in home dir of unprivileged user in container
   file:
     path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle{{ config.isabelle.version }}/etc"
@@ -58,8 +64,7 @@
   blockinfile:
     name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle{{ config.isabelle.version }}/etc/components"
     create: yes
-    block: |
-      {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp
+    block: /opt/afp
 
 - name: Download additional AFP components
   command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle components -a"

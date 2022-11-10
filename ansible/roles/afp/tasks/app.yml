@@ -10,7 +10,7 @@
   file: path=/var/afpbuild state=directory owner=root group=root mode=0755
 
 - name: Prepare application storage (upload)
-  file: path=/var/afpbuild/up state=directory owner=www-data group=root mode=0755
+  file: path=/var/afpbuild/up state=directory owner=conrad group=root mode=0755
 
 - name: Prepare application storage (download)
   file: path=/var/afpbuild/down state=directory owner=conrad group=root mode=0755

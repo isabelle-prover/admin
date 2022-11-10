@@ -3,9 +3,8 @@
 UPLOAD_DIR = "/var/afpbuild/up"
 DOWNLOAD_DIR = "/var/afpbuild/down"
 
-LINKBASE = "https://{{ config.domains.jenkins }}/afp-submission/"
+LINKBASE = "https://{{ config.domains.afp }}/webapp/"
 AFPLINKBASE = "https://{{ config.domains.afp }}/"
-SUBMISSION_URL = LINKBASE + "index"
 
 FROM = "AFP Submission System <afp@isabelle.systems>"
 SENDER = "{{ config.mail.sender }}"
@@ -31,9 +30,7 @@ ISABELLE_SETTINGS = ["-o", "document=pdf",
                      "-o", "browser_info",
                      "-o", "timeout_scale=4",
                      "-v"]
-AFP_PATH = "/opt/afp/thys"
 ISABELLE_BROWSER_INFO = CONTAINER_DIR + "/.isabelle/Isabelle{{ config.isabelle.version }}/browser_info/"
-AFP_STATUS_FILENAME = "AFP_STATUS"
 
 CONTAINERS_PATH = "/media/data/conrad/.local/share/lxc/"
 CONTAINER_ROOT = "overlay/delta"
