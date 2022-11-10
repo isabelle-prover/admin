@@ -38,6 +38,17 @@
 - name: Clone AFP
   hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-{{ config.afp.version }} revision=default force=yes purge=yes
 
+- name: Fix AFP default origin
+  lineinfile: name={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp/.hg/hgrc regexp=^default line='default = https://foss.heptapod.net/isa-afp/afp-{{ config.afp.version }}'
+
+- name: Change ownership of AFP
+  file:
+    path: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp"
+    state: directory
+    recurse: yes
+    owner: conrad
+    group: conrad
+
 - name: Add APF symlink
   file:
     src: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp"
