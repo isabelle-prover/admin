@@ -28,6 +28,9 @@ config:
 
     site_home: "/var/www/afp"
 
+  linter:
+    version: Isabelle2022-v1.0.0
+
   apache:
     cert_name: isabelle-tls-certs
 

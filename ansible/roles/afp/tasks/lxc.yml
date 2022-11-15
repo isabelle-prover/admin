@@ -38,6 +38,9 @@
 - name: Clone AFP
   hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-{{ config.afp.version }} revision=default force=yes purge=yes
 
+- name: Clone Linter
+  git: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/linter repo=https://github.com/isabelle-prover/isabelle-linter refspec={{ config.linter.version }} force=yes
+
 - name: Fix AFP default origin
   lineinfile: name={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp/.hg/hgrc regexp=^default line='default = https://foss.heptapod.net/isa-afp/afp-{{ config.afp.version }}'
 
@@ -53,6 +56,12 @@
   file:
     src: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp"
     dest: "/opt/afp"
+    state: link
+
+- name: Add Linter symlink
+  file:
+    src: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/linter"
+    dest: "/opt/linter"
     state: link
 
 - name: Create .isabelle/Isabelle{{ config.isabelle.version }}/etc/ in home dir of unprivileged user in container
@@ -75,7 +84,9 @@
   blockinfile:
     name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle{{ config.isabelle.version }}/etc/components"
     create: yes
-    block: /opt/afp
+    block: |
+      /opt/afp
+      /opt/linter
 
 - name: Download additional AFP components
   command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle components -a"
