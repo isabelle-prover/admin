@@ -39,7 +39,7 @@
   hg: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp repo=https://foss.heptapod.net/isa-afp/afp-{{ config.afp.version }} revision=default force=yes purge=yes
 
 - name: Clone Linter
-  git: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/linter repo=https://github.com/isabelle-prover/isabelle-linter refspec={{ config.linter.version }} force=yes
+  git: dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/linter repo=https://github.com/isabelle-prover/isabelle-linter version={{ config.linter.version }} force=yes
 
 - name: Fix AFP default origin
   lineinfile: name={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp/.hg/hgrc regexp=^default line='default = https://foss.heptapod.net/isa-afp/afp-{{ config.afp.version }}'
