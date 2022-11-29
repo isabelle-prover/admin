@@ -1,0 +1,17 @@
+---
+
+- name: Install packages
+  apt:
+    state: present
+    update_cache: yes
+    name:
+      - slurmctld
+
+- name: Create slurmctld spool dir
+  file: path=/var/spool/slurmctld state=directory owner=slurm group=slurm mode=0751
+
+- name: Create slurmctld log dir
+  file: path=/var/log/slurmctld state=directory owner=slurm group=slurm mode=0751
+
+- name: Enable slurm controller daemon
+  service: name=slurmctld enabled=true state=restarted

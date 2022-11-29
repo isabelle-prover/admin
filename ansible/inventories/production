@@ -8,6 +8,19 @@ vmnipkow13.in.tum.de
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 
+[slurm:children]
+slurm_worker
+slurm_master
+
+[slurm_worker]
+of1.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
+of2.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
+of3.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
+of4.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
+
+[slurm_master]
+of1.proof.cit.tum.de
+
 [afp]
 138.246.234.221
 
@@ -22,4 +35,5 @@ worker_lrz
 [production:children]
 leader
 worker
+slurm
 afp
