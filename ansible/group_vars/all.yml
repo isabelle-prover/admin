@@ -4,7 +4,6 @@ ansible_python_interpreter: python3
 config:
   worker:
     jenkins_home: "/media/data/jenkins"
-    slurm_home: "/media/data/slurm"
 
   mail:
     host: postout.lrz.de

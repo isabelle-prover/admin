@@ -44,6 +44,18 @@
     - { role: apache, tags: [ 'apache' ] }
     - { role: jenkins, tags: [ 'jenkins' ] }
 
+- name: Configure slurm master
+  hosts: slurm_master
+  become: yes
+  become_method: sudo
+
+  vars_files:
+    - vars/secrets.yml
+
+  roles:
+    - { role: slurm-master, tags: [ 'slurm-master' ] }
+    - { role: slurm, tag: ['slurm'] }
+
 - name: Configure slurm workers
   hosts: slurm_worker
   become: yes
@@ -54,15 +66,3 @@
 
   roles:
     - { role: slurm, tags: [ 'slurm', 'slurm-worker' ] }
-
-- name: Configure slurm master
-  hosts: slurm_master
-  become: yes
-  become_method: sudo
-
-  vars_files:
-    - vars/secrets.yml
-
-  roles:
-    - { role: slurm, tag: ['slurm'] }
-    - { role: slurm-master, tags: [ 'slurm-master' ] }

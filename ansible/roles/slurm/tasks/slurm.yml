@@ -15,7 +15,7 @@
   group: name=munge system=yes
 
 - name: Create slurm user
-  user: name=slurm uid=905 shell=/bin/sh home={{ config.worker.slurm_home }} group=slurm
+  user: name=slurm uid=905 shell=/bin/sh group=slurm
 
 - name: Create slurm group
   group: name=slurm gid=905

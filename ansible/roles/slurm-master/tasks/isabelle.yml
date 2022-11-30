@@ -1,0 +1,7 @@
+---
+
+- name: Prepare Isabelle
+  file: path={{ config.worker.jenkins_home }}/.isabelle state=directory owner=jenkins group=root mode=0755
+
+- name: Copy Isabelle settings
+  copy: src=dotisabelle/ dest={{ config.worker.jenkins_home }}/.isabelle owner=jenkins group=root mode=0644 follow=yes

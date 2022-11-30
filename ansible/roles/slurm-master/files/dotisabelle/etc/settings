@@ -1,0 +1,17 @@
+ISABELLE_CI_PROPERTIES=/etc/isabelle/ci.properties
+
+init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/main"
+init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/cakeml"
+init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/ci-extras"
+init_component "$ISABELLE_HOME/Admin/jenkins/build"
+[ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp"
+[ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
+
+ISABELLE_POLYML="$ML_HOME/poly"
+ISABELLE_SCALA="$SCALA_HOME/bin"
+ISABELLE_SWIPL=swipl
+ISABELLE_SMLNJ=sml
+
+ISABELLE_CC=gcc
+ISABELLE_HEAPS=/media/isabelle-cluster/heaps
+ISABELLE_BROWSER_INFO=/media/isabelle-cluster/browser_info
