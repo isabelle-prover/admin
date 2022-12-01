@@ -30,10 +30,10 @@
   lineinfile: name=/etc/hosts regexp='127.0.1.1\s.*' line='127.0.1.1 {{ inventory_hostname }} {{ ansible_hostname }}'
 
 - name: Write slurm conf
-  template: src=slurm.conf dest=/etc/slurm/slurm.conf owner=slurm group=slurm mode=0600
+  template: src=slurm.conf dest=/etc/slurm/slurm.conf owner=slurm group=slurm mode=0650
 
 - name: Copy slurm cgroup conf
-  copy: src=cgroup.conf dest=/etc/slurm/cgroup.conf owner=slurm group=slurm mode=0600
+  copy: src=cgroup.conf dest=/etc/slurm/cgroup.conf owner=slurm group=slurm mode=0650
 
 - name: Add slurm nodes
   lineinfile:

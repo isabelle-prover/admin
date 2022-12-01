@@ -14,7 +14,7 @@
   file: path=/media/data state=directory owner=root group=root mode=0755
 
 - name: Create Jenkins user
-  user: name=jenkins uid=902 shell=/bin/sh home={{ config.worker.jenkins_home }}
+  user: name=jenkins uid=902 shell=/bin/sh home={{ config.worker.jenkins_home }} groups=slurm
 
 - name: Prepare .ssh directory
   file: path={{ config.worker.jenkins_home }}/.ssh state=directory owner=jenkins group=root mode=0700
