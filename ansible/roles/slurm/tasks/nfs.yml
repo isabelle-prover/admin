@@ -14,7 +14,7 @@
   file: path=/media/isabelle-cluster/isabelle state=directory
 
 - name: Create Isabelle user home mount point
-  file: path=/media/isabelle-cluster/isabelle state=directory
+  file: path=/media/isabelle-cluster/.isabelle state=directory
 
 - name: Create Isabelle heaps mount point
   file: path=/media/isabelle-cluster/heaps state=directory
