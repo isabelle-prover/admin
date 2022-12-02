@@ -4,8 +4,9 @@ init_components "$ISABELLE_HOME_USER/contrib" "$ISABELLE_HOME/Admin/components/m
 init_components "$ISABELLE_HOME_USER/contrib" "$ISABELLE_HOME/Admin/components/cakeml"
 init_components "$ISABELLE_HOME_USER/contrib" "$ISABELLE_HOME/Admin/components/ci-extras"
 init_component "$ISABELLE_HOME/Admin/jenkins/build"
-[ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp"
+[ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/thys"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
+[ -d "$ISABELLE_HOME/../isabelle-distributed-build" ] && init_component "$ISABELLE_HOME/../isabelle-distributed-build"
 
 ISABELLE_POLYML="$ML_HOME/poly"
 ISABELLE_SCALA="$SCALA_HOME/bin"
