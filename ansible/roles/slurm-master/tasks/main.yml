@@ -1,4 +1,6 @@
 ---
 
 - include: install.yml
+- include: slurm.yml
+- include: nfs.yml
 - include: isabelle.yml
