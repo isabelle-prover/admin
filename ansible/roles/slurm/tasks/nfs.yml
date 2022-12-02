@@ -13,8 +13,26 @@
 - name: Create Isabelle home mount point
   file: path=/media/isabelle-cluster/isabelle state=directory
 
+- name: Create Isabelle home read only mount point
+  file: path=/media/isabelle-cluster/isabelle_ro state=directory
+
+- name: Create Isabelle home write mount point
+  file: path=/media/isabelle-cluster/isabelle_rw state=directory
+
+- name: Create Isabelle home workdir mount point
+  file: path=/media/isabelle-cluster/isabelle_work state=directory
+
 - name: Create Isabelle user home mount point
   file: path=/media/isabelle-cluster/.isabelle state=directory
+
+- name: Create Isabelle user home read only mount point
+  file: path=/media/isabelle-cluster/.isabelle_ro state=directory
+
+- name: Create Isabelle user home write mount point
+  file: path=/media/isabelle-cluster/.isabelle_rw state=directory
+
+- name: Create Isabelle user home workdir mount point
+  file: path=/media/isabelle-cluster/.isabelle_work state=directory
 
 - name: Create Isabelle heaps mount point
   file: path=/media/isabelle-cluster/heaps state=directory
@@ -26,10 +44,12 @@
   blockinfile:
     name: /etc/fstab
     block: |
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed /media/isabelle-cluster/isabelle nfs ro 0 0
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle nfs ro 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed /media/isabelle-cluster/isabelle_ro nfs ro 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle_ro nfs ro 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/heaps /media/isabelle-cluster/heaps nfs rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/heaps /media/isabelle-cluster/browser_info nfs rw 0 0
+      overlay /media/isabelle-cluster/isabelle overlay noauto,x-systemd.automount,lowerdir=/media/isabelle-cluster/isabelle_rw,upperdir=/media/isabelle-cluster/isabelle_ro,workdir=/media/isabelle-cluster/isabelle_work 0 0
+      overlay /media/isabelle-cluster/.isabelle overlay noauto,x-systemd.automount,lowerdir=/media/isabelle-cluster/isabelle_rw,upperdir=/media/isabelle-cluster/.isabelle_ro,workdir=/media/isabelle-cluster/.isabelle_work 0 0
 
 - name: Mount NFS
   shell: mount -a
