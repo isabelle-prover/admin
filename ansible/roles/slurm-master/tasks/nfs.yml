@@ -25,8 +25,8 @@
     block: |
       {{ config.worker.jenkins_home }}/workspace/isabelle-distributed localhost(ro,sync,no_subtree_check) {{ groups['slurm_worker'] | product(['(ro,sync,no_subtree_check)']) | map('join') | join(' ') }}
       {{ config.worker.jenkins_home }}/.isabelle localhost(ro,sync,no_subtree_check) {{ groups['slurm_worker'] | product(['(ro,sync,no_subtree_check)']) | map('join') | join(' ') }}
-      {{ config.worker.jenkins_home }}/workspace/heaps localhost(ro,sync,no_subtree_check) {{ groups['slurm_worker'] | product(['(ro,sync,no_subtree_check)']) | map('join') | join(' ') }}
-      {{ config.worker.jenkins_home }}/workspace/browser_info localhost(ro,sync,no_subtree_check) {{ groups['slurm_worker'] | product(['(ro,sync,no_subtree_check)']) | map('join') | join(' ') }}
+      {{ config.worker.jenkins_home }}/workspace/heaps localhost(rw,sync,no_subtree_check) {{ groups['slurm_worker'] | product(['(rw,sync,no_subtree_check)']) | map('join') | join(' ') }}
+      {{ config.worker.jenkins_home }}/workspace/browser_info localhost(rw,sync,no_subtree_check) {{ groups['slurm_worker'] | product(['(rw,sync,no_subtree_check)']) | map('join') | join(' ') }}
 
 - name: Start and enable NFS service
   service: name=nfs-kernel-server enabled=true state=restarted
