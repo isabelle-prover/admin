@@ -16,37 +16,6 @@
 - name: Create slurmctld log dir
   file: path=/var/log/slurmctld state=directory owner=slurm group=slurm mode=0751
 
-- name: Start mysql
-  service: name=mariadb enabled=true state=started
-
-- name: Set mysql root password
-  become: true
-  shell: "mysqladmin -u root password '{{ config.slurm.db_password }}'"
-
-- name: Enable ansible-python
-  become: true
-  pip:
-    name: pymysql
-    state: present
-
-- name: Create mysql user
-  become: true
-  mysql_user:
-    login_password: "{{ config.slurm.db_password }}"
-    login_user: root
-    name: slurm
-    password: "{{ config.slurm.db_password }}"
-    priv: '*.*:ALL'
-    state: present
-
-- name: Create mysql db
-  become: true
-  mysql_db:
-    login_password: "{{ config.slurm.db_password }}"
-    login_user: root
-    name: slurm_acct_db
-    state: present
-
 - name: Copy slurmdb conf
   template: src=slurmdbd.conf dest=/etc/slurm/slurmdbd.conf owner=slurm group=slurm mode=0600
 
