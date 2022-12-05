@@ -12,11 +12,14 @@ hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 slurm_worker
 slurm_master
 
-[slurm_worker]
-of1.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
-of2.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
-of3.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
-of4.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000
+[adlerlake_ls21]
+of1.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+of2.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+of3.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+of4.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+
+[slurm_worker:children]
+adlerlake_ls21
 
 [slurm_master]
 of1.proof.cit.tum.de

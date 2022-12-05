@@ -15,6 +15,7 @@
 
 - name: Create Isabelle home read only mount point
   file: path=/media/isabelle-cluster/isabelle_ro state=directory
+  ignore_errors: True
 
 - name: Create Isabelle home write mount point
   file: path=/media/isabelle-cluster/isabelle_rw state=directory
@@ -27,6 +28,7 @@
 
 - name: Create Isabelle user home read only mount point
   file: path=/media/isabelle-cluster/.isabelle_ro state=directory
+  ignore_errors: True
 
 - name: Create Isabelle user home write mount point
   file: path=/media/isabelle-cluster/.isabelle_rw state=directory
@@ -36,9 +38,11 @@
 
 - name: Create Isabelle heaps mount point
   file: path=/media/isabelle-cluster/heaps state=directory
+  ignore_errors: True
 
 - name: Create Isabelle browser info mount
   file: path=/media/isabelle-cluster/browser_info state=directory
+  ignore_errors: True
 
 - name: Register NFS mounts
   blockinfile:
