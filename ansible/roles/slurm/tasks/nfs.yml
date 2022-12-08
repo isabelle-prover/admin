@@ -44,14 +44,22 @@
   file: path=/media/isabelle-cluster/browser_info state=directory
   ignore_errors: True
 
+- name: Unmount NFS mounts
+  ignore_errors: True
+  shell: |
+    umount /media/isabelle-cluster/isabelle_ro
+    umount /media/isabelle-cluster/heaps
+    umount /media/isabelle-cluster/browser_info
+    umount /media/isabelle-cluster/.isabelle_ro
+
 - name: Register NFS mounts
   blockinfile:
     name: /etc/fstab
     block: |
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed /media/isabelle-cluster/isabelle_ro nfs x-systemd.automount,ro 0 0
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle_ro nfs x-systemd.automount,ro 0 0
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/heaps /media/isabelle-cluster/heaps nfs x-systemd.automount,rw 0 0
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/browser_info /media/isabelle-cluster/browser_info nfs x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/isabelle /media/isabelle-cluster/isabelle_ro nfs noac,sync,x-systemd.automount,ro 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/heaps /media/isabelle-cluster/heaps nfs noac,sync,x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/browser_info /media/isabelle-cluster/browser_info nfs noac,sync,x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle_ro nfs noac,sync,x-systemd.automount,ro 0 0
       overlay /media/isabelle-cluster/isabelle overlay x-systemd.automount,lowerdir=/media/isabelle-cluster/isabelle_ro,upperdir=/media/isabelle-cluster/isabelle_rw,workdir=/media/isabelle-cluster/isabelle_work 0 0
       overlay /media/isabelle-cluster/.isabelle overlay x-systemd.automount,lowerdir=/media/isabelle-cluster/.isabelle_ro,upperdir=/media/isabelle-cluster/.isabelle_rw,workdir=/media/isabelle-cluster/.isabelle_work 0 0
 
