@@ -13,28 +13,8 @@
 - name: Create Isabelle home mount point
   file: path=/media/isabelle-cluster/isabelle state=directory
 
-- name: Create Isabelle home read only mount point
-  file: path=/media/isabelle-cluster/isabelle_ro state=directory
-  ignore_errors: True
-
-- name: Create Isabelle home write mount point
-  file: path=/media/isabelle-cluster/isabelle_rw state=directory
-
-- name: Create Isabelle home workdir mount point
-  file: path=/media/isabelle-cluster/isabelle_work state=directory
-
 - name: Create Isabelle user home mount point
   file: path=/media/isabelle-cluster/.isabelle state=directory
-
-- name: Create Isabelle user home read only mount point
-  file: path=/media/isabelle-cluster/.isabelle_ro state=directory
-  ignore_errors: True
-
-- name: Create Isabelle user home write mount point
-  file: path=/media/isabelle-cluster/.isabelle_rw state=directory
-
-- name: Create Isabelle user home workdir mount point
-  file: path=/media/isabelle-cluster/.isabelle_work state=directory
 
 - name: Create Isabelle heaps mount point
   file: path=/media/isabelle-cluster/heaps state=directory
@@ -47,24 +27,19 @@
 - name: Unmount NFS mounts
   ignore_errors: True
   shell: |
-    umount /media/isabelle-cluster/isabelle_ro
+    umount /media/isabelle-cluster/isabelle
     umount /media/isabelle-cluster/heaps
     umount /media/isabelle-cluster/browser_info
-    umount /media/isabelle-cluster/.isabelle_ro
+    umount /media/isabelle-cluster/.isabelle
 
 - name: Register NFS mounts
   blockinfile:
     name: /etc/fstab
     block: |
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/isabelle /media/isabelle-cluster/isabelle_ro nfs noac,sync,x-systemd.automount,ro 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/isabelle /media/isabelle-cluster/isabelle nfs x-systemd.automount,rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/heaps /media/isabelle-cluster/heaps nfs noac,sync,x-systemd.automount,rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/browser_info /media/isabelle-cluster/browser_info nfs noac,sync,x-systemd.automount,rw 0 0
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle_ro nfs noac,sync,x-systemd.automount,ro 0 0
-      overlay /media/isabelle-cluster/isabelle overlay x-systemd.automount,lowerdir=/media/isabelle-cluster/isabelle_ro,upperdir=/media/isabelle-cluster/isabelle_rw,workdir=/media/isabelle-cluster/isabelle_work 0 0
-      overlay /media/isabelle-cluster/.isabelle overlay x-systemd.automount,lowerdir=/media/isabelle-cluster/.isabelle_ro,upperdir=/media/isabelle-cluster/.isabelle_rw,workdir=/media/isabelle-cluster/.isabelle_work 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle nfs x-systemd.automount,rw 0 0
 
 - name: Mount NFS
   systemd: daemon_reload=true state=restarted name=remote-fs.target
-
-- name: Mount Overlayfs
-  systemd: daemon_reload=true state=restarted name=local-fs.target
