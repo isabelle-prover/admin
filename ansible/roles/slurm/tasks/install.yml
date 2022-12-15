@@ -16,3 +16,4 @@
       - smlnj
       - lib32stdc++6
       - texlive-full
+      - libzarith-ocaml

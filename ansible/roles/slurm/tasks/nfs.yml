@@ -13,12 +13,18 @@
 - name: Create Isabelle home mount point
   file: path=/media/isabelle-cluster/isabelle state=directory
 
-- name: Create Isabelle user home mount point
-  file: path=/media/isabelle-cluster/.isabelle state=directory
-
 - name: Create Isabelle heaps mount point
   file: path=/media/isabelle-cluster/heaps state=directory
   ignore_errors: True
+
+- name: Create Isabelle user home mount point
+  file: path=/media/isabelle-cluster/.isabelle state=directory
+
+- name: Create Isabelle opam home mount point
+  file: path=/media/isabelle-cluster/.opam state=directory
+
+- name: Create Isabelle stack home mount point
+  file: path=/media/isabelle-cluster/.stack state=directory
 
 - name: Create Isabelle browser info mount
   file: path=/media/isabelle-cluster/browser_info state=directory
@@ -31,6 +37,8 @@
     umount /media/isabelle-cluster/heaps
     umount /media/isabelle-cluster/browser_info
     umount /media/isabelle-cluster/.isabelle
+    umount /media/isabelle-cluster/.opam
+    umount /media/isabelle-cluster/.stack
 
 - name: Register NFS mounts
   blockinfile:
@@ -40,6 +48,8 @@
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/heaps /media/isabelle-cluster/heaps nfs noac,sync,x-systemd.automount,rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/browser_info /media/isabelle-cluster/browser_info nfs noac,sync,x-systemd.automount,rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle nfs x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.opam /media/isabelle-cluster/.opam nfs x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.stack /media/isabelle-cluster/.stack nfs x-systemd.automount,rw 0 0
 
 - name: Mount NFS
   systemd: daemon_reload=true state=restarted name=remote-fs.target
