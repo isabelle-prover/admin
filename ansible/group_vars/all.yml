@@ -62,6 +62,7 @@ config:
       - testboard
       - afp_testboard
       - isabelle-notify
+      - isabelle-distributed
 
     views:
       - default

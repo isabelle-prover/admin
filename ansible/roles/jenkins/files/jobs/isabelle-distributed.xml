@@ -1,6 +1,6 @@
 <project>
     <actions/>
-    <description>Experimental Isabelle slurm job.</description>
+    <description>Experimental distributed Isabelle slurm build.</description>
     <keepDependencies>false</keepDependencies>
     <properties>
         <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
@@ -64,7 +64,7 @@
     <concurrentBuild>false</concurrentBuild>
     <builders>
         <hudson.tasks.Shell>
-            <command>bin/isabelle components -a bin/isabelle jedit -bf bin/isabelle ocaml_setup bin/isabelle ghc_setup bin/isabelle context_build -X slow -v -a</command>
+            <command>bin/isabelle components -a bin/isabelle jedit -bf bin/isabelle ocaml_setup bin/isabelle ghc_setup bin/isabelle context_build -X slow -v -P: -a</command>
             <configuredLocalRules/>
         </hudson.tasks.Shell>
     </builders>
