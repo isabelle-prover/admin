@@ -7,6 +7,16 @@
     name:
       - nfs-common
 
+- name: Unmount NFS mounts
+  ignore_errors: True
+  shell: |
+    umount /media/isabelle-cluster/isabelle
+    umount /media/isabelle-cluster/heaps
+    umount /media/isabelle-cluster/browser_info
+    umount /media/isabelle-cluster/.isabelle
+    umount /media/isabelle-cluster/.opam
+    umount /media/isabelle-cluster/.stack
+
 - name: Create mount point dirs
   file: path=/media/isabelle-cluster state=directory owner=slurm group=slurm mode=0755
 
@@ -15,7 +25,6 @@
 
 - name: Create Isabelle heaps mount point
   file: path=/media/isabelle-cluster/heaps state=directory
-  ignore_errors: True
 
 - name: Create Isabelle user home mount point
   file: path=/media/isabelle-cluster/.isabelle state=directory
@@ -28,25 +37,14 @@
 
 - name: Create Isabelle browser info mount
   file: path=/media/isabelle-cluster/browser_info state=directory
-  ignore_errors: True
-
-- name: Unmount NFS mounts
-  ignore_errors: True
-  shell: |
-    umount /media/isabelle-cluster/isabelle
-    umount /media/isabelle-cluster/heaps
-    umount /media/isabelle-cluster/browser_info
-    umount /media/isabelle-cluster/.isabelle
-    umount /media/isabelle-cluster/.opam
-    umount /media/isabelle-cluster/.stack
 
 - name: Register NFS mounts
   blockinfile:
     name: /etc/fstab
     block: |
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/isabelle /media/isabelle-cluster/isabelle nfs x-systemd.automount,rw 0 0
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/heaps /media/isabelle-cluster/heaps nfs noac,sync,x-systemd.automount,rw 0 0
-      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed/browser_info /media/isabelle-cluster/browser_info nfs noac,sync,x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/workspace/isabelle-distributed /media/isabelle-cluster/isabelle nfs x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.heaps /media/isabelle-cluster/heaps nfs noac,sync,x-systemd.automount,rw 0 0
+      {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.browser_info /media/isabelle-cluster/browser_info nfs noac,sync,x-systemd.automount,rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.isabelle /media/isabelle-cluster/.isabelle nfs x-systemd.automount,rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.opam /media/isabelle-cluster/.opam nfs x-systemd.automount,rw 0 0
       {{ groups['slurm_master'][0] }}:{{ config.worker.jenkins_home }}/.stack /media/isabelle-cluster/.stack nfs x-systemd.automount,rw 0 0
