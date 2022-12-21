@@ -1,0 +1,86 @@
+<project>
+    <actions/>
+    <description>Experimental Isabelle slurm job.</description>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    </properties>
+    <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.8">
+        <scms>
+            <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1260.vdfb_723cdcc81">
+                <installation>(Default)</installation>
+                <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+                <modules/>
+                <revisionType>BRANCH</revisionType>
+                <revision>default</revision>
+                <clean>false</clean>
+                <credentialsId/>
+                <disableChangeLog>false</disableChangeLog>
+            </hudson.plugins.mercurial.MercurialSCM>
+            <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
+                <source>https://foss.heptapod.net/isa-afp/afp-devel/</source>
+                <modules></modules>
+                <revisionType>BRANCH</revisionType>
+                <revision>default</revision>
+                <subdir>afp</subdir>
+                <clean>true</clean>
+                <credentialsId></credentialsId>
+                <disableChangeLog>false</disableChangeLog>
+            </hudson.plugins.mercurial.MercurialSCM>
+            <hudson.plugins.git.GitSCM plugin="git@4.14.2">
+                <configVersion>2</configVersion>
+                <userRemoteConfigs>
+                    <hudson.plugins.git.UserRemoteConfig>
+                        <url>https://github.com/isabelle-prover/isabelle-context-build.git</url>
+                    </hudson.plugins.git.UserRemoteConfig>
+                </userRemoteConfigs>
+                <branches>
+                    <hudson.plugins.git.BranchSpec>
+                        <name>*/master</name>
+                    </hudson.plugins.git.BranchSpec>
+                </branches>
+                <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+                <submoduleCfg class="empty-list"/>
+                <extensions>
+                    <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+                        <relativeTargetDir>isabelle-context-build</relativeTargetDir>
+                    </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+                </extensions>
+            </hudson.plugins.git.GitSCM>
+        </scms>
+    </scm>
+    <quietPeriod>120</quietPeriod>
+    <assignedNode>slurm_master</assignedNode>
+    <canRoam>false</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers>
+        <hudson.triggers.SCMTrigger>
+            <spec>H/3 * * * *</spec>
+            <ignorePostCommitHooks>false</ignorePostCommitHooks>
+        </hudson.triggers.SCMTrigger>
+    </triggers>
+    <concurrentBuild>false</concurrentBuild>
+    <builders>
+        <hudson.tasks.Shell>
+            <command>bin/isabelle components -a bin/isabelle jedit -bf bin/isabelle ocaml_setup bin/isabelle ghc_setup bin/isabelle context_build -X slow -v -a</command>
+            <configuredLocalRules/>
+        </hudson.tasks.Shell>
+    </builders>
+    <publishers/>
+    <buildWrappers>
+        <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.21"/>
+        <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@1.0.2">
+            <colorMapName>xterm</colorMapName>
+        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+        <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.25">
+            <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+                <timeoutMinutes>200</timeoutMinutes>
+            </strategy>
+            <operationList>
+                <hudson.plugins.build__timeout.operations.FailOperation/>
+            </operationList>
+        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    </buildWrappers>
+</project>

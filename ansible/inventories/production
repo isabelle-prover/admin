@@ -13,7 +13,7 @@ slurm_worker
 slurm_master
 
 [adlerlake_ls21]
-of1.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+of1.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21 worker_name=workerls211 worker_tag=slurm_master
 of2.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
 of3.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
 of4.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
@@ -30,6 +30,7 @@ of1.proof.cit.tum.de
 [worker:children]
 worker_lrz
 worker_mta
+slurm_master
 
 [lrz:children]
 afp
