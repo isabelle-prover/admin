@@ -64,7 +64,13 @@
     <concurrentBuild>false</concurrentBuild>
     <builders>
         <hudson.tasks.Shell>
-            <command>bin/isabelle components -a bin/isabelle jedit -bf bin/isabelle ocaml_setup bin/isabelle ghc_setup bin/isabelle context_build -X slow -v -P: -a</command>
+            <command>
+bin/isabelle components -a
+bin/isabelle jedit -bf
+bin/isabelle ocaml_setup
+bin/isabelle ghc_setup
+bin/isabelle context_build -X slow -v -P: -a
+            </command>
             <configuredLocalRules/>
         </hudson.tasks.Shell>
     </builders>
