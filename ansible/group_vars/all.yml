@@ -26,7 +26,7 @@ config:
     sub_id_max: 10100000
     sub_id_count: 100000
 
-    site_home: "/var/www/afp"
+    site_home: "/srv/afp"
 
   linter:
     version: Isabelle2022-v1.1.1
@@ -35,9 +35,9 @@ config:
     cert_name: isabelle-tls-certs
 
     webroots:
-      - ci
-      - afp
-      - afp-devel
+      - /var/www/ci
+      - /srv/afp
+      - /var/www/afp-devel
 
     configs:
       - ci.conf
