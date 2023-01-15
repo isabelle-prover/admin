@@ -21,6 +21,15 @@
 - name: Add Jenkins user to shadow group
   user: name=jenkins groups=shadow append=yes
 
+- name: Create Jenkins job storage directory (parent)
+  file: path=/srv/jenkins-data state=directory owner=root group=root mode=0755
+
+- name: Create Jenkins job storage directory
+  file: path=/srv/jenkins-data/jobs state=directory owner=jenkins group=jenkins mode=0755
+
+- name: Link Jenkins job storage directory
+  file: src=/srv/jenkins-data/jobs path=/var/lib/jenkins/jobs state=link
+
 - name: Set permissions for AFP devel site
   file: path=/var/www/afp-devel state=directory owner=jenkins group=root mode=0755
 
