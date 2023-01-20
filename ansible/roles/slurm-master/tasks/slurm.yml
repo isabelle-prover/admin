@@ -24,3 +24,7 @@
 
 - name: Enable slurm controller daemon
   service: name=slurmctld enabled=true state=restarted
+
+- name: Set time zone
+  community.general.timezone:
+    name: Europe/Berlin

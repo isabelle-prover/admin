@@ -13,13 +13,26 @@ slurm_worker
 slurm_master
 
 [adlerlake_ls21]
-of1.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21 worker_name=workerls211 worker_tag=slurm_master
-of2.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
-of3.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
-of4.proof.cit.tum.de sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+of1.proof.cit.tum.de hostname=of1-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21 worker_name=workerls211 worker_tag=slurm_master
+of2.proof.cit.tum.de hostname=of2-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+of3.proof.cit.tum.de hostname=of3-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+of4.proof.cit.tum.de hostname=of4-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+
+[skylake_lrzxlarge]
+10.195.8.30  hostname=isabelle-cluster-lrz-1 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.8.46  hostname=isabelle-cluster-lrz-2 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.8.32  hostname=isabelle-cluster-lrz-3 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.8.40  hostname=isabelle-cluster-lrz-4 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.6.179 hostname=isabelle-cluster-lrz-5 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.7.194 hostname=isabelle-cluster-lrz-6 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.8.42  hostname=isabelle-cluster-lrz-7 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.8.49  hostname=isabelle-cluster-lrz-8 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.8.29  hostname=isabelle-cluster-lrz-9 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
+10.195.8.11  hostname=isabelle-cluster-lrz-10 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
 
 [slurm_worker:children]
 adlerlake_ls21
+skylake_lrzxlarge
 
 [slurm_master]
 of1.proof.cit.tum.de

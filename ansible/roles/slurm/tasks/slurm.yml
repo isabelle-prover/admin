@@ -27,7 +27,7 @@
   service: name=munge enabled=true state=restarted
 
 - name: Add FQN to hosts
-  lineinfile: name=/etc/hosts regexp='127.0.1.1\s.*' line='127.0.1.1 {{ inventory_hostname }} {{ ansible_hostname }}'
+  lineinfile: name=/etc/hosts regexp='127.0.1.1\s.*' line='127.0.1.1 {{ inventory_hostname }} {{ hostname }}'
 
 - name: Write slurm conf
   template: src=slurm.conf dest=/etc/slurm/slurm.conf owner=slurm group=slurm mode=0650
@@ -43,3 +43,7 @@
 
 - name: Start and enable slurm service
   service: name=slurmd enabled=true state=restarted
+
+- name: Set time zone
+  community.general.timezone:
+    name: Europe/Berlin
