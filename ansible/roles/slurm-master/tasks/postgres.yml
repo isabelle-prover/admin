@@ -1,0 +1,57 @@
+---
+
+- name: Install packages
+  apt:
+    state: present
+    update_cache: yes
+    name:
+      - python3-pip
+      - python3-dev
+      - libpq-dev
+      - postgresql
+
+- name: Enable psycopg2 for ansible
+  become: true
+  pip:
+    name: psycopg2
+    state: present
+
+- name: Allow postgres listen
+  lineinfile: name=/etc/postgresql/14/main/postgresql.conf line="listen_addresses = '*'"
+
+- name: Start posgres
+  service: name=postgresql enabled=true state=restarted
+
+- name: Create postgresql db
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_db:
+    login_user: postgres
+    name: isabelle_cluster
+
+- name: Create postgresql user
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_user:
+    name: isabelle
+    db: isabelle_cluster
+    password: "{{ config.slurm.db_password }}"
+    expires: infinity
+
+- name: Allow postgres connections
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_pg_hba:
+    dest: /etc/postgresql/14/main/pg_hba.conf
+    address: all
+    contype: "host"
+    method: "md5"
+
+- name: Restart posgres
+  service: name=postgresql enabled=true state=restarted
