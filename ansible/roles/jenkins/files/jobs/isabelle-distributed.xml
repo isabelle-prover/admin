@@ -66,11 +66,8 @@
         <hudson.tasks.Shell>
             <command>
 bin/isabelle components -a
-bin/isabelle jedit -bf
-bin/isabelle ocaml_setup
-bin/isabelle ghc_setup
-bin/isabelle context_build -X slow -v -P: -a
-            </command>
+bin/isabelle jedit -b
+bin/isabelle context_build -X slow -x Complx -x UTP-Toolkit -v -P: -a -s partition_prio -h /media/isabelle-cluster:/media/isabelle-cluster/isabelle -p adlerlake_ls21,skylake_lrzxlarge</command>
             <configuredLocalRules/>
         </hudson.tasks.Shell>
     </builders>
