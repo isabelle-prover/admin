@@ -2,7 +2,7 @@
 Description=AFP Submission Service Frontend
 
 [Service]
-ExecStart={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2022/bin/isabelle afp_submit -p 8080 -a afp-submission /var/afpbuild
+ExecStart={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle2022/bin/isabelle afp_submit -p 8080 -a afp-submission -b https://www.isa-afp.org/webapp -D /var/afpbuild
 User=conrad
 Environment="HOME=/media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu"
 
