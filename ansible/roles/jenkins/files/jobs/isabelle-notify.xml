@@ -97,7 +97,17 @@
         <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@1.0.2">
             <colorMapName>xterm</colorMapName>
         </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-        <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.24">
+        <EnvInjectBuildWrapper plugin="envinject@2.901.v0038b_6471582">
+            <info>
+                <propertiesContent>ITC="true"</propertiesContent>
+                <secureGroovyScript plugin="script-security@1251.vfe552ed55f8d">
+                    <script/>
+                    <sandbox>false</sandbox>
+                </secureGroovyScript>
+                <loadFilesFromMaster>false</loadFilesFromMaster>
+            </info>
+        </EnvInjectBuildWrapper>
+        <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.31">
             <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
                 <timeoutMinutes>10</timeoutMinutes>
             </strategy>
