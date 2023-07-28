@@ -1,0 +1,9 @@
+ML_system_64 = true
+system_heaps = true
+build_database_test = true
+build_database_name = "isabelle_cluster"
+build_database_password = "{{ config.cluster.db_password }}"
+build_database_port = "5432"
+build_database_server = "true"
+build_database_user = "isabelle"
+build_database_host = "{{ groups['worker_cluster'][0] }}"

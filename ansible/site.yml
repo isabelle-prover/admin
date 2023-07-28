@@ -20,6 +20,20 @@
   roles:
     - { role: worker-mta, tags: [ 'worker', 'worker-mta' ] }
 
+- name: Configure cluster workers
+  hosts: worker_cluster
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_remote_tmp: /tmp/ansible
+
+  vars_files:
+    - vars/secrets.yml
+
+  roles:
+    - { role: worker-cluster, tags: [ 'worker', 'worker-cluster' ] }
+
 - name: Configure AFP submission checker
   hosts: afp
   become: yes
@@ -44,8 +58,8 @@
     - { role: apache, tags: [ 'apache' ] }
     - { role: jenkins, tags: [ 'jenkins' ] }
 
-- name: Configure slurm master
-  hosts: slurm_master
+- name: Configure cluster nodes
+  hosts: cluster_node
   become: yes
   become_method: sudo
 
@@ -56,19 +70,4 @@
     - vars/secrets.yml
 
   roles:
-    - { role: slurm-master, tags: [ 'slurm-master' ] }
-    - { role: slurm, tag: ['slurm'] }
-
-- name: Configure slurm workers
-  hosts: slurm_worker
-  become: yes
-  become_method: sudo
-
-  vars:
-    ansible_remote_tmp: /tmp/ansible
-
-  vars_files:
-    - vars/secrets.yml
-
-  roles:
-    - { role: slurm, tags: [ 'slurm', 'slurm-worker' ] }
+    - { role: cluster-node, tags: [ 'cluster-node' ] }

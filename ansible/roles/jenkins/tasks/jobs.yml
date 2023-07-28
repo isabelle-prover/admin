@@ -4,7 +4,7 @@
   file: path=/home/admin/jobs state=directory owner=root group=root mode=0644
 
 - name: Copy Jenkins job definitions
-  copy: src=jobs/{{ item }}.xml dest=/home/admin/jobs/{{ item }}.xml owner=root group=root mode=0644
+  template: src=jobs/{{ item }}.xml dest=/home/admin/jobs/{{ item }}.xml owner=root group=root mode=0644
   loop: "{{ config.jenkins.jobs }}"
 
 - name: List Jenkins jobs

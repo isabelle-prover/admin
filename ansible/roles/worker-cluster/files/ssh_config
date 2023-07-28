@@ -1,0 +1,3 @@
+IdentityFile ~/.ssh/id_cluster
+Host *
+    StrictHostKeyChecking no

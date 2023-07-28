@@ -1,8 +1,0 @@
----
-
-- include: install.yml
-- include: postgres.yml
-- include: mariadb.yml
-- include: slurm.yml
-- include: nfs.yml
-- include: isabelle.yml

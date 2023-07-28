@@ -8,34 +8,27 @@ vmnipkow13.in.tum.de
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
 
-[slurm:children]
-slurm_worker
-slurm_master
+[worker_cluster]
+of1.proof.cit.tum.de jobs=2 threads=8 worker_name=workerls21cluster worker_tag=cluster
 
-[adlerlake_ls21]
-of1.proof.cit.tum.de hostname=of1-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21 worker_name=workerls211 worker_tag=slurm_master
-of2.proof.cit.tum.de hostname=of2-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
-of3.proof.cit.tum.de hostname=of3-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
-of4.proof.cit.tum.de hostname=of4-proof sockets=1 cores=8 threads=2 slurm_memkb=60000 slurm_partition=adlerlake_ls21
+[cluster_node]
+of2.proof.cit.tum.de jobs=3 threads=8
+of3.proof.cit.tum.de jobs=3 threads=8
+of4.proof.cit.tum.de jobs=3 threads=8
+10.195.8.30 ansible_user=ubuntu jobs=2 threads=4
+10.195.8.46 ansible_user=ubuntu jobs=2 threads=4
+10.195.8.32 ansible_user=ubuntu jobs=2 threads=4
+10.195.8.40 ansible_user=ubuntu jobs=2 threads=4
+10.195.6.179 ansible_user=ubuntu jobs=2 threads=4
+10.195.7.194 ansible_user=ubuntu jobs=2 threads=4
+10.195.8.42 ansible_user=ubuntu jobs=2 threads=4
+10.195.8.49 ansible_user=ubuntu jobs=2 threads=4
+10.195.8.29 ansible_user=ubuntu jobs=2 threads=4
+10.195.8.11 ansible_user=ubuntu jobs=2 threads=4
 
-[skylake_lrzxlarge]
-10.195.8.30  hostname=isabelle-cluster-lrz-1 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.8.46  hostname=isabelle-cluster-lrz-2 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.8.32  hostname=isabelle-cluster-lrz-3 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.8.40  hostname=isabelle-cluster-lrz-4 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.6.179 hostname=isabelle-cluster-lrz-5 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.7.194 hostname=isabelle-cluster-lrz-6 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.8.42  hostname=isabelle-cluster-lrz-7 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.8.49  hostname=isabelle-cluster-lrz-8 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.8.29  hostname=isabelle-cluster-lrz-9 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-10.195.8.11  hostname=isabelle-cluster-lrz-10 sockets=1 cores=10 threads=1 slurm_memkb=40000 slurm_partition=skylake_lrzxlarge ansible_user=ubuntu
-
-[slurm_worker:children]
-adlerlake_ls21
-skylake_lrzxlarge
-
-[slurm_master]
-of1.proof.cit.tum.de
+[cluster:children]
+worker_cluster
+cluster_node
 
 [afp]
 138.246.234.221
@@ -43,7 +36,7 @@ of1.proof.cit.tum.de
 [worker:children]
 worker_lrz
 worker_mta
-slurm_master
+worker_cluster
 
 [lrz:children]
 afp
@@ -52,5 +45,5 @@ worker_lrz
 [production:children]
 leader
 worker
-slurm
+cluster_node
 afp

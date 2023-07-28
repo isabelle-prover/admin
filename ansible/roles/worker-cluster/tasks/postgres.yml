@@ -39,7 +39,7 @@
   postgresql_user:
     name: isabelle
     db: isabelle_cluster
-    password: "{{ config.slurm.db_password }}"
+    password: "{{ config.cluster.db_password }}"
     expires: infinity
 
 - name: Allow postgres connections

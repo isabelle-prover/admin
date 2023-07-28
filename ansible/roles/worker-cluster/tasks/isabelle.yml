@@ -1,0 +1,16 @@
+---
+
+- name: Prepare Isabelle
+  file: path={{ config.worker.jenkins_home }}/.isabelle/etc state=directory owner=jenkins group=root mode=0755
+
+- name: Copy Isabelle settings
+  template: src=settings dest={{ config.worker.jenkins_home }}/.isabelle/etc/settings owner=jenkins group=root mode=0644 follow=yes
+
+- name: Copy Isabelle preferences
+  template: src=preferences dest={{ config.worker.jenkins_home }}/.isabelle/etc/preferences owner=jenkins group=root mode=0644 follow=yes
+
+- name: Prepare Isabelle cluster
+  file: path={{ config.worker.jenkins_home }}/.isabelle/build_cluster/etc state=directory owner=jenkins group=root mode=0755
+
+- name: Copy Isabelle cluster preferences
+  template: src=preferences dest={{ config.worker.jenkins_home }}/.isabelle/build_cluster/etc/preferences owner=jenkins group=root mode=0644 follow=yes

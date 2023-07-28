@@ -1,6 +1,6 @@
 <project>
     <actions/>
-    <description>Experimental distributed Isabelle slurm build.</description>
+    <description>Experimental distributed Isabelle build.</description>
     <keepDependencies>false</keepDependencies>
     <properties>
         <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
@@ -27,30 +27,10 @@
                 <credentialsId></credentialsId>
                 <disableChangeLog>false</disableChangeLog>
             </hudson.plugins.mercurial.MercurialSCM>
-            <hudson.plugins.git.GitSCM plugin="git@4.14.2">
-                <configVersion>2</configVersion>
-                <userRemoteConfigs>
-                    <hudson.plugins.git.UserRemoteConfig>
-                        <url>https://github.com/isabelle-prover/isabelle-context-build.git</url>
-                    </hudson.plugins.git.UserRemoteConfig>
-                </userRemoteConfigs>
-                <branches>
-                    <hudson.plugins.git.BranchSpec>
-                        <name>*/master</name>
-                    </hudson.plugins.git.BranchSpec>
-                </branches>
-                <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-                <submoduleCfg class="empty-list"/>
-                <extensions>
-                    <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-                        <relativeTargetDir>isabelle-context-build</relativeTargetDir>
-                    </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-                </extensions>
-            </hudson.plugins.git.GitSCM>
         </scms>
     </scm>
     <quietPeriod>120</quietPeriod>
-    <assignedNode>slurm_master</assignedNode>
+    <assignedNode>cluster</assignedNode>
     <canRoam>false</canRoam>
     <disabled>false</disabled>
     <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -65,9 +45,14 @@
     <builders>
         <hudson.tasks.Shell>
             <command>
-bin/isabelle components -a
-bin/isabelle jedit -b
-bin/isabelle context_build -X slow -x Complx -x UTP-Toolkit -v -P: -a -s partition_prio -h /media/isabelle-cluster:/media/isabelle-cluster/isabelle -p adlerlake_ls21,skylake_lrzxlarge</command>
+isabelle/bin/isabelle components -a
+isabelle/bin/isabelle jedit -b
+isabelle/bin/isabelle build -v -A: -g AFP -X slow \
+  -j {{ hostvars[groups['worker_cluster'][0]]['jobs'] }} -o threads={{ hostvars[groups['worker_cluster'][0]]['threads'] }} \
+  {% for host in groups['cluster_node'] %}
+  -H {{ host }}:jobs={{ hostvars[host]['jobs'] }},threads={{ hostvars[host]['threads'] }} \
+  {% endfor %}
+            </command>
             <configuredLocalRules/>
         </hudson.tasks.Shell>
     </builders>
