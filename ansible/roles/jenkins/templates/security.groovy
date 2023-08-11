@@ -1,3 +1,5 @@
+import com.michelin.cio.hudson.plugins.rolestrategy.AuthorizationType
+import com.michelin.cio.hudson.plugins.rolestrategy.PermissionEntry
 import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy
 import com.michelin.cio.hudson.plugins.rolestrategy.Role
 import com.synopsys.arc.jenkins.plugins.rolestrategy.RoleType
@@ -17,10 +19,10 @@ strategy.addRole(RoleType.Global, buildRole)
 strategy.addRole(RoleType.Global, readRole)
 
 // Assign roles to users/groups
-strategy.assignRole(RoleType.Global, adminRole, 'admin')
-strategy.assignRole(RoleType.Global, readRole, 'isabelle')
-strategy.assignRole(RoleType.Global, buildRole, 'isabelle')
-strategy.assignRole(RoleType.Global, readRole, 'anonymous')
+strategy.assignRole(RoleType.Global, adminRole, new PermissionEntry(AuthorizationType.USER, 'admin'))
+strategy.assignRole(RoleType.Global, readRole, new PermissionEntry(AuthorizationType.GROUP, 'isabelle'))
+strategy.assignRole(RoleType.Global, buildRole, new PermissionEntry(AuthorizationType.GROUP, 'isabelle'))
+strategy.assignRole(RoleType.Global, readRole, new PermissionEntry(AuthorizationType.USER, 'anonymous'))
 
 
 crumbs = new hudson.security.csrf.DefaultCrumbIssuer(false)
