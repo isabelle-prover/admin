@@ -1,6 +1,6 @@
 ML_system_64 = true
 system_heaps = true
-build_database_test = true
+build_database = true
 build_database_name = "isabelle_cluster"
 build_database_password = "{{ config.cluster.db_password }}"
 build_database_port = "5432"
