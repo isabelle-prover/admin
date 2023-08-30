@@ -99,7 +99,7 @@
         </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
         <EnvInjectBuildWrapper plugin="envinject@2.901.v0038b_6471582">
             <info>
-                <propertiesContent>ITC="true"</propertiesContent>
+                <propertiesContent>ITC=true</propertiesContent>
                 <secureGroovyScript plugin="script-security@1251.vfe552ed55f8d">
                     <script/>
                     <sandbox>false</sandbox>
