@@ -45,9 +45,10 @@
     <builders>
         <hudson.tasks.Shell>
             <command>
-isabelle/bin/isabelle components -a
-isabelle/bin/isabelle jedit -b
-isabelle/bin/isabelle build -v -A: -g AFP -X slow \
+bin/isabelle components -a
+bin/isabelle jedit -b
+bin/isabelle build_process -r -f
+bin/isabelle build -v -A: -g AFP -X slow \
   -j {{ hostvars[groups['worker_cluster'][0]]['jobs'] }} -o threads={{ hostvars[groups['worker_cluster'][0]]['threads'] }} \
   {% for host in groups['cluster_node'] %}
   -H {{ host }}:jobs={{ hostvars[host]['jobs'] }},threads={{ hostvars[host]['threads'] }} \
