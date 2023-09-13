@@ -15,11 +15,10 @@ config:
     user: isabelle-bot
 
   isabelle:
-    version: 2022
-    checksum: sha256:e7fa6e9d9675d7a56751c00fa81ad0d081e1b6ffbdb0d7f02056853ba77f04c6
+    version: 2023
 
   afp:
-    version: 2022
+    version: 2023
     container_home: "/media/data/conrad"
     git: "https://github.com/isabelle-prover/afp-submission.git"
     sub_id_min: 10000001
@@ -29,7 +28,7 @@ config:
     site_home: "/srv/afp"
 
   linter:
-    version: Isabelle2022-v1.2.1
+    version: Isabelle2023-v1.0.0
 
   apache:
     cert_name: isabelle-tls-certs

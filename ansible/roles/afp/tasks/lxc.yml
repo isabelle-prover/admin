@@ -30,7 +30,7 @@
   copy: src=/etc/resolv.conf dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/etc/resolv.conf remote_src=true owner=root group=root mode=0644
 
 - name: Download Isabelle
-  get_url: url=https://isabelle.in.tum.de/website-Isabelle{{ config.isabelle.version }}/dist/Isabelle{{ config.isabelle.version }}_linux.tar.gz dest=/media/data/isabelle{{ config.isabelle.version }}.tar.gz checksum={{ config.isabelle.checksum }}
+  get_url: url=https://isabelle.in.tum.de/website-Isabelle{{ config.isabelle.version }}/dist/Isabelle{{ config.isabelle.version }}_linux.tar.gz dest=/media/data/isabelle{{ config.isabelle.version }}.tar.gz
 
 - name: Unpack Isabelle into LXC base container
   unarchive: src=/media/data/isabelle{{ config.isabelle.version }}.tar.gz copy=false creates=Isabelle{{ config.isabelle.version }} dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt owner=root group=root
