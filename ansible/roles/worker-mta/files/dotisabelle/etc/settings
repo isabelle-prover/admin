@@ -1,5 +1,3 @@
-ISABELLE_CI_PROPERTIES=/etc/isabelle/ci.properties
-
 init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/main"
 init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/cakeml"
 init_components "$HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/ci-extras"

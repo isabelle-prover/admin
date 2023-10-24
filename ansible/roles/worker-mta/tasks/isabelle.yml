@@ -11,6 +11,3 @@
 
 - name: Prepare Isabelle CI properties
   file: path=/etc/isabelle state=directory owner=jenkins group=root mode=0750
-
-- name: Copy Isabelle CI properties
-  template: src=ci.properties dest=/etc/isabelle/ci.properties owner=jenkins group=root mode=0640
