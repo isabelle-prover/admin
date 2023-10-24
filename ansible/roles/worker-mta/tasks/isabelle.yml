@@ -1,10 +1,13 @@
 ---
 
 - name: Prepare Isabelle
-  file: path={{ config.worker.jenkins_home }}/.isabelle state=directory owner=jenkins group=root mode=0755
+  file: path={{ config.worker.jenkins_home }}/.isabelle/etc state=directory owner=jenkins group=root mode=0755
 
 - name: Copy Isabelle settings
   copy: src=dotisabelle/ dest={{ config.worker.jenkins_home }}/.isabelle owner=jenkins group=root mode=0644 follow=yes
+
+- name: Copy Isabelle preferences
+  template: src=dotisabelle/etc/preferences dest={{ config.worker.jenkins_home }}/.isabelle/etc/preferences owner=jenkins group=root mode=0644
 
 - name: Prepare Isabelle CI properties
   file: path=/etc/isabelle state=directory owner=jenkins group=root mode=0750
