@@ -31,7 +31,27 @@
     login_user: postgres
     name: isabelle_cluster
 
-- name: Create postgresql user
+- name: Create postgresql db
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_db:
+    login_user: postgres
+    name: isabelle_log
+
+- name: Allow Isabelle access to cluster db
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_user:
+    name: isabelle
+    db: isabelle_cluster
+    password: "{{ config.cluster.db_password }}"
+    expires: infinity
+
+- name: Allow Isabelle access to log db
   become: true
   become_user: postgres
   become_method: su
