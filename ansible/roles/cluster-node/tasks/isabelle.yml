@@ -4,4 +4,4 @@
   file: path={{ config.worker.jenkins_home }}/.isabelle/build_cluster/etc state=directory owner=jenkins group=root mode=0755
 
 - name: Copy Isabelle cluster preferences
-  template: src=preferences dest={{ config.worker.jenkins_home }}/.isabelle/build_cluster/etc/preferences owner=jenkins group=root mode=0644 follow=yes
+  template: src=preferences dest={{ config.worker.jenkins_home }}/.isabelle/build_cluster/etc/preferences owner=jenkins group=root mode=0700 follow=yes
