@@ -1,5 +1,6 @@
 [Unit]
 Description=AFP Submission Service Frontend
+Requires=media-data.mount
 
 [Service]
 ExecStart={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle afp_submit -p 8080 -a afp-submission -b https://www.isa-afp.org/webapp -D /var/afpbuild
