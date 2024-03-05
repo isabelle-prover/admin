@@ -43,7 +43,7 @@
 if ! [ -d .hg ]; then
   hg init
 fi
-hg pull http://isabelle.in.tum.de/repos/isabelle/
+hg pull https://isabelle.in.tum.de/repos/isabelle/
 hg up
 </command>
     </hudson.tasks.Shell>

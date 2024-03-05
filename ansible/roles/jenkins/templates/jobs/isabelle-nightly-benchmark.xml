@@ -5,7 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties/>
   <scm class="hudson.plugins.mercurial.MercurialSCM" plugin="mercurial@1.54">
-    <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+    <source>https://isabelle.in.tum.de/repos/isabelle/</source>
     <modules></modules>
     <revisionType>BRANCH</revisionType>
     <revision>default</revision>

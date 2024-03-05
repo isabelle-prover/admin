@@ -7,7 +7,7 @@
   <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.5">
     <scms>
       <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1.54">
-        <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+        <source>https://isabelle.in.tum.de/repos/isabelle/</source>
         <modules></modules>
         <revisionType>BRANCH</revisionType>
         <revision>default</revision>

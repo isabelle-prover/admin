@@ -9,7 +9,7 @@
         <scms>
             <hudson.plugins.mercurial.MercurialSCM plugin="mercurial@1251.va_b_121f184902">
                 <installation>(Default)</installation>
-                <source>http://isabelle.in.tum.de/repos/isabelle/</source>
+                <source>https://isabelle.in.tum.de/repos/isabelle/</source>
                 <modules/>
                 <revisionType>BRANCH</revisionType>
                 <revision>default</revision>
