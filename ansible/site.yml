@@ -43,7 +43,6 @@
     - vars/secrets.yml
 
   roles:
-    - { role: lrz-base, tags: [ 'lrz-base' ] }
     - { role: afp, tags: [ 'afp' ] }
 
 - name: Configure and deploy Apache and Jenkins

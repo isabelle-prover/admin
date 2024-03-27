@@ -20,7 +20,7 @@
   become_method: sudo
 
 - name: Create LXC base container
-  shell: lxc-create -n base -t download --bdev dir -- -d ubuntu -r focal -a amd64 --no-validate
+  shell: lxc-create -n base -t download --bdev dir -- -d ubuntu -r focal -a amd64
   when: "afp_lxc.stdout.find('base') == -1"
   become: yes
   become_user: conrad
@@ -146,6 +146,9 @@
   with_items:
     - lxc-start -n base
     - lxc-wait -n base -s RUNNING
+    - lxc-attach -n base -- locale-gen en_US.UTF-8
+    - lxc-attach -n base -- locale-gen en_DK.UTF-8
+    - lxc-attach -n base -- locale-gen de_DE.UTF-8
     - lxc-attach -n base -- apt-get -y update
     - lxc-attach -n base -- apt-get -y install lib32stdc++6 unzip texlive-full fontconfig
     - lxc-stop -n base
