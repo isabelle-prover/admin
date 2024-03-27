@@ -1,9 +1,6 @@
 [leader]
 vmnipkow13.in.tum.de
 
-[worker_lrz]
-10.195.3.255 worker_name=workerlrz5 worker_tag=lrz-cloud
-
 [worker_mta]
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
@@ -15,16 +12,6 @@ of1.proof.cit.tum.de jobs=2 threads=8 worker_name=workerls21cluster worker_tag=c
 of2.proof.cit.tum.de jobs=3 threads=8
 of3.proof.cit.tum.de jobs=3 threads=8
 of4.proof.cit.tum.de jobs=3 threads=8
-10.195.8.30 ansible_user=ubuntu jobs=2 threads=4
-10.195.8.46 ansible_user=ubuntu jobs=2 threads=4
-10.195.8.32 ansible_user=ubuntu jobs=2 threads=4
-10.195.8.40 ansible_user=ubuntu jobs=2 threads=4
-10.195.6.179 ansible_user=ubuntu jobs=2 threads=4
-10.195.7.194 ansible_user=ubuntu jobs=2 threads=4
-10.195.8.42 ansible_user=ubuntu jobs=2 threads=4
-10.195.8.49 ansible_user=ubuntu jobs=2 threads=4
-10.195.8.29 ansible_user=ubuntu jobs=2 threads=4
-10.195.8.11 ansible_user=ubuntu jobs=2 threads=4
 
 [cluster:children]
 worker_cluster
@@ -34,13 +21,8 @@ cluster_node
 proofvm1.cit.tum.de ansible_user=huch
 
 [worker:children]
-worker_lrz
 worker_mta
 worker_cluster
-
-[lrz:children]
-afp
-worker_lrz
 
 [production:children]
 leader

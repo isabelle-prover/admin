@@ -9,6 +9,5 @@ Welcome to Isabelle admin documentation!
    architecture
    ansible
    mta
-   opennebula
    process
    jenkins

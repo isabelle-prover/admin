@@ -1,14 +1,5 @@
 ---
 
-- name: Configure LRZ workers
-  hosts: worker_lrz
-  become: yes
-  become_method: sudo
-
-  roles:
-    - { role: lrz-base, tags: [ 'lrz-base' ] }
-    - { role: worker-lrz, tags: [ 'worker', 'worker-lrz' ] }
-
 - name: Configure MTA workers
   hosts: worker_mta
   become: yes

@@ -56,25 +56,6 @@ Contact
 Worker machines
 ~~~~~~~~~~~~~~~
 
-Linux/LRZ
-.........
-
-Hosted by
-  Leibniz-Rechenzentrum
-
-Specification
-  octa-core VMs running Ubuntu  20.04 LTS, virtualized by OpenNebula/KVM
-
-Hostnames
-  various, see :doc:`opennebula`
-
-Administration
-  - Full root access (accounts can be obtained from Lars Hupel)
-  - Full VM control (accounts for OpenNebula can be obtained from the chair administrators)
-
-Contact
-  LRZ Service Desk
-
 Linux/MTA
 .........
 
@@ -115,20 +96,38 @@ AFP machine
 ~~~~~~~~~~~
 
 Hosted by
-  Leibniz-Rechenzentrum
+  Rechnerbetriebsgruppe der Fakultäten für Mathematik und Informatik
 
 Specification
-  dual-core VM running Ubuntu 20.04 LTS, virtualized by OpenNebula/KVM
+  quad-core VM running Ubuntu 20.04 LTS
 
 Hostnames
-  various, see :doc:`opennebula`
+  - proofvm1.cit.tum.de
 
 Administration
-  - Full root access (accounts can be obtained from Lars Hupel)
-  - Full VM control (accounts for OpenNebula can be obtained from the chair administrators)
+  - Full VM control (accounts via LDAP by chair administrators)
 
 Contact
-  LRZ Service Desk
+  chair administrators
+
+
+Cluster machines
+~~~~~~~~~~~~~~~~
+
+Hosted by
+  chair administrators
+
+Specification
+  various high-end machines
+
+Administration
+  - Full root access (LDAP accounts)
+
+Hostnames
+  - of{1-4}.proof.cit.tum.de
+
+Contact
+  chair administractors
 
 
 Documentation

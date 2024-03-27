@@ -27,9 +27,9 @@
       </hudson.plugins.mercurial.MercurialSCM>
     </scms>
   </scm>
-  <assignedNode>lrz-cloud</assignedNode>
+  <assignedNode></assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
