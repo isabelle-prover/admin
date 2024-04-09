@@ -52,7 +52,6 @@ config:
       - executors.groovy
       - mail.groovy
       - hg.groovy
-      - optout.groovy
 
     jobs:
       - isabelle-all
