@@ -12,7 +12,6 @@
     - envinject
     - mercurial
     - embeddable-build-status
-    - build-monitor-plugin
     - multiple-scms
     - jenkins-multijob-plugin
     - email-ext
