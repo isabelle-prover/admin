@@ -81,13 +81,14 @@ Hosted by
   chair administrators
 
 Specification
-  low-end iMac running macOS El Capitan, not virtualized
+  high-end iMac servers (mac minis + mac studio), not virtualized
 
 Hostnames
-  ``macisa1.informatik.tu-muenchen.de``
+  - ``mini{1-3}.isabelle.in.tum.de``
+  - ``studio1.isabelle.in.tum.de``
 
 Administration
-  Full root access (accounts can be obtained from Lars Hupel)
+  Full root access (accounts via LDAP by chair administrators)
 
 Contact
   chair administrators
