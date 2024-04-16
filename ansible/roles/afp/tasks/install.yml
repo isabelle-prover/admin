@@ -17,6 +17,7 @@
       - libpam-systemd
       - libgomp1
       - fontconfig
+      - firewalld
       - acl # <https://github.com/georchestra/ansible/issues/55#issuecomment-588313638>
 
 - name: Create container user
@@ -27,3 +28,17 @@
 
 - name: Set subordinate GIDs
   shell: usermod -w {{ config.afp.sub_id_min }}-{{ config.afp.sub_id_max }} conrad
+
+- name: Switch to cgroup v1
+  lineinfile: dest=/etc/default/grub regexp=^GRUB_CMDLINE_LINUX= line='GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"'
+
+- name: Re-generate grub conf
+  shell: update-grub
+
+- name: Get cgroup version
+  shell: stat -fc %T /sys/fs/cgroup/
+  register: cgroup_version
+
+- name: Reboot machine
+  when: "cgroup_version.stdout == 'cgroup2fs'"
+  reboot:

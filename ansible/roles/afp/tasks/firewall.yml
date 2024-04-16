@@ -14,3 +14,12 @@
 
 - name: Load firewall rules
   shell: iptables-restore < /etc/iptables/rules.v4
+
+- name: Make lxcbr0 trusted
+  shell: firewall-cmd --zone=trusted --change-interface=lxcbr0 --permanent
+
+- name: Open trusted subnet
+  shell: firewall-cmd --zone=trusted --add-source=131.159.0.0/16 --permanent
+
+- name: Reload rules
+  shell: firewall-cmd --reload

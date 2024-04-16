@@ -20,11 +20,14 @@
   become_method: sudo
 
 - name: Create LXC base container
-  shell: lxc-create -n base -t download --bdev dir -- -d ubuntu -r focal -a amd64
+  shell: lxc-create -n base -t download --bdev dir -- -d ubuntu -r jammy -a amd64
   when: "afp_lxc.stdout.find('base') == -1"
   become: yes
   become_user: conrad
   become_method: sudo
+
+- name: Allow traversal of container home dir
+  file: path={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu mode=0755
 
 - name: Copy resolv.conf
   copy: src=/etc/resolv.conf dest={{ config.afp.container_home }}/.local/share/lxc/base/rootfs/etc/resolv.conf remote_src=true owner=root group=root mode=0644
@@ -77,8 +80,8 @@
     name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle{{ config.isabelle.version }}/etc/settings"
     create: yes
     block: |
-      ISABELLE_TOOL_JAVA_OPTIONS="-Xmx2G"
-      ML_OPTIONS="-H 4000 --maxheap 4G"
+      ISABELLE_TOOL_JAVA_OPTIONS="-Xmx4G"
+      ML_OPTIONS="-H 4000 --maxheap 8G"
       ML_HOME="$POLYML_HOME/$ML_PLATFORM"
 
 - name: Add AFP component
@@ -152,6 +155,7 @@
     - lxc-attach -n base -- locale-gen de_DE.UTF-8
     - lxc-attach -n base -- apt-get -y update
     - lxc-attach -n base -- apt-get -y install lib32stdc++6 unzip texlive-full fontconfig
+    # kill the luatex process at this point once cpu activity is ~0: https://askubuntu.com/questions/956006/pregenerating-context-markiv-format-this-may-take-some-time-takes-forever
     - lxc-stop -n base
   become: true
   become_user: conrad

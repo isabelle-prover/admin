@@ -97,16 +97,16 @@ AFP machine
 ~~~~~~~~~~~
 
 Hosted by
-  Rechnerbetriebsgruppe der Fakultäten für Mathematik und Informatik
+  chair administrators
 
 Specification
-  quad-core VM running Ubuntu 20.04 LTS
+  Workstation running Ubuntu 22.04 LTS
 
 Hostnames
-  - proofvm1.cit.tum.de
+  - atnipkow8
 
 Administration
-  - Full VM control (accounts via LDAP by chair administrators)
+  - Full root access (request from admins or Fabian Huch)
 
 Contact
   chair administrators
