@@ -18,7 +18,7 @@ worker_cluster
 cluster_node
 
 [afp]
-atnipkow8.in.tum.de ansible_user=huch
+atnipkow8.in.tum.de
 
 [worker:children]
 worker_mta
