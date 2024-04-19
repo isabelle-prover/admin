@@ -1,0 +1,59 @@
+[host.of1-proof]
+hostname = "of1.proof.cit.tum.de"
+user = "cluster"
+jobs = 3
+threads = 12
+
+[host.of2-proof]
+hostname = "of2.proof.cit.tum.de"
+user = "cluster"
+jobs = 4
+threads = 16
+
+[host.of3-proof]
+hostname = "of3.proof.cit.tum.de"
+user = "cluster"
+jobs = 4
+threads = 16
+
+[host.of4-proof]
+hostname = "of4.proof.cit.tum.de"
+user = "cluster"
+jobs = 4
+threads = 16
+
+[host.se1]
+hostname = "se1.proof.cit.tum.de"
+user = "cluster"
+jobs = 8
+threads = 16
+
+[host.se2]
+hostname = "se2.proof.cit.tum.de"
+user = "cluster"
+jobs = 8
+threads = 16
+
+[host.se3]
+hostname = "se3.proof.cit.tum.de"
+user = "cluster"
+jobs = 8
+threads = 16
+
+[host.se4]
+hostname = "se4.proof.cit.tum.de"
+user = "cluster"
+jobs = 8
+threads = 16
+
+[cluster.ls21-full]
+hosts = [
+  "of1-proof",
+  "of2-proof",
+  "of3-proof",
+  "of4-proof",
+  "se1",
+  "se2",
+  "se3",
+  "se4",
+]

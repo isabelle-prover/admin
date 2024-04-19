@@ -29,7 +29,7 @@
   become_exe: sudo su -
   postgresql_db:
     login_user: postgres
-    name: isabelle_cluster
+    name: isabelle_build
 
 - name: Create postgresql db
   become: true
@@ -38,7 +38,7 @@
   become_exe: sudo su -
   postgresql_db:
     login_user: postgres
-    name: isabelle_log
+    name: isabelle_build_log
 
 - name: Allow Isabelle access to cluster db
   become: true
@@ -47,7 +47,7 @@
   become_exe: sudo su -
   postgresql_user:
     name: isabelle
-    db: isabelle_cluster
+    db: isabelle_build
     password: "{{ config.cluster.db_password }}"
     expires: infinity
 
@@ -58,7 +58,7 @@
   become_exe: sudo su -
   postgresql_user:
     name: isabelle
-    db: isabelle_cluster
+    db: isabelle_build
     password: "{{ config.cluster.db_password }}"
     expires: infinity
 
