@@ -6,7 +6,7 @@ init_component "$ISABELLE_HOME/Admin/jenkins/build"
 [ -d "$ISABELLE_HOME/afp" ] && init_component "$ISABELLE_HOME/afp/admin/jenkins"
 [ -d "$ISABELLE_HOME/itc" ] && [ "$ITC" == true ] && init_component "$ISABELLE_HOME/itc"
 
-ML_OPTIONS="-H 4000 --maxheap 8G"
+ML_OPTIONS="-H 4000 --maxheap 16G"
 
 ISABELLE_POLYML="$ML_HOME/poly"
 ISABELLE_SCALA="$SCALA_HOME/bin"
