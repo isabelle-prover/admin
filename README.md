@@ -1,4 +1,4 @@
-# Isabelle CI infrastructure
+# Isabelle Infrastructure Administration
 This is the infrastructure-as-code repository for the Isabelle infrastructure, hosted at TUM.
 
 ## Quick start
@@ -11,7 +11,7 @@ This is the infrastructure-as-code repository for the Isabelle infrastructure, h
 ## Preliminaries
 Recommended reading for this documentation:
 - [Ansible documentation](https://docs.ansible.com/ansible/), especially the following sections:
-    * [Introduction](https://docs.ansible.com/ansible/)_
+    * [Introduction](https://docs.ansible.com/ansible/)
     * [Playbooks](https://docs.ansible.com/ansible/playbooks.html)
     * [Playbooks: Special Topics/Tags](https://docs.ansible.com/ansible/playbooks_tags.html)
 - [Lehrstuhl-VM (de)](https://wiki.in.tum.de/Informatik/Benutzerwiki/LehrstuhlVM)
@@ -36,7 +36,7 @@ There are three kinds of servers:
 2. *Workers* require a lot of resources.
    There are various kinds of workers with different configuration based on hosting provider and OS platform.
 
-3. The *AFP submission* system is a single, low-end machine.
+3. The *AFP submission* system is a single, medium-powered machine.
    The leader acts as a proxy for that machine.
 
 
