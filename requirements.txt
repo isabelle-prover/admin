@@ -1,5 +1,2 @@
 ansible==2.10.7
-Sphinx>=1.8
-sphinx-autobuild
-sphinx_rtd_theme
 PyMySQL
