@@ -18,6 +18,7 @@
       - libgomp1
       - fontconfig
       - firewalld
+      - language-pack-en
       - acl # <https://github.com/georchestra/ansible/issues/55#issuecomment-588313638>
 
 - name: Create container user
