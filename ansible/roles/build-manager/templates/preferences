@@ -1,0 +1,8 @@
+build_manager_submission_dir = "{{ config.build.data }}"
+build_manager_ssh_host = "localhost"
+
+build_manager_database_name = "isabelle_build_manager"
+build_manager_database_host = "{{ groups['build_manager'][0] }}"
+build_manager_database_port = "5432"
+build_manager_database_user = "isabelle"
+build_manager_database_password = "{{ config.cluster.db_password }}"

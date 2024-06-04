@@ -1,6 +1,9 @@
 [leader]
 vmnipkow13.in.tum.de
 
+[build_manager]
+build.proof.cit.tum.de
+
 [worker_mta]
 lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
 hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc

@@ -1,0 +1,9 @@
+[Unit]
+Description=Isabelle Build System
+
+[Service]
+ExecStart={{ config.build.home }}/isabelle/bin/isabelle build_manager -A: -p 8080 -H cluster.ls21-full
+User=build
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+---
+
+- include: install.yml
+- include: isabelle.yml
+- include: postgres.yml
+- include: app.yml
+- include: caddy.yml

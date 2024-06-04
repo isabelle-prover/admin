@@ -1,0 +1,36 @@
+---
+
+- name: Clone Isabelle
+  become: true
+  become_user: build
+  become_method: su
+  become_exe: sudo su -
+  hg: dest={{ config.build.home }}/isabelle repo=https://isabelle.in.tum.de/repos/isabelle force=yes purge=yes
+
+- name: Clone AFP
+  become: true
+  become_user: build
+  become_method: su
+  become_exe: sudo su -
+  hg: dest={{ config.build.home }}/afp repo=https://foss.heptapod.net/isa-afp/afp-devel force=yes purge=yes
+
+- name: Create Isabelle user home directory
+  file: path={{ config.build.home }}/.isabelle/etc state=directory owner=build group=isabelle mode=0775
+
+- name: Copy Isabelle preferences
+  template: src=preferences dest={{ config.build.home }}/.isabelle/etc/preferences owner=build group=isabelle mode=0700
+
+- name: Add Isabelle components
+  template: src=components dest={{ config.build.home }}/.isabelle/etc/components owner=build group=isabelle mode=0740
+
+- name: Download Isabelle components
+  shell: "{{ config.build.home }}/isabelle/Admin/init"
+
+- name: Add registry
+  copy: src=registry.toml dest={{ config.build.home }}/.isabelle/etc/registry.toml owner=build group=isabelle mode=0740
+
+- name: Create Isabelle build manager user home directory
+  file: path={{ config.build.home }}/.isabelle/build_manager/etc state=directory owner=build group=isabelle mode=0775
+
+- name: Copy Isabelle build manager preferences
+  template: src=preferences_cluster dest={{ config.build.home }}/.isabelle/build_manager/etc/preferences owner=build group=isabelle mode=0700

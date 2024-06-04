@@ -1,0 +1,74 @@
+---
+
+- name: Allow postgres to listen for connections
+  lineinfile: name=/etc/postgresql/14/main/postgresql.conf line="listen_addresses = '*'"
+
+- name: Start postgres
+  service: name=postgresql enabled=true state=restarted
+
+- name: Create postgresql dbs
+  with_items:
+    - isabelle_build
+    - isabelle_build_log
+    - isabelle_build_manager
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_db:
+    login_user: postgres
+    name: "{{ item }}"
+
+- name: Add Isabelle user
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_user:
+    name: isabelle
+    password: "{{ config.cluster.db_password }}"
+    expires: infinity
+
+- name: Grant Isabelle user access
+  with_items:
+    - isabelle_build
+    - isabelle_build_log
+    - isabelle_build_manager
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_privs:
+    database: "{{ item }}"
+    privs: ALL
+    roles: PUBLIC
+    objs: ALL_IN_SCHEMA
+
+- name: Allow postgres password connections
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_pg_hba:
+    dest: /etc/postgresql/14/main/pg_hba.conf
+    address: all
+    contype: "host"
+    method: "md5"
+
+- name: Allow local postgres connections without password
+  with_items:
+    - "::1/128"
+    - "127.0.0.1/32"
+    - "localhost"
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_pg_hba:
+    dest: /etc/postgresql/14/main/pg_hba.conf
+    contype: "host"
+    source: "{{ item }}"
+    method: "trust"
+
+- name: Restart posgres
+  service: name=postgresql enabled=true state=restarted

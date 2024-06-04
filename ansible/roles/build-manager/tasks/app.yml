@@ -1,0 +1,13 @@
+---
+
+- name: Prepare server dir
+  file: path={{ config.build.data }} state=directory owner=build group=isabelle mode=0770
+
+- name: Prepare submission dir
+  file: path={{ config.build.data }}/pending state=directory owner=build group=isabelle mode=2770
+
+- name: Copy systemd service
+  template: src=build-manager.service dest=/etc/systemd/system/build-manager.service owner=root group=root mode=0644
+
+- name: Reload and restart build manager
+  service: name=build-manager.service enabled=yes daemon_reload=yes state=restarted

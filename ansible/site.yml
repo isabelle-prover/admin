@@ -48,6 +48,17 @@
     - { role: apache, tags: [ 'apache' ] }
     - { role: jenkins, tags: [ 'jenkins' ] }
 
+- name: Configure and deploy build manager
+  hosts: build_manager
+  become: yes
+  become_method: sudo
+
+  vars_files:
+    - vars/secrets.yml
+
+  roles:
+    - { role: build-manager, tags: [ 'build-manager' ] }
+
 - name: Configure cluster nodes
   hosts: cluster_node
   become: yes

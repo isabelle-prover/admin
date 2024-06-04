@@ -1,0 +1,13 @@
+---
+
+- name: Copy Caddyfile
+  copy: src=Caddyfile dest=/etc/caddy/Caddyfile owner=root group=root mode=0644
+
+- name: Copy renew script
+  copy: src=caddy.sh dest=/usr/local/cert.d/caddy.sh owner=root group=root mode=0755
+
+- name: Install
+  shell: rbg-cert --reinstall
+
+- name: Restart Caddy
+  service: name=caddy enabled=true state=restarted

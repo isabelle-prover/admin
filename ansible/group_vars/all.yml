@@ -11,6 +11,10 @@ config:
     user: ge73ruk
     sender: ge73ruk@mytum.de
 
+  build:
+    home: /home/build
+    data: /srv/build
+
   github:
     user: isabelle-bot
 
