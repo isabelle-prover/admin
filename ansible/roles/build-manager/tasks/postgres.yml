@@ -70,5 +70,14 @@
     source: "{{ item }}"
     method: "trust"
 
+- name: Increase max connections
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_set:
+    name: max_connections
+    value: "500"
+
 - name: Restart posgres
   service: name=postgresql enabled=true state=restarted

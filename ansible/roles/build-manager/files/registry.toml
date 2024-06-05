@@ -2,49 +2,49 @@
 hostname = "of1.proof.cit.tum.de"
 user = "cluster"
 jobs = 3
-threads = 12
+threads = 8
 
 [host.of2-proof]
 hostname = "of2.proof.cit.tum.de"
 user = "cluster"
-jobs = 4
-threads = 16
+jobs = 3
+threads = 8
 
 [host.of3-proof]
 hostname = "of3.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
-threads = 16
+threads = 8
 
 [host.of4-proof]
 hostname = "of4.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
-threads = 16
+threads = 8
 
 [host.se1]
 hostname = "se1.proof.cit.tum.de"
 user = "cluster"
-jobs = 8
-threads = 16
+jobs = 4
+threads = 8
 
 [host.se2]
 hostname = "se2.proof.cit.tum.de"
 user = "cluster"
-jobs = 8
-threads = 16
+jobs = 4
+threads = 8
 
 [host.se3]
 hostname = "se3.proof.cit.tum.de"
 user = "cluster"
-jobs = 8
-threads = 16
+jobs = 4
+threads = 8
 
 [host.se4]
 hostname = "se4.proof.cit.tum.de"
 user = "cluster"
-jobs = 8
-threads = 16
+jobs = 4
+threads = 8
 
 [cluster.ls21-full]
 hosts = [
