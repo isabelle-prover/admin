@@ -46,12 +46,31 @@ user = "cluster"
 jobs = 4
 threads = 8
 
+[host.benchmark]
+hostname = "of4.proof.cit.tum.de"
+
+[host.nightly]
+hostname = "of4.proof.cit.tum.de"
+
 [cluster.ls21-full]
 hosts = [
   "of1-proof",
   "of2-proof",
   "of3-proof",
   "of4-proof",
+  "se1",
+  "se2",
+  "se3",
+  "se4",
+  "benchmark",
+  "nightly",
+]
+
+[cluster.default]
+hosts = [
+  "of1-proof",
+  "of2-proof",
+  "of3-proof",
   "se1",
   "se2",
   "se3",

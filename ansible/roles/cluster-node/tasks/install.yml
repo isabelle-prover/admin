@@ -26,8 +26,17 @@
 - name: Create cluster user
   user: name=cluster shell=/bin/bash group=isabelle home=/home/cluster
 
-- name: Prepare .ssh directory
+- name: Prepare cluster .ssh directory
   file: path=/home/cluster/.ssh state=directory owner=cluster group=root mode=0700
 
-- name: Copy authorized_keys file
+- name: Copy cluster authorized_keys file
   copy: src=authorized_keys dest=/home/cluster/.ssh/authorized_keys owner=cluster group=root mode=0600
+
+- name: Create build user
+  user: name=build shell=/bin/bash home={{ config.build.home }} group=isabelle system=yes
+
+- name: Prepare build .ssh directory
+  file: path={{ config.build.home }}/.ssh state=directory owner=build group=root mode=0700
+
+- name: Copy build authorized_keys file
+  copy: src=authorized_keys dest={{ config.build.home }}/.ssh/authorized_keys owner=build group=root mode=0600

@@ -30,7 +30,7 @@
   copy: src=registry.toml dest={{ config.build.home }}/.isabelle/etc/registry.toml owner=build group=isabelle mode=0740
 
 - name: Create Isabelle build manager user home directory
-  file: path={{ config.build.home }}/.isabelle/build_manager/etc state=directory owner=build group=isabelle mode=0775
+  file: path={{ config.build.home }}/.isabelle/build_cluster/etc state=directory owner=build group=isabelle mode=0775
 
 - name: Copy Isabelle build manager preferences
-  template: src=preferences_cluster dest={{ config.build.home }}/.isabelle/build_manager/etc/preferences owner=build group=isabelle mode=0700
+  template: src=preferences_cluster dest={{ config.build.home }}/.isabelle/build_cluster/etc/preferences owner=build group=isabelle mode=0700
