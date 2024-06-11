@@ -1,0 +1,12 @@
+---
+
+- name: Debug
+  become: yes
+  become_method: sudo
+  hosts: all
+
+  roles:
+    - update
+
+  vars_files:
+    - vars/secrets.yml
