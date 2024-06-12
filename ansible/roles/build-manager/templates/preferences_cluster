@@ -1,5 +1,5 @@
 build_database_name = "isabelle_build"
-build_database_host = "{{ groups['worker_cluster'][0] }}"
+build_database_host = "{{ groups['build_manager'][0] }}"
 build_database_port = "5432"
 build_database_user = "isabelle"
 build_database_password = "{{ config.cluster.db_password }}"

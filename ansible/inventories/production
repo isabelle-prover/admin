@@ -4,13 +4,6 @@ vmnipkow13.in.tum.de
 [build_manager]
 build.proof.cit.tum.de
 
-[worker_mta]
-lxcisa1.informatik.tu-muenchen.de worker_name=workermta1 worker_tag=mta_big
-hpc.isabelle.in.tum.de worker_name=workermtahpc worker_tag=mta_hpc
-
-[worker_cluster]
-of1.proof.cit.tum.de worker_name=workerls21cluster worker_tag=cluster
-
 [cluster_node]
 se1.proof.cit.tum.de
 se2.proof.cit.tum.de
@@ -28,12 +21,8 @@ cluster_node
 [afp]
 atnipkow8.in.tum.de
 
-[worker:children]
-worker_mta
-worker_cluster
-
 [production:children]
 leader
-worker
+build_manager
 cluster_node
 afp

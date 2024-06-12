@@ -1,30 +1,5 @@
 ---
 
-- name: Configure MTA workers
-  hosts: worker_mta
-  become: yes
-  become_method: sudo
-
-  vars_files:
-    - vars/secrets.yml
-
-  roles:
-    - { role: worker-mta, tags: [ 'worker', 'worker-mta' ] }
-
-- name: Configure cluster workers
-  hosts: worker_cluster
-  become: yes
-  become_method: sudo
-
-  vars:
-    ansible_remote_tmp: /tmp/ansible
-
-  vars_files:
-    - vars/secrets.yml
-
-  roles:
-    - { role: worker-cluster, tags: [ 'worker', 'worker-cluster' ] }
-
 - name: Configure AFP submission checker
   hosts: afp
   become: yes
@@ -36,7 +11,7 @@
   roles:
     - { role: afp, tags: [ 'afp' ] }
 
-- name: Configure and deploy Apache and Jenkins
+- name: Configure and deploy Apache
   hosts: leader
   become: yes
   become_method: sudo
@@ -46,7 +21,6 @@
 
   roles:
     - { role: apache, tags: [ 'apache' ] }
-    - { role: jenkins, tags: [ 'jenkins' ] }
 
 - name: Configure and deploy build manager
   hosts: build_manager

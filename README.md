@@ -27,14 +27,15 @@ There are of course exceptions to this rule, for example in emergencies (downtim
 
 ### Overview
 
-There are three kinds of servers:
+There are different kinds of servers:
 
 1. The central server is the *leader*, which runs on a low-resource virtual machine.
-   It mainly hosts an Apache web server and the Jenkins instance.
-   It performs regular polling of the repositories and starts and coordinates builds on the workers.
+   It mainly hosts an Apache web server.
 
-2. *Workers* require a lot of resources.
+2. *cluster-node* require a lot of resources.
    There are various kinds of workers with different configuration based on hosting provider and OS platform.
+
+3. *Build manager* is a main cluster node, which also runs the main isabelle process and the database.
 
 3. The *AFP submission* system is a single, medium-powered machine.
    The leader acts as a proxy for that machine.
@@ -128,15 +129,13 @@ To run Ansible, you need to give it an inventory file and a playbook:
 ```
 ansible-playbook -i inventories/production [-l GROUP|HOST] site.yml
 ```
-In this repository, there are two inventory files: one for production, one for testing.
 Always check the contents of the inventory files before deploying.
 
 ## Processes
 
 ### Security updates
 Security updates should be applied regularly.
-The most critical part of the infrastructure is the Jenkins instance which is exposed to the Internet.
-It is highly recommended to follow the `Jenkins Security Advisories <https://wiki.jenkins-ci.org/display/JENKINS/Security+Advisories>`_.
+The most critical part of the infrastructure is the Isabelle build manager instance which is exposed to the Internet.
 
 ### Isabelle Version Update
 After Isabelle release:
@@ -145,6 +144,3 @@ After Isabelle release:
 After AFP release.
 1. Update versions in [group vars](ansible/group_vars/all.yml)
 2. Re-deploy `afp`
-
-## Jenkins
-Server is controlled with systemd, e.g. can be stopped with: `service jenkins stop`.

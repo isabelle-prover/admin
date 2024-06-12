@@ -1,6 +1,0 @@
-ci_mail_user = "{{ config.mail.user }}"
-ci_mail_password = "{{ config.mail.password }}"
-ci_mail_sender = "{{ config.mail.sender }}"
-ci_mail_smtp_host = "{{ config.mail.host }}"
-ci_mail_smtp_port = {{ config.mail.port }}
-ci_github_dispatch_token = "{{ config.github.dispatch_token }}"

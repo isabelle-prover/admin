@@ -27,18 +27,3 @@
 
 - name: Restart Apache
   service: name=apache2 state=restarted
-
-- name: Copy web assets
-  copy: src=assets dest=/var/www/ci/ owner=root group=root mode=0644 directory_mode=0755
-  tags:
-    - apache-status
-
-- name: Prepare status page
-  file: path=/var/www/ci/status state=directory owner=root group=root mode=0755
-  tags:
-    - apache-status
-
-- name: Copy status page
-  copy: src=status.html dest=/var/www/ci/status/index.html owner=root group=root mode=0644
-  tags:
-    - apache-status

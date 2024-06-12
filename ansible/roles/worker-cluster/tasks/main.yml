@@ -1,5 +1,0 @@
----
-
-- include: install.yml
-- include: isabelle.yml
-- include: postgres.yml

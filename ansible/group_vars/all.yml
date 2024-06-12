@@ -2,9 +2,6 @@
 ansible_python_interpreter: python3
 
 config:
-  worker:
-    jenkins_home: "/media/data/jenkins"
-
   mail:
     host: postout.lrz.de
     port: 465
@@ -47,26 +44,3 @@ config:
       - ci-ssl.conf
       - isa-afp.conf
       - isa-afp-ssl.conf
-
-  jenkins:
-    scripts:
-      - users.groovy
-      - security.groovy
-      - credentials.groovy
-      - executors.groovy
-      - mail.groovy
-      - hg.groovy
-
-    jobs:
-      - isabelle-all
-      - isabelle-nightly-benchmark
-      - isabelle-nightly-slow
-      - testboard
-      - afp_testboard
-      - isabelle-notify
-      - isabelle-distributed
-
-    views:
-      - default
-      - nightly
-      - testboard
