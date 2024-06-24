@@ -1,2 +1,1 @@
-ansible==7.0.0
-PyMySQL
+ansible==10.1.0

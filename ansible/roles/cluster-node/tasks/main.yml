@@ -1,4 +1,4 @@
 ---
 
-- include: install.yml
-- include: isabelle.yml
+- import_tasks: install.yml
+- import_tasks: isabelle.yml

@@ -1,7 +1,7 @@
 ---
 
-- include: install.yml
-- include: firewall.yml
-- include: apache.yml
-- include: lxc.yml
-- include: app.yml
+- import_tasks: install.yml
+- import_tasks: firewall.yml
+- import_tasks: apache.yml
+- import_tasks: lxc.yml
+- import_tasks: app.yml

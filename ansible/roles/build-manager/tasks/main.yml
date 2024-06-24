@@ -1,7 +1,7 @@
 ---
 
-- include: install.yml
-- include: isabelle.yml
-- include: postgres.yml
-- include: app.yml
-- include: caddy.yml
+- import_tasks: install.yml
+- import_tasks: isabelle.yml
+- import_tasks: postgres.yml
+- import_tasks: app.yml
+- import_tasks: caddy.yml
