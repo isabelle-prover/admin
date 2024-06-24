@@ -1,18 +1,16 @@
 ---
 
 - name: Clone Isabelle
-  become: true
-  become_user: build
-  become_method: su
-  become_exe: sudo su -
   hg: dest={{ config.build.home }}/isabelle repo=https://isabelle.in.tum.de/repos/isabelle force=yes purge=yes
 
+- name: Fix Isabelle permissions
+  file: dest={{ config.build.home }}/isabelle owner=build group=isabelle recurse=true
+
 - name: Clone AFP
-  become: true
-  become_user: build
-  become_method: su
-  become_exe: sudo su -
   hg: dest={{ config.build.home }}/afp repo=https://foss.heptapod.net/isa-afp/afp-devel force=yes purge=yes
+
+- name: Fix AFP permissions
+  file: dest={{ config.build.home }}/afp owner=build group=isabelle recurse=true
 
 - name: Create Isabelle user home directory
   file: path={{ config.build.home }}/.isabelle/etc state=directory owner=build group=isabelle mode=0775
