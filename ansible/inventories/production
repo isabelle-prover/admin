@@ -1,5 +1,5 @@
 [leader]
-vmnipkow13.in.tum.de
+vmnipkow13.cit.tum.de
 
 [build_manager]
 build.proof.cit.tum.de
@@ -19,7 +19,7 @@ worker_cluster
 cluster_node
 
 [afp]
-atnipkow8.in.tum.de
+afp-submit.proof.cit.tum.de
 
 [production:children]
 leader

@@ -1,78 +1,140 @@
-[host.of1-proof]
+[host.se1_classic]
+hostname = "se1.proof.cit.tum.de"
+user = "cluster"
+jobs = 2
+threads = 8
+
+[host.se2_classic]
+hostname = "se2.proof.cit.tum.de"
+user = "cluster"
+jobs = 3
+threads = 8
+
+[host.se3_classic]
+hostname = "se3.proof.cit.tum.de"
+user = "cluster"
+jobs = 3
+threads = 8
+
+[host.se4_classic]
+hostname = "se4.proof.cit.tum.de"
+user = "cluster"
+jobs = 3
+threads = 8
+
+[host.of1-proof_classic]
 hostname = "of1.proof.cit.tum.de"
 user = "cluster"
-jobs = 3
+jobs = 2
 threads = 8
 
-[host.of2-proof]
+
+[host.of2-proof_classic]
 hostname = "of2.proof.cit.tum.de"
 user = "cluster"
-jobs = 3
+jobs = 2
 threads = 8
 
-[host.of3-proof]
+[host.of3-proof_classic]
+hostname = "of3.proof.cit.tum.de"
+user = "cluster"
+jobs = 2
+threads = 8
+
+[host.of4-proof_classic]
+hostname = "of4.proof.cit.tum.de"
+user = "cluster"
+jobs = 2
+threads = 8
+
+[host.se1_schedule]
+hostname = "se1.proof.cit.tum.de"
+user = "cluster"
+jobs = 7
+threads = 12
+
+[host.se2_schedule]
+hostname = "se2.proof.cit.tum.de"
+user = "cluster"
+jobs = 8
+threads = 16
+
+[host.se3_schedule]
+hostname = "se3.proof.cit.tum.de"
+user = "cluster"
+jobs = 8
+threads = 16
+
+[host.se4_schedule]
+hostname = "se4.proof.cit.tum.de"
+user = "cluster"
+jobs = 8
+threads = 16
+
+[host.of1-proof_schedule]
+hostname = "of1.proof.cit.tum.de"
+user = "cluster"
+jobs = 4
+threads = 16
+
+[host.of2-proof_schedule]
+hostname = "of2.proof.cit.tum.de"
+user = "cluster"
+jobs = 4
+threads = 16
+
+[host.of3-proof_schedule]
 hostname = "of3.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
-threads = 8
+threads = 16
 
-[host.of4-proof]
+[host.of4-proof_schedule]
 hostname = "of4.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
-threads = 8
-
-[host.se1]
-hostname = "se1.proof.cit.tum.de"
-user = "cluster"
-jobs = 4
-threads = 8
-
-[host.se2]
-hostname = "se2.proof.cit.tum.de"
-user = "cluster"
-jobs = 4
-threads = 8
-
-[host.se3]
-hostname = "se3.proof.cit.tum.de"
-user = "cluster"
-jobs = 4
-threads = 8
-
-[host.se4]
-hostname = "se4.proof.cit.tum.de"
-user = "cluster"
-jobs = 4
-threads = 8
-
-[host.benchmark]
-hostname = "of4.proof.cit.tum.de"
-
-[host.nightly]
-hostname = "of4.proof.cit.tum.de"
+threads = 16
 
 [cluster.ls21-full]
 hosts = [
-  "of1-proof",
-  "of2-proof",
-  "of3-proof",
-  "of4-proof",
-  "se1",
-  "se2",
-  "se3",
-  "se4",
-  "benchmark",
-  "nightly",
+  "of1-proof_classic",
+  "of2-proof_classic",
+  "of3-proof_classic",
+  "of4-proof_classic",
+  "se1_classic",
+  "se2_classic",
+  "se3_classic",
+  "se4_classic",
+  "of1-proof_schedule",
+  "of2-proof_schedule",
+  "of3-proof_schedule",
+  "of4-proof_schedule",
+  "se1_schedule",
+  "se2_schedule",
+  "se3_schedule",
+  "se4_schedule",
 ]
 
 [cluster.default]
 hosts = [
-  "of1-proof",
-  "of2-proof",
-  "of3-proof",
-  "se1",
-  "se2",
-  "se3",
-  "se4",
+  "of1-proof_classic",
+  "of2-proof_classic",
+  "of3-proof_classic",
+  "of4-proof_classic",
+  "se1_classic",
+  "se2_classic",
+  "se3_classic",
+  "se4_classic",
+]
+
+[cluster.schedule]
+hosts = [
+  "of1-proof_schedule",
+  "of2-proof_schedule",
+  "of3-proof_schedule",
+  "of4-proof_schedule",
+  "se1_schedule",
+  "se2_schedule",
+  "se3_schedule",
+  "se4_schedule",
 ]

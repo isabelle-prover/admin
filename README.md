@@ -53,9 +53,9 @@ Hostnames are reachable from within the institute by hostname, from the outside 
 | Leader               | RBG          | dual-core VM running Ubuntu 18.04 LTS, virtualized by vSphere   | LDAP        | `vmnipkow13`<br> `ci.isabelle.systems`<br> `isa-afp.org`<br> `www.isa-afp.org`<br> `devel.isa-afp.org` |
 | Linux/MTA worker     | Chair admins | various high-end machines running Ubuntu 20.04, not virtualized | LDAP        | `lxcisa1`, `hpc.isabelle`                                                                              |
 | macOS/MTA            | Chair admins | high-end iMac servers (mac minis + mac studio), not virtualized | LDAP        | `mini{1-3}`, `studio1`                                                                                 |
-| AFP machine          | Printer room | Workstation running Ubuntu 22.04 LTS, not virtualized           | Local admin | `atnipkow8`                                                                                            |
+| AFP machine          | Printer room | Workstation running Ubuntu 22.04 LTS, not virtualized           | Local admin | `atnipkow8`, `afp-submit.proof`                                                                        |
 | Cluster workstations | Printer room | High-end workstation running Ubuntu 22.04 LTS, not virtualized  | LDAP        | `of{1-4}`                                                                                              |
-| Cluster servers      | Chair admins | High-end servers running Ubuntu 22.04 LTS, not virtualized      | LDAP        | `se{1-4}`                                                                                              |
+| Cluster servers      | Chair admins | High-end servers running Ubuntu 22.04 LTS, not virtualized      | LDAP        | `se{1-4}`, `build.proof`                                                                               |
 
 
 #### External Domains
