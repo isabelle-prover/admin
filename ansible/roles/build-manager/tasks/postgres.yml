@@ -6,6 +6,9 @@
 - name: Start postgres
   service: name=postgresql enabled=true state=restarted
 
+- name: Add postgres user to ansible group
+  user: name=postgres groups=ansible append=yes
+
 - name: Create postgresql dbs
   with_items:
     - isabelle_build

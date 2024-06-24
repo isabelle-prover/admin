@@ -1,10 +1,24 @@
 ---
 
+- name: Ensure ansible group exists
+  group: name=ansible state=present
+
+- name: Download caddy key
+  get_url:
+    url: https://dl.cloudsmith.io/public/caddy/stable/gpg.key
+    dest: /etc/apt/trusted.gpg.d/caddy.asc
+
+- name: Add repo
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/caddy.asc] https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main"
+    state: present
+
 - name: Install packages
   apt:
     state: present
     update_cache: yes
     name:
+      - openjdk-17-jre
       - curl
       - m4
       - libgomp1

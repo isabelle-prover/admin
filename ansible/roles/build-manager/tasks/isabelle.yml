@@ -21,7 +21,14 @@
 - name: Add Isabelle components
   template: src=components dest={{ config.build.home }}/.isabelle/etc/components owner=build group=isabelle mode=0740
 
+- name: Add build user to ansible group
+  user: name=build groups=ansible append=yes
+
 - name: Download Isabelle components
+  become: true
+  become_user: build
+  become_method: su
+  become_exe: sudo su -
   shell: "{{ config.build.home }}/isabelle/Admin/init"
 
 - name: Add registry

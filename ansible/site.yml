@@ -2,8 +2,6 @@
 
 - name: Configure AFP submission checker
   hosts: afp
-  become: yes
-  become_method: sudo
 
   vars_files:
     - vars/secrets.yml
@@ -13,8 +11,6 @@
 
 - name: Configure and deploy Apache
   hosts: leader
-  become: yes
-  become_method: sudo
 
   vars_files:
     - vars/secrets.yml
@@ -24,11 +20,6 @@
 
 - name: Configure and deploy build manager
   hosts: build_manager
-  become: yes
-  become_method: sudo
-
-  vars:
-    ansible_remote_tmp: /tmp/ansible
 
   vars_files:
     - vars/secrets.yml
@@ -38,11 +29,6 @@
 
 - name: Configure cluster nodes
   hosts: cluster_node
-  become: yes
-  become_method: sudo
-
-  vars:
-    ansible_remote_tmp: /tmp/ansible
 
   vars_files:
     - vars/secrets.yml

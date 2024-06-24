@@ -5,6 +5,7 @@
     state: present
     update_cache: yes
     name:
+      - openjdk-17-jre
       - curl
       - m4
       - libgomp1

@@ -6,6 +6,9 @@
 - name: Copy renew script
   copy: src=caddy.sh dest=/usr/local/cert.d/caddy.sh owner=root group=root mode=0755
 
+- name: Create cert dir
+  file: path=/var/lib/caddy/.local/share/caddy/tls state=directory owner=caddy group=caddy mode=0755
+
 - name: Install
   shell: rbg-cert --reinstall
 
