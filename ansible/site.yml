@@ -27,6 +27,9 @@
   become: yes
   become_method: sudo
 
+  vars:
+    ansible_remote_tmp: /tmp/ansible
+
   vars_files:
     - vars/secrets.yml
 

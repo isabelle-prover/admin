@@ -15,7 +15,7 @@ of3.proof.cit.tum.de
 of4.proof.cit.tum.de
 
 [cluster:children]
-worker_cluster
+build_manager
 cluster_node
 
 [afp]
