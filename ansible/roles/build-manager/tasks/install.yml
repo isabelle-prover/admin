@@ -53,5 +53,8 @@
 - name: Copy SSH config
   copy: src=ssh_config dest={{ config.build.home }}/.ssh/config owner=build group=root mode=0644
 
+- name: Copy public SSH key for worker access
+  copy src=id_cluster.pub dest={{ config.build.home }}/.ssh/id_cluster.pub owner=build group=root mode=0644
+
 - name: Copy private SSH key for worker access
   copy: content="{{ config.cluster.ssh_key }}" dest={{ config.build.home }}/.ssh/id_cluster owner=build group=root mode=0600
