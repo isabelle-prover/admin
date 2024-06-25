@@ -1,3 +1,9 @@
-IdentityFile ~/.ssh/id_cluster
-Host *
+IdentityFile ~/.ssh/id_build
+
+Host se*.proof.cit.tum.de
+    IdentityFile ~/.ssh/id_cluster
+    StrictHostKeyChecking no
+
+Host of*.proof.cit.tum.de
+    IdentityFile ~/.ssh/id_cluster
     StrictHostKeyChecking no

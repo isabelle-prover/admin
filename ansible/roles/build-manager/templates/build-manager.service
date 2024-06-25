@@ -1,5 +1,5 @@
 [Unit]
-Description=Isabelle Build System
+Description=Isabelle Build Manager
 
 [Service]
 ExecStart={{ config.build.home }}/isabelle/bin/isabelle build_manager -A: -p 8080 -H cluster.ls21-full
