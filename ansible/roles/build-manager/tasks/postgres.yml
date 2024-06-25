@@ -47,16 +47,17 @@
     roles: PUBLIC
     objs: ALL_IN_SCHEMA
 
-- name: Allow postgres password connections
+- name: Allow peer connection and clear out old
   become: true
   become_user: postgres
   become_method: su
   become_exe: sudo su -
   postgresql_pg_hba:
     dest: /etc/postgresql/14/main/pg_hba.conf
-    address: all
-    contype: "host"
-    method: "md5"
+    contype: local
+    source: all
+    method: peer
+    overwrite: true
 
 - name: Allow local postgres connections without password
   with_items:
@@ -72,6 +73,17 @@
     contype: "host"
     source: "{{ item }}"
     method: "trust"
+
+- name: Allow postgres password connections
+  become: true
+  become_user: postgres
+  become_method: su
+  become_exe: sudo su -
+  postgresql_pg_hba:
+    dest: /etc/postgresql/14/main/pg_hba.conf
+    address: all
+    contype: "host"
+    method: "md5"
 
 - name: Increase max connections
   become: true

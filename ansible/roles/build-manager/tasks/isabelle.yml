@@ -4,22 +4,22 @@
   hg: dest={{ config.build.home }}/isabelle repo=https://isabelle.in.tum.de/repos/isabelle force=yes purge=yes
 
 - name: Fix Isabelle permissions
-  file: dest={{ config.build.home }}/isabelle owner=build group=isabelle recurse=true
+  file: dest={{ config.build.home }}/isabelle owner=build group=root recurse=true
 
 - name: Clone AFP
   hg: dest={{ config.build.home }}/afp repo=https://foss.heptapod.net/isa-afp/afp-devel force=yes purge=yes
 
 - name: Fix AFP permissions
-  file: dest={{ config.build.home }}/afp owner=build group=isabelle recurse=true
+  file: dest={{ config.build.home }}/afp owner=build group=root recurse=true
 
 - name: Create Isabelle user home directory
-  file: path={{ config.build.home }}/.isabelle/etc state=directory owner=build group=isabelle mode=0775
+  file: path={{ config.build.home }}/.isabelle/etc state=directory owner=build group=root
 
 - name: Copy Isabelle preferences
-  template: src=preferences dest={{ config.build.home }}/.isabelle/etc/preferences owner=build group=isabelle mode=0700
+  template: src=preferences dest={{ config.build.home }}/.isabelle/etc/preferences owner=build group=root mode=0700
 
 - name: Add Isabelle components
-  template: src=components dest={{ config.build.home }}/.isabelle/etc/components owner=build group=isabelle mode=0740
+  template: src=components dest={{ config.build.home }}/.isabelle/etc/components owner=build group=root
 
 - name: Add build user to ansible group
   user: name=build groups=ansible append=yes
@@ -32,10 +32,10 @@
   shell: "{{ config.build.home }}/isabelle/Admin/init"
 
 - name: Add registry
-  copy: src=registry.toml dest={{ config.build.home }}/.isabelle/etc/registry.toml owner=build group=isabelle mode=0740
+  copy: src=registry.toml dest={{ config.build.home }}/.isabelle/etc/registry.toml owner=build group=root mode=0700
 
-- name: Create Isabelle build manager user home directory
-  file: path={{ config.build.home }}/.isabelle/build_cluster/etc state=directory owner=build group=isabelle mode=0775
+- name: Create Isabelle build manager cluster etc directory
+  file: path=/home/build/.isabelle/build_cluster/etc state=directory owner=build group=root
 
-- name: Copy Isabelle build manager preferences
-  template: src=preferences_cluster dest={{ config.build.home }}/.isabelle/build_cluster/etc/preferences owner=build group=isabelle mode=0700
+- name: Copy Isabelle build manager cluster preferences
+  template: src=preferences_cluster dest=/home/build/.isabelle/build_cluster/etc/preferences owner=build group=root mode=0700

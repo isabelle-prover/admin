@@ -1,10 +1,7 @@
 ---
 
-- name: Make cluster user home dir accessible
-  file: path=/home/cluster state=directory owner=cluster group=isabelle mode=0750
-
-- name: Prepare Isabelle home on cluster (usable for group Isabelle)
-  file: path=/home/cluster/.isabelle/build_cluster/etc state=directory owner=cluster group=isabelle mode=0770
+- name: Prepare Isabelle home
+  file: path=/home/cluster/.isabelle/build_cluster/etc state=directory owner=cluster group=cluster
 
 - name: Copy Isabelle cluster preferences
-  template: src=preferences dest=/home/cluster/.isabelle/build_cluster/etc/preferences owner=cluster group=isabelle mode=0740 follow=yes
+  template: src=preferences dest=/home/cluster/.isabelle/build_cluster/etc/preferences owner=cluster group=cluster mode=0700

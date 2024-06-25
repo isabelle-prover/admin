@@ -47,9 +47,6 @@
 - name: Prepare .ssh directory
   file: path={{ config.build.home }}/.ssh state=directory owner=build group=root mode=0700
 
-- name: Copy authorized_keys file
-  copy: src=authorized_keys dest={{ config.build.home }}/.ssh/authorized_keys owner=build group=root mode=0600
-
 - name: Copy SSH config
   copy: src=ssh_config dest={{ config.build.home }}/.ssh/config owner=build group=root mode=0644
 

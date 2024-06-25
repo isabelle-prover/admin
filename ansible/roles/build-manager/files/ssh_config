@@ -1,5 +1,9 @@
 IdentityFile ~/.ssh/id_build
 
+Host localhost
+    IdentityFile ~/.ssh/id_cluster
+    StrictHostKeyChecking no
+
 Host se*.proof.cit.tum.de
     IdentityFile ~/.ssh/id_cluster
     StrictHostKeyChecking no
