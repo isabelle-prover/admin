@@ -3,7 +3,6 @@
 config:
   domains:
     ci: ci.isabelle.systems
-    build: build.proof.cit.tum.de
     afp: www.isa-afp.org
     afp_devel: devel.isa-afp.org
     afp_short: isa-afp.org
