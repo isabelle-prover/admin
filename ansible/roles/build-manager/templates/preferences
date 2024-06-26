@@ -7,9 +7,3 @@ build_manager_database_host = "{{ groups['build_manager'][0] }}"
 build_manager_database_port = "5432"
 build_manager_database_user = "isabelle"
 build_manager_database_password = "{{ config.cluster.db_password }}"
-
-ci_mail_user = "{{ config.mail.user }}"
-ci_mail_password = "{{ config.mail.password }}"
-ci_mail_sender = "{{ config.mail.sender }}"
-ci_mail_smtp_host = "{{ config.mail.host }}"
-ci_mail_smtp_port = {{ config.mail.port }}
