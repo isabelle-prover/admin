@@ -6,6 +6,7 @@
     update_cache: yes
     name:
       - openjdk-17-jre
+      - mercurial
       - curl
       - m4
       - libgomp1
