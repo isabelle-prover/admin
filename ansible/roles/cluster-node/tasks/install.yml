@@ -35,10 +35,10 @@
   copy: src=authorized_keys dest=/home/cluster/.ssh/authorized_keys owner=cluster group=cluster mode=0600
 
 - name: Create build user
-  user: name=build shell=/bin/bash home={{ config.build.home }} group=cluster system=yes
+  user: name=build shell=/bin/bash home={{ config.build.home }} group=build system=yes
 
 - name: Prepare build .ssh directory
-  file: path={{ config.build.home }}/.ssh state=directory owner=build group=cluster mode=0700
+  file: path={{ config.build.home }}/.ssh state=directory owner=build group=build mode=0700
 
 - name: Copy build authorized_keys file
-  copy: src=authorized_keys dest={{ config.build.home }}/.ssh/authorized_keys owner=build group=cluster mode=0600
+  copy: src=authorized_keys dest={{ config.build.home }}/.ssh/authorized_keys owner=build group=build mode=0600
