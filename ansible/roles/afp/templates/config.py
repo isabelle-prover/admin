@@ -3,8 +3,8 @@
 UPLOAD_DIR = "/var/afpbuild/up"
 DOWNLOAD_DIR = "/var/afpbuild/down"
 
-LINKBASE = "https://{{ config.domains.afp }}/webapp/"
-AFPLINKBASE = "https://{{ config.domains.afp }}/"
+LINKBASE = "https://{{ config.ssl_domains.afp }}/webapp/"
+AFPLINKBASE = "https://{{ config.ssl_domains.afp }}/"
 
 FROM = "AFP Submission System <afp@isabelle.systems>"
 SENDER = "{{ config.mail.sender }}"

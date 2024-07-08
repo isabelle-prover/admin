@@ -3,6 +3,15 @@ ansible_python_interpreter: python3
 ansible_remote_tmp: /tmp
 
 config:
+  ssl_domains:
+    ci: ci.isabelle.systems
+    afp: www.isa-afp.org
+    afp_devel: devel.isa-afp.org
+    afp_short: isa-afp.org
+
+  domains:
+    build: build.proof.cit.tum.de
+
   mail:
     host: postout.lrz.de
     port: 465

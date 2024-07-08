@@ -1,8 +1,0 @@
----
-
-config:
-  domains:
-    ci: ci.isabelle.systems
-    afp: www.isa-afp.org
-    afp_devel: devel.isa-afp.org
-    afp_short: isa-afp.org
