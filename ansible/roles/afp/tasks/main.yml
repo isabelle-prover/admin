@@ -2,6 +2,6 @@
 
 - import_tasks: install.yml
 - import_tasks: firewall.yml
-- import_tasks: apache.yml
+- import_tasks: caddy.yml
 - import_tasks: lxc.yml
 - import_tasks: app.yml

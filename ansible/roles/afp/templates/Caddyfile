@@ -1,0 +1,4 @@
+:443
+
+reverse_proxy :8080
+tls /var/lib/caddy/.local/share/caddy/tls/fullchain.pem /var/lib/caddy/.local/share/caddy/tls/key.pem

@@ -10,6 +10,7 @@ config:
     afp_short: isa-afp.org
 
   domains:
+    afp_submit: afp-submit.proof.cit.tum.de
     build: build.proof.cit.tum.de
 
   mail:

@@ -1,19 +1,7 @@
 ---
 
-- name: Set default ACCEPT policy
-  shell: iptables -P INPUT ACCEPT
-
-- name: Flush firewall
-  shell: iptables -F
-
-- name: Prepare firewall
-  file: path=/etc/iptables state=directory owner=root group=root mode=0755
-
-- name: Copy firewall rules
-  copy: src=rules.v4 dest=/etc/iptables/rules.v4 owner=root group=root mode=0644
-
-- name: Load firewall rules
-  shell: iptables-restore < /etc/iptables/rules.v4
+- name: Allow port 443
+  shell: firewall-cmd --zone=public --add-port=443/tcp --permanent
 
 - name: Make lxcbr0 trusted
   shell: firewall-cmd --zone=trusted --change-interface=lxcbr0 --permanent
