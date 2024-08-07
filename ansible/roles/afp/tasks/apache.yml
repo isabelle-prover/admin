@@ -19,7 +19,7 @@
   with_items: "{{ config.apache.webroots }}"
 
 - name: Obtain AFP submission host
-  set_fact: afp_submission_host={{ groups['afp'][0] }}
+  set_fact: afp_submission_host={{ groups['afp_submit'][0] }}
 
 - name: Configure Apache
   template: src={{ item }} dest=/etc/apache2/sites-enabled/{{ item }} owner=root group=root mode=0644

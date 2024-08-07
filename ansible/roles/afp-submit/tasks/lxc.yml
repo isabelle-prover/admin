@@ -98,7 +98,7 @@
     HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
 
 - name: Build Isabelle sessions
-  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle build -o threads=2 -bv {{ item }}"
+  command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle build -bv {{ item }}"
   with_items:
     - Pure
     - HOL

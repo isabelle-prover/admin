@@ -1,6 +1,15 @@
 ---
 
 - name: Configure AFP submission checker
+  hosts: afp_submit
+
+  vars_files:
+    - vars/secrets.yml
+
+  roles:
+    - { role: afp-submit, tags: [ 'afp-submit' ] }
+
+- name: Configure and deploy Apache
   hosts: afp
 
   vars_files:
@@ -8,15 +17,6 @@
 
   roles:
     - { role: afp, tags: [ 'afp' ] }
-
-- name: Configure and deploy Apache
-  hosts: leader
-
-  vars_files:
-    - vars/secrets.yml
-
-  roles:
-    - { role: apache, tags: [ 'apache' ] }
 
 - name: Configure and deploy build manager
   hosts: build_manager

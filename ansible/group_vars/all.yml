@@ -4,7 +4,6 @@ ansible_remote_tmp: /tmp
 
 config:
   ssl_domains:
-    ci: ci.isabelle.systems
     afp: www.isa-afp.org
     afp_devel: devel.isa-afp.org
     afp_short: isa-afp.org
@@ -12,16 +11,18 @@ config:
   domains:
     afp_submit: afp-submit.proof.cit.tum.de
     build: build.proof.cit.tum.de
+    search: search.isabelle.in.tum.de
 
   mail:
-    host: postout.lrz.de
+    host: mail.cit.tum.de
     port: 465
-    user: ge73ruk
-    sender: ge73ruk@mytum.de
 
   build:
     home: /home/build
     data: /srv/build
+    mail:
+      sender: ci@proof.cit.tum.de
+      admin: isabelle-ci@mailman46.in.tum.de
 
   github:
     user: isabelle-bot
@@ -38,6 +39,11 @@ config:
     sub_id_count: 100000
 
     site_home: "/srv/afp"
+
+    mail:
+      sender: afp@proof.cit.tum.de
+      admin: afp@proof.cit.tum.de
+      editors: afp-submit@in.tum.de
 
   linter:
     version: Isabelle2024-v1.0.1

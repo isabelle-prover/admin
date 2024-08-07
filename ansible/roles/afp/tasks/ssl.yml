@@ -1,0 +1,7 @@
+---
+
+- name: Stop Apache
+  service: name=apache2 state=stopped
+
+- name: Run Let's Encrypt
+  shell: certbot certonly --non-interactive --expand --keep --agree-tos --cert-name {{ config.apache.cert_name }} --email {{ config.afp.mail.admin }} --standalone --preferred-challenges http-01 -d {{ config.ssl_domains.values() | join(" -d ") }}

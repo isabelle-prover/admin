@@ -48,20 +48,26 @@ The contact for all machines are the Chair admins (MTAs).
 Hostnames are reachable from within the institute by hostname, from the outside via `.in.tum.de`/`.cit.tum.de` domain
 (e.g., `hpc.isabelle.in.tum.de`).
 
-|                      | Hosted by    | Spec                                                            | Accounts    | Hostnames                                                                                              |
-|----------------------|--------------|-----------------------------------------------------------------|-------------|--------------------------------------------------------------------------------------------------------|
-| Leader               | RBG          | dual-core VM running Ubuntu 18.04 LTS, virtualized by vSphere   | LDAP        | `vmnipkow13`<br> `ci.isabelle.systems`<br> `isa-afp.org`<br> `www.isa-afp.org`<br> `devel.isa-afp.org` |
-| Linux/MTA worker     | Chair admins | various high-end machines running Ubuntu 20.04, not virtualized | LDAP        | `lxcisa1`, `hpc.isabelle`                                                                              |
-| macOS/MTA            | Chair admins | high-end iMac servers (mac minis + mac studio), not virtualized | LDAP        | `mini{1-3}`, `studio1`                                                                                 |
-| AFP machine          | Printer room | Workstation running Ubuntu 22.04 LTS, not virtualized           | Local admin | `atnipkow8`, `afp-submit.proof`                                                                        |
-| Cluster workstations | Printer room | High-end workstation running Ubuntu 22.04 LTS, not virtualized  | LDAP        | `of{1-4}`                                                                                              |
-| Cluster servers      | Chair admins | High-end servers running Ubuntu 22.04 LTS, not virtualized      | LDAP        | `se{1-4}`, `build.proof`                                                                               |
+|                        | Hosted by    | Spec                                                            | Accounts    | Hostnames                                                                    |
+|------------------------|--------------|-----------------------------------------------------------------|-------------|------------------------------------------------------------------------------|
+| AFP                    | RBG          | dual-core VM running Ubuntu 18.04 LTS, virtualized by vSphere   | LDAP        | `vmnipkow13`<br> `isa-afp.org`<br> `www.isa-afp.org`<br> `devel.isa-afp.org` |
+| Linux/MTA worker       | Chair admins | various high-end machines running Ubuntu 20.04, not virtualized | LDAP        | `lxcisa1`, `hpc.isabelle`                                                    |
+| macOS/MTA              | Chair admins | high-end iMac servers (mac minis + mac studio), not virtualized | LDAP        | `mini{1-3}`, `studio1`                                                       |
+| AFP-Submission machine | Printer room | Workstation running Ubuntu 22.04 LTS, not virtualized           | Local admin | `atnipkow8`, `afp-submit.proof`                                              |
+| Cluster workstations   | Printer room | High-end workstation running Ubuntu 22.04 LTS, not virtualized  | LDAP        | `of{1-4}`                                                                    |
+| Cluster servers        | Chair admins | High-end servers running Ubuntu 22.04 LTS, not virtualized      | LDAP        | `se{1-4}`, `build.proof`                                                     |
 
+#### Mailing Lists
+Note: tum lists use `@mailman46.in.tum.de` in their FROM.
+
+|                         | Used for                 | Run by |
+|-------------------------|--------------------------|--------|
+| `afp-submit@in.tum.de`  | AFP editor discussion    | MTAs   |
+| `isabelle-ci@in.tum.de` | build manager to post on | MTAs   |
 
 #### External Domains
 |                    | Hosted by      | Administration |
 |--------------------|----------------|----------------|
-| `isabelle.systems` | 1&1            | Lars Hupel     |
 | `isa-afp.org`      | United Domains | Gerwin Klein   |
 
 #### SSL certificates
@@ -84,28 +90,7 @@ They are specified by a host name or an IP address.
 Hosts can be grouped together; groups may form a hierarchy.
 In an inventory file, hosts or groups of hosts may have additional variables.
 Inventory files use a simple, INI-like syntax.
-
-Example:
-
-```
-[leader-vm]
-ci-staging.isabelle.systems
-
-[worker-vm]
-10.155.208.95 worker_name=worker0-testing
-
-[afp-vm]
-10.155.208.96
-
-[testing:children]
-leader-vm
-worker-vm
-afp-vm
-```
-
-This inventory specifies three groups of hosts: ``leader-vm``, ``worker-vm``, and ``afp-vm``.
-It also demonstrates how to specify a variable assignment for a host.
-Additionally, it specifies the ``testing`` group which encompasses all hosts in this file.
+See [docs](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html) for mor details.
 
 Ansible connects to hosts via SSH from your local machine.
 Hence, if you are running Ansible, all hosts must be reachable from your local machine and you must have proper credentials (e.g., SSH private keys).

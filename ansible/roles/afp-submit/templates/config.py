@@ -6,10 +6,10 @@ DOWNLOAD_DIR = "/var/afpbuild/down"
 LINKBASE = "https://{{ config.ssl_domains.afp }}/webapp/"
 AFPLINKBASE = "https://{{ config.ssl_domains.afp }}/"
 
-FROM = "AFP Submission System <afp@isabelle.systems>"
-SENDER = "{{ config.mail.sender }}"
-ADMINS = ["afp@isabelle.systems"]
-EDITORS = ["afp-submit@in.tum.de"]
+FROM = "AFP Submission System <{{ config.afp.mail.admin }}>"
+SENDER = "{{ config.afp.mail.sender }}"
+ADMINS = ["{{ config.afp.mail.admin }}"]
+EDITORS = ["{{ config.afp.mail.editors }}"]
 TEMPLATES = "/opt/afpbuild/src/templates"
 
 POLLTIME = 0.3
@@ -17,8 +17,8 @@ POLLTIME = 0.3
 MAILSSL = True
 MAILSERVER = "{{ config.mail.host }}"
 MAILSERVERPORT = {{ config.mail.port }}
-MAILUSER = "{{ config.mail.user }}"
-MAILPASS = "{{ config.mail.password }}"
+MAILUSER = ""
+MAILPASS = ""
 
 BASE_CONTAINER = "base"
 UNPRIV_USER = "ubuntu"

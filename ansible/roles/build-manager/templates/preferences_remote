@@ -1,6 +1,4 @@
-ci_mail_user = "{{ config.mail.user }}"
-ci_mail_password = "{{ config.mail.password }}"
-ci_mail_sender = "{{ config.mail.sender }}"
+ci_mail_sender = "{{ config.build.mail.sender }}"
 ci_mail_smtp_host = "{{ config.mail.host }}"
 ci_mail_smtp_port = {{ config.mail.port }}
-ci_mail_to = "isabelle-ci@mailman46.in.tum.de"
+ci_mail_to = "{{ config.build.mail.admin }}"
