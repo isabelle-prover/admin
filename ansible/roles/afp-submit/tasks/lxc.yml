@@ -55,7 +55,7 @@
     owner: conrad
     group: conrad
 
-- name: Add APF symlink
+- name: Add AFP symlink
   file:
     src: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp"
     dest: "/opt/afp"
@@ -89,13 +89,13 @@
     name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle{{ config.isabelle.version }}/etc/components"
     create: yes
     block: |
-      /opt/afp
+      {{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/afp
       /opt/linter
 
 - name: Download additional AFP components
   command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle components -a"
   environment:
-    HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
+    HOME: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu"
 
 - name: Build Isabelle sessions
   command: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle build -bv {{ item }}"
@@ -106,7 +106,7 @@
     - HOL-Analysis
     - HOL-Probability
   environment:
-    HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
+    HOME: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu"
   tags:
     - afp-sessions
 
@@ -123,9 +123,17 @@
     - Sepref_Prereq
     - Refine_Imperative_HOL
   environment:
-    HOME: /media/data/conrad/.local/share/lxc/base/rootfs/home/ubuntu
+    HOME: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu"
   tags:
     - afp-sessions
+
+- name: Use symlinked AFP to use in container
+  blockinfile:
+    name: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu/.isabelle/Isabelle{{ config.isabelle.version }}/etc/components"
+    create: yes
+    block: |
+      /opt/afp
+      /opt/linter
 
 - name: Set correct file rights of .isabelle in home dir of unprivileged user in container
   file:
