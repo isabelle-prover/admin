@@ -18,6 +18,8 @@
       - texlive-full
       - libzarith-ocaml
       - cpufrequtils
+      - pkg-config
+      - g++
 
 - name: Set performance governor
   lineinfile: name=/etc/default/cpufrequtils line="GOVERNOR=performance" create=true owner=root group=root
