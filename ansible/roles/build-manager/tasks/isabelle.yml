@@ -34,12 +34,6 @@
 - name: Add registry
   copy: src=registry.toml dest={{ config.build.home }}/.isabelle/etc/registry.toml owner=build group=root mode=0700
 
-- name: Create Isabelle build manager etc directory
-  file: path={{ config.build.home }}/.isabelle/build_manager/etc state=directory owner=build group=root
-
-- name: Copy Isabelle build manager preferences
-  template: src=preferences_remote dest={{ config.build.home }}/.isabelle/build_manager/etc/preferences owner=build group=root mode=0700
-
 - name: Create Isabelle build manager cluster etc directory
   file: path={{ config.build.home }}/.isabelle/build_cluster/etc state=directory owner=build group=root
 

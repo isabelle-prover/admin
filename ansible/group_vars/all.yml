@@ -21,9 +21,6 @@ config:
   build:
     home: /home/build
     data: /srv/build
-    mail:
-      sender: ci@proof.cit.tum.de
-      admin: isabelle-ci@mailman46.in.tum.de
 
   github:
     user: isabelle-bot

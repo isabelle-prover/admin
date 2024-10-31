@@ -1,4 +1,0 @@
-ci_mail_sender = "{{ config.build.mail.sender }}"
-ci_mail_smtp_host = "{{ config.mail.host }}"
-ci_mail_smtp_port = {{ config.mail.port }}
-ci_mail_to = "{{ config.build.mail.admin }}"
