@@ -1,5 +1,6 @@
 [Unit]
 Description=Isabelle Build Manager
+Requires=postgresql.service
 
 [Service]
 ExecStart={{ config.build.home }}/isabelle/bin/isabelle build_manager -A: -p 8080 -H cluster.ls21-full
