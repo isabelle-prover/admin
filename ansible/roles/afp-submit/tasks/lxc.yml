@@ -83,6 +83,7 @@
       ISABELLE_TOOL_JAVA_OPTIONS="-Xmx4G -Xss64M"
       ML_OPTIONS="-H 4000 --maxheap 8G"
       ML_HOME="$POLYML_HOME/$ML_PLATFORM"
+      ISABELLE_MLTON=""
 
 - name: Add AFP component
   blockinfile:
