@@ -3,97 +3,112 @@ hostname = "se1.proof.cit.tum.de"
 user = "cluster"
 jobs = 2
 threads = 8
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.se2_classic]
 hostname = "se2.proof.cit.tum.de"
 user = "cluster"
 jobs = 3
 threads = 8
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.se3_classic]
 hostname = "se3.proof.cit.tum.de"
 user = "cluster"
 jobs = 3
 threads = 8
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.se4_classic]
 hostname = "se4.proof.cit.tum.de"
 user = "cluster"
 jobs = 3
 threads = 8
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of1-proof_classic]
 hostname = "of1.proof.cit.tum.de"
 user = "cluster"
 jobs = 2
 threads = 8
-
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of2-proof_classic]
 hostname = "of2.proof.cit.tum.de"
 user = "cluster"
 jobs = 2
 threads = 8
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of3-proof_classic]
 hostname = "of3.proof.cit.tum.de"
 user = "cluster"
 jobs = 2
 threads = 8
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of4-proof_classic]
 hostname = "of4.proof.cit.tum.de"
 user = "cluster"
 jobs = 2
 threads = 8
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.se1_schedule]
 hostname = "se1.proof.cit.tum.de"
 user = "cluster"
 jobs = 7
 threads = 12
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.se2_schedule]
 hostname = "se2.proof.cit.tum.de"
 user = "cluster"
 jobs = 8
 threads = 16
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.se3_schedule]
 hostname = "se3.proof.cit.tum.de"
 user = "cluster"
 jobs = 8
 threads = 16
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.se4_schedule]
 hostname = "se4.proof.cit.tum.de"
 user = "cluster"
 jobs = 8
 threads = 16
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of1-proof_schedule]
 hostname = "of1.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
 threads = 16
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of2-proof_schedule]
 hostname = "of2.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
 threads = 16
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of3-proof_schedule]
 hostname = "of3.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
 threads = 16
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [host.of4-proof_schedule]
 hostname = "of4.proof.cit.tum.de"
 user = "cluster"
 jobs = 4
 threads = 16
+settings = """ISABELLE_TOOL_JAVA_OPTIONS="$ISABELLE_TOOL_JAVA_OPTIONS -Xms2g -Xmx8g" """
 
 [cluster.ls21-full]
 hosts = [
