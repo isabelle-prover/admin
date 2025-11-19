@@ -1,6 +1,6 @@
 ---
 
-- name: Debug
+- name: Update
   become: yes
   become_method: sudo
   hosts: all
