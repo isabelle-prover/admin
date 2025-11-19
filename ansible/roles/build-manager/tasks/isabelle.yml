@@ -1,7 +1,7 @@
 ---
 
 - name: Clone Isabelle
-  hg: dest={{ config.build.home }}/isabelle repo=https://isabelle.sketis.net/repos/isabelle force=yes purge=yes
+  hg: dest={{ config.build.home }}/isabelle repo=/p/home/isabelle-repository/repos/isabelle force=yes purge=yes
 
 - name: Fix Isabelle permissions
   file: dest={{ config.build.home }}/isabelle owner=build group=root recurse=true
