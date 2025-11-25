@@ -44,7 +44,7 @@ config:
       editors: afp-submit@in.tum.de
 
   linter:
-    version: Isabelle2025-v1.0.0
+    version: Isabelle2025-v1.1.0
 
   apache:
     cert_name: isabelle-tls-certs
