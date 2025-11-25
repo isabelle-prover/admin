@@ -3,7 +3,10 @@
 - name: Update
   become: yes
   become_method: sudo
-  hosts: all
+  hosts: 
+    - cluster_node
+    - afp_submit
+    - afp
 
   roles:
     - update
