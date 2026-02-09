@@ -29,7 +29,7 @@ config:
     version: 2025-2
 
   afp:
-    version: 2025-1
+    version: 2025-2
     container_home: "/media/data/conrad"
     git: "https://github.com/isabelle-prover/afp-submission.git"
     sub_id_min: 10000001
