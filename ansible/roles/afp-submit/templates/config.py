@@ -32,7 +32,7 @@ ISABELLE_SETTINGS = ["-o", "document=pdf",
                      "-v"]
 ISABELLE_BROWSER_INFO = CONTAINER_DIR + "/.isabelle/Isabelle{{ config.isabelle.version }}/browser_info/"
 
-CONTAINERS_PATH = "/media/data/conrad/.local/share/lxc/"
+CONTAINERS_PATH = "{{ config.afp.container_home }}/.local/share/lxc/"
 CONTAINER_ROOT = "overlay/delta"
 
 BROWSER_INFO_DIR = "/var/www/afp/browser_info"
