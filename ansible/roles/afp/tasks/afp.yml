@@ -1,0 +1,16 @@
+---
+
+- name: Create AFP web user
+  user: name=afpweb uid=904 shell=/bin/bash home=/home/afpweb
+
+- name: Set permissions for AFP site
+  file: path={{ config.afp.site_home }} state=directory owner=afpweb group=root mode=0755
+
+- name: Create afp-devel dir
+  file: path=/var/www/afp-devel state=directory owner=afpweb group=root mode=0755
+
+- name: Prepare .ssh directory
+  file: path=/home/afpweb/.ssh state=directory owner=afpweb group=root mode=0700
+
+- name: Copy authorized_keys file
+  copy: src=authorized_keys dest=/home/afpweb/.ssh/authorized_keys owner=afpweb group=root mode=0644

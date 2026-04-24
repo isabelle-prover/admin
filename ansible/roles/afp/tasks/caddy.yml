@@ -1,0 +1,7 @@
+---
+
+- name: Copy Caddyfile
+  template: src=Caddyfile dest=/etc/caddy/Caddyfile owner=root group=root mode=0644
+
+- name: Restart Caddy
+  service: name=caddy enabled=true state=restarted

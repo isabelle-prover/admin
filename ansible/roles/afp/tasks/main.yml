@@ -1,0 +1,5 @@
+---
+
+- import_tasks: install.yml
+- import_tasks: caddy.yml
+- import_tasks: afp.yml

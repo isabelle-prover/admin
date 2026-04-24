@@ -1,0 +1,21 @@
+www.afp.proof.cit.tum.de {
+    redir https://afp.proof.cit.tum.de{uri}
+}
+
+afp.proof.cit.tum.de {
+    root /srv/afp
+    file_server
+
+    header {
+      Access-Control-Allow-Origin "https://{{ config.domains.afp_submit }}"
+    }
+}
+
+www.devel.afp.proof.cit.tum.de {
+    redir https://devel.afp.proof.cit.tum.de{uri}
+}
+
+devel.afp.proof.cit.tum.de {
+    root /var/www/afp-devel
+    file_server
+}
