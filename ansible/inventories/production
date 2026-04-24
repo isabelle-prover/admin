@@ -1,4 +1,4 @@
-[afp]
+[afp_old]
 vmnipkow13.in.tum.de
 
 [build_manager]
@@ -22,7 +22,7 @@ cluster_node
 afp-submit.proof.cit.tum.de
 
 [production:children]
-afp
+afp_old
 build_manager
 cluster_node
 afp_submit

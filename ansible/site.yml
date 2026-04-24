@@ -10,13 +10,13 @@
     - { role: afp-submit, tags: [ 'afp-submit' ] }
 
 - name: Configure and deploy Apache
-  hosts: afp
+  hosts: afp-old
 
   vars_files:
     - vars/secrets.yml
 
   roles:
-    - { role: afp, tags: [ 'afp' ] }
+    - { role: afp-old, tags: [ 'afp-old' ] }
 
 - name: Configure and deploy build manager
   hosts: build_manager
