@@ -1,9 +1,6 @@
 [afp]
 afp.proof.cit.tum.de
 
-[afp_old]
-vmnipkow13.in.tum.de
-
 [build_manager]
 build.proof.cit.tum.de
 
@@ -25,7 +22,6 @@ cluster_node
 afp-submit.proof.cit.tum.de
 
 [production:children]
-afp_old
 build_manager
 cluster_node
 afp_submit

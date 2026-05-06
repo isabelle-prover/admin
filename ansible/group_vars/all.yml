@@ -45,17 +45,3 @@ config:
 
   linter:
     version: Isabelle2025-1-v1.0.0
-
-  apache:
-    cert_name: isabelle-tls-certs
-
-    webroots:
-      - /var/www/ci
-      - /srv/afp
-      - /var/www/afp-devel
-
-    configs:
-      - ci.conf
-      - ci-ssl.conf
-      - isa-afp.conf
-      - isa-afp-ssl.conf

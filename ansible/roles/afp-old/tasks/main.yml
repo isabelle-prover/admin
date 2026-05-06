@@ -1,8 +1,0 @@
----
-
-- import_tasks: install.yml
-- import_tasks: firewall.yml
-- import_tasks: security.yml
-- import_tasks: ssl.yml
-- import_tasks: apache.yml
-- import_tasks: afp.yml
