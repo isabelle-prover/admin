@@ -29,8 +29,8 @@ There are of course exceptions to this rule, for example in emergencies (downtim
 
 There are different kinds of servers:
 
-1. The central server is the *leader*, which runs on a low-resource virtual machine.
-   It mainly hosts an Apache web server.
+1. The central server is the *afp*, which runs on a low-resource virtual machine.
+   It mainly hosts a web server.
 
 2. *cluster-node* require a lot of resources.
    There are various kinds of workers with different configuration based on hosting provider and OS platform.
@@ -46,16 +46,16 @@ There are different kinds of servers:
 #### Machines
 The contact for all machines are the Chair admins (MTAs).
 Hostnames are reachable from within the institute by hostname, from the outside via `.in.tum.de`/`.cit.tum.de` domain
-(e.g., `hpc.isabelle.in.tum.de`).
+(e.g., `afp.proof.in.tum.de`).
 
-|                        | Hosted by    | Spec                                                            | Accounts    | Hostnames                                                                    |
-|------------------------|--------------|-----------------------------------------------------------------|-------------|------------------------------------------------------------------------------|
-| AFP                    | RBG          | dual-core VM running Ubuntu 18.04 LTS, virtualized by vSphere   | LDAP        | `vmnipkow13`<br> `isa-afp.org`<br> `www.isa-afp.org`<br> `devel.isa-afp.org` |
-| Linux/MTA worker       | Chair admins | various high-end machines running Ubuntu 20.04, not virtualized | LDAP        | `lxcisa1`, `hpc.isabelle`                                                    |
-| macOS/MTA              | Chair admins | high-end iMac servers (mac minis + mac studio), not virtualized | LDAP        | `mini{1-3}`, `studio1`                                                       |
-| AFP-Submission machine | Printer room | Workstation running Ubuntu 22.04 LTS, not virtualized           | Local admin | `atnipkow8`, `afp-submit.proof`                                              |
-| Cluster workstations   | Printer room | High-end workstation running Ubuntu 22.04 LTS, not virtualized  | LDAP        | `of{1-4}`                                                                    |
-| Cluster servers        | Chair admins | High-end servers running Ubuntu 22.04 LTS, not virtualized      | LDAP        | `se{1-4}`, `build.proof`                                                     |
+|                        | Hosted by    | Spec                                                            | Accounts    | Hostnames                                                             |
+|------------------------|--------------|-----------------------------------------------------------------|-------------|-----------------------------------------------------------------------|
+| AFP                    | RBG          | dual-core VM running Ubuntu 18.04 LTS, virtualized by vSphere   | LDAP        | `proofvm3`<br> `afp.proof` <br> `isa-afp.org`<br> `devel.isa-afp.org` |
+| Linux/MTA worker       | Chair admins | various high-end machines running Ubuntu 20.04, not virtualized | LDAP        | `lxcisa{0,1}`, `hpc.isabelle`                                         |
+| macOS/MTA              | Chair admins | high-end iMac servers (mac minis + mac studio), not virtualized | LDAP        | `mini{1-3}`, `studio1`                                                |
+| AFP-Submission machine | Printer room | Workstation running Ubuntu 22.04 LTS, not virtualized           | Local admin | `atnipkow8`, `afp-submit.proof`                                       |
+| Cluster workstations   | Printer room | High-end workstation running Ubuntu 22.04 LTS, not virtualized  | LDAP        | `of{1-4}`                                                             |
+| Cluster servers        | Chair admins | High-end servers running Ubuntu 22.04 LTS, not virtualized      | LDAP        | `se{1-4}`, `build.proof`                                              |
 
 #### Mailing Lists
 Note: tum lists use `@mailman46.in.tum.de` in their FROM.
@@ -115,6 +115,11 @@ To run Ansible, you need to give it an inventory file and a playbook:
 ansible-playbook -i inventories/production [-l GROUP|HOST] site.yml
 ```
 Always check the contents of the inventory files before deploying.
+Secrets are managed through an ansible vault, and the executing user may need to be specified explcitily.
+Thus a common way to run ansible is:
+```
+ansible-playbook -i inventories/production --ask-vault-pass site.yml -l <target> -u <user>
+```
 
 ## Processes
 
