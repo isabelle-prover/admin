@@ -28,7 +28,6 @@ ISABELLE_PATH = "/opt/Isabelle{{ config.isabelle.version }}/bin/isabelle"
 ISABELLE_SETTINGS = ["-o", "document=pdf",
                      "-o", "document_variants=document:outline=/proof,/ML",
                      "-o", "browser_info",
-                     "-o", "timeout_scale=4",
                      "-v"]
 ISABELLE_BROWSER_INFO = CONTAINER_DIR + "/.isabelle/Isabelle{{ config.isabelle.version }}/browser_info/"
 
