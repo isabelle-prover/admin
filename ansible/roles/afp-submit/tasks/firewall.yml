@@ -1,5 +1,8 @@
 ---
 
+- name: Enable firewalld
+  service: name=firewalld.service enabled=yes daemon_reload=yes state=started
+
 - name: Allow port 443
   shell: firewall-cmd --zone=public --add-port=443/tcp --permanent
 
