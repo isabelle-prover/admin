@@ -26,10 +26,10 @@ config:
     user: isabelle-bot
 
   isabelle:
-    version: 2025-2
+    version: 2026
 
   afp:
-    version: 2025-2
+    version: 2026
     container_home: "/media/data/conrad"
     git: "https://github.com/isabelle-prover/afp-submission.git"
     sub_id_min: 10000001
@@ -44,4 +44,4 @@ config:
       editors: afp-submit@in.tum.de
 
   linter:
-    version: Isabelle2025-1-v1.0.0
+    version: Isabelle2026-v1.0.0
