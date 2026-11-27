@@ -106,6 +106,7 @@
     - HOL-Library
     - HOL-Analysis
     - HOL-Probability
+    - HOL-Computational_Algebra
   environment:
     HOME: "{{ config.afp.container_home }}/.local/share/lxc/base/rootfs/home/ubuntu"
   tags:
